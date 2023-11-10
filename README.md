@@ -1,4 +1,6 @@
 <!-- PUNDIT  -->
+
+
 # step ONE
 # rails generate pundit:policy NAMEOFTABLE #(for every table that need ofc)
 
@@ -18,6 +20,10 @@
 #     true
 #   end
 # end
+
+
+
+
 
 
 # step FOUR

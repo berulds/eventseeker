@@ -77,6 +77,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_10_063911) do
     t.index ["user_id"], name: "index_itineraries_on_user_id"
   end
 
+  create_table "itinerary_events", force: :cascade do |t|
+    t.bigint "itinerary_id", null: false
+    t.bigint "event_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_itinerary_events_on_event_id"
+    t.index ["itinerary_id"], name: "index_itinerary_events_on_itinerary_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -95,4 +104,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_10_063911) do
   add_foreign_key "bookmarks", "events"
   add_foreign_key "bookmarks", "users"
   add_foreign_key "itineraries", "users"
+  add_foreign_key "itinerary_events", "events"
+  add_foreign_key "itinerary_events", "itineraries"
 end

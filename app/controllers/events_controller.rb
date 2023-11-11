@@ -1,8 +1,12 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: [:destroy, :edit, :update]
+  before_action :set_event, only: [:show, :destroy, :edit, :update]
 
   def new
     @event = Event.new
+    authorize @event
+  end
+  
+  def show
     authorize @event
   end
 

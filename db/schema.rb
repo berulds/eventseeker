@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_11_013509) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_11_031611) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -102,6 +102,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_11_013509) do
     t.index ["itinerary_id"], name: "index_itinerary_events_on_itinerary_id"
   end
 
+  create_table "user_genres", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "genre_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["genre_id"], name: "index_user_genres_on_genre_id"
+    t.index ["user_id"], name: "index_user_genres_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -124,4 +133,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_11_013509) do
   add_foreign_key "itineraries", "users"
   add_foreign_key "itinerary_events", "events"
   add_foreign_key "itinerary_events", "itineraries"
+  add_foreign_key "user_genres", "genres"
+  add_foreign_key "user_genres", "users"
 end

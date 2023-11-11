@@ -5,6 +5,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :bookmarks
-
+  has_many :genres, through: :user_genre
   validates :username, presence: true, uniqueness: true
 end

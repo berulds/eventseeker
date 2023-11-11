@@ -1,19 +1,16 @@
 class EventPolicy < ApplicationPolicy
-  class Scope < Scope
-    # NOTE: Be explicit about which records you allow access to!
-    # def resolve
-    #   scope.all
-    # end
+  def new?
+    true
   end
 
-  def new?
+  def create?
     true
   end
 
   def show?
     true
   end
-  
+
   def edit?
     true
   end
@@ -24,5 +21,12 @@ class EventPolicy < ApplicationPolicy
 
   def destroy?
     true
+  end
+
+  class Scope < Scope
+    # NOTE: Be explicit about which records you allow access to! Edit this laterrrrrr!!
+    def resolve
+      scope.all
+    end
   end
 end

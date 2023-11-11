@@ -7,7 +7,8 @@
 
 # step TWO
 #   authorize @ in the method definition  controller
-# def show
+# def new
+#   @variable = Variable.new
 #   authorize @tablename # Add this line
 # end
 

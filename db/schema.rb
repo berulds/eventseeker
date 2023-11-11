@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_10_064321) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_11_001948) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -43,8 +43,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_10_064321) do
   end
 
   create_table "bookmarks", force: :cascade do |t|
-    t.boolean "attending"
-    t.boolean "attended"
+    t.boolean "attending", default: false
+    t.boolean "attended", default: false
     t.bigint "user_id", null: false
     t.bigint "event_id", null: false
     t.datetime "created_at", null: false
@@ -74,6 +74,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_10_064321) do
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name"
     t.index ["user_id"], name: "index_itineraries_on_user_id"
   end
 

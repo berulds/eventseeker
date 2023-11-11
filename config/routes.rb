@@ -7,4 +7,6 @@ Rails.application.routes.draw do
   resources :events, only: [:new, :show]
 
   get 'bookmarks/new'
+
+  resources :events, only: [:destroy, :edit, :update]
 end

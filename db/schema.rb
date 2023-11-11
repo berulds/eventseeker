@@ -53,6 +53,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_11_001948) do
     t.index ["user_id"], name: "index_bookmarks_on_user_id"
   end
 
+  create_table "event_genres", force: :cascade do |t|
+    t.bigint "genre_id", null: false
+    t.bigint "event_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_event_genres_on_event_id"
+    t.index ["genre_id"], name: "index_event_genres_on_genre_id"
+  end
+
   create_table "events", force: :cascade do |t|
     t.string "name"
     t.string "address"
@@ -64,6 +73,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_11_001948) do
     t.string "category"
     t.string "average_price"
     t.string "ticket_purchase"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "genres", force: :cascade do |t|
+    t.string "type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -104,6 +119,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_11_001948) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "bookmarks", "events"
   add_foreign_key "bookmarks", "users"
+  add_foreign_key "event_genres", "events"
+  add_foreign_key "event_genres", "genres"
   add_foreign_key "itineraries", "users"
   add_foreign_key "itinerary_events", "events"
   add_foreign_key "itinerary_events", "itineraries"

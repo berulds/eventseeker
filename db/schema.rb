@@ -43,8 +43,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_11_013509) do
   end
 
   create_table "bookmarks", force: :cascade do |t|
-    t.boolean "attending"
-    t.boolean "attended"
+    t.boolean "attending", default: false
+    t.boolean "attended", default: false
     t.bigint "user_id", null: false
     t.bigint "event_id", null: false
     t.datetime "created_at", null: false

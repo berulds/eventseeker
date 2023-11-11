@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   devise_for :users
   root to: "pages#home"
 
-  get 'events/new'
+  resources :events, only: [:new, :show]
+
   get 'bookmarks/new'
 end

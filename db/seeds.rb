@@ -6,7 +6,7 @@
 
 
 # TODO
-# [x] - create users  seeds (missing avatar logic for cloudinary)
+# [x] - create users seeds (missing avatar logic for cloudinary)
 # [x] - create genre seeds
 # [x] - create user_genres seeds
 # [x] - create events seeds
@@ -45,7 +45,13 @@ users_base.each do |user|
   user = User.create!(username: user[:username], email: user[:email], password: user[:password])
   # file = URI.open(url)
   # user.images.attach(io: file, filename: "filename", content_type: 'photo/jpg')
+   #   filename = user.username + ".jpg"
+   #   user.images.attach(io: File.open('app/assets/images/'+ filename), filename: filename)
 end
+
+# this is how to show the image on localhost/ view:
+# declare  @avatar = current_user && add resize and border to image tag
+# <%= image_tag @avatar.images.first if @user_avatar.images.attached? %>
 
 puts "created #{User.count} users"
 

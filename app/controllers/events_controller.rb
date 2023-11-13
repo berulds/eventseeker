@@ -1,11 +1,21 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :destroy, :edit, :update]
 
+  def index
+    @events = policy_scope(Event)
+  end
+
   def new
     @event = Event.new
     authorize @event
   end
-  
+
+  def create
+    @event = Event.new(event_params)
+    authorize @event
+    @event.save
+  end
+
   def show
     authorize @event
   end

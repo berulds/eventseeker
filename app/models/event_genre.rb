@@ -1,4 +1,4 @@
 class EventGenre < ApplicationRecord
-  belongs_to :genre
-  belongs_to :event
+  has_one :genre
+  has_one :event
 end

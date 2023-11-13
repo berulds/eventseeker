@@ -1,2 +1,14 @@
 <h1>Pages#home</h1>
 <p>Find me in app/views/pages/home.html.erb</p>
+
+<div>
+  <% @user.each do |user_photo| %>
+    <%= cl_image_tag(user_photo.photo.key, alt: "nada", style: "height: 350px; object-fit: cover;") %>
+  <% end %>
+</div>
+
+<div>
+  <% @event.each do |event_photo| %>
+    <%= cl_image_tag(event_photo.photo.key, alt: "nada", style: "height: 350px; object-fit: cover;") %>
+  <% end %>
+</div>

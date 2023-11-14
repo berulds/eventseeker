@@ -8,4 +8,6 @@ Rails.application.routes.draw do
 
   get 'bookmarks/new'
 
+  resources :itineraries, only: [:new, :create, :show, :destroy, :edit, :update]
+
 end

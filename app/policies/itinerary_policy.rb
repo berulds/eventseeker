@@ -1,11 +1,4 @@
 class ItineraryPolicy < ApplicationPolicy
-  class Scope < Scope
-    # NOTE: Be explicit about which records you allow access to!
-    # def resolve
-    #   scope.all
-    # end
-  end
-
   def new?
     true
   end
@@ -16,5 +9,24 @@ class ItineraryPolicy < ApplicationPolicy
 
   def show?
     true
+  end
+
+  def destroy?
+    true
+  end
+
+  def edit?
+    true
+  end
+
+  def update?
+    true
+  end
+
+  class Scope < Scope
+    # NOTE: Be explicit about which records you allow access to!
+    def resolve
+      scope.all
+    end
   end
 end

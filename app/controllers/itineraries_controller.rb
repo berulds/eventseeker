@@ -1,4 +1,6 @@
 class ItinerariesController < ApplicationController
+  before_action :set_itinerary, only: [:show, :destroy, :edit, :update]
+
   def new
     @itinerary = Itinerary.new
     authorize @itinerary
@@ -11,7 +13,6 @@ class ItinerariesController < ApplicationController
   end
 
   def show
-    @itinerary = Itinerary.find(params[:id])
     authorize @itinerary
   end
 
@@ -35,6 +36,10 @@ class ItinerariesController < ApplicationController
 
   def itinerary_params
     params.require(:itinerary).permit(:name, :start_time, :end_time)
+  end
+
+  def set_itinerary
+    @itinerary = Itinerary.find(params[:id])
   end
 
 end

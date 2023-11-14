@@ -1,0 +1,8 @@
+<h2><%= @itinerary.name %></h2>
+
+<p>Starts: <%= @itinerary.start_time %></p>
+<p>Ends: <%= @itinerary.end_time %></p>
+
+<%= link_to "Delete", itinerary_path(@itinerary), class: "btn btn-warning", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+<%# change to dashboard path later %>
+<%= link_to "Edit", edit_itinerary_path(@itinerary), class: "btn btn-warning" %>

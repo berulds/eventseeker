@@ -7,3 +7,4 @@
 <p>Address: <%= @event.address %></p>
 
 <%= link_to "Delete", event_path(@event), class: "btn btn-warning", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+<%= link_to "Edit", edit_event_path(@event), class: "btn btn-warning" %>

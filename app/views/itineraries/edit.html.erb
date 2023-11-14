@@ -1,5 +1,4 @@
-<h1>Create a new itinerary!</h1>
-
+<h1>Edit your itinerary!</h1>
 <%= form_with model: @itinerary do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name %>
@@ -9,3 +8,5 @@
   <%= f.text_field :end_time %>
   <%= f.submit %>
 <% end %>
+
+<%= link_to "Delete", root_path(@itinerary), class: "btn btn-warning", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>

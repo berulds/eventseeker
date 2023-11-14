@@ -1,14 +1,37 @@
 <h1>Pages#home</h1>
 <p>Find me in app/views/pages/home.html.erb</p>
 
+
 <div>
-  <% @user.each do |user_photo| %>
-    <%= cl_image_tag(user_photo.photo.key, alt: "nada", style: "height: 350px; object-fit: cover;") %>
+  <% @users.each do |user| %>
+    <%= cl_image_tag(user.photo.key, alt: "nada", style: "height: 350px; object-fit: cover;") %>
   <% end %>
 </div>
 
 <div>
-  <% @event.each do |event_photo| %>
-    <%= cl_image_tag(event_photo.photo.key, alt: "nada", style: "height: 350px; object-fit: cover;") %>
+  <% @events.each do |event| %>
+    <%= cl_image_tag(event.photo.key, alt: "nada", style: "height: 350px; object-fit: cover;") %>
   <% end %>
 </div>
+
+
+<div class="search">
+  <%= form_with(url: { action: "search_events" }, method: "get") do %>
+    <%= text_field_tag(:query, nil, placeholder: "") %>
+    <%= submit_tag("Search") %>
+  <% end %>
+</div>
+
+<% if @api_events.present? %>
+  <h1>Events</h1>
+  <ul>
+    <% @api_events.each do |event| %>
+      <li>
+        <strong><%= event["title"] %></strong><br>
+        <%= event["address"].join(", ") %><br>
+        <%= event["date"]["start_date"] if event["date"] %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+<% end %>

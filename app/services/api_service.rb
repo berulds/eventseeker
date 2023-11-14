@@ -3,7 +3,7 @@ class ApiService
   require "open-uri"
 
   def self.call_google_events_api(query)
-    url = "https://serpapi.com/search.json?engine=google_events&q=#{URI.encode_www_form_component(query)}&hl=en&gl=us&api_key=#{apikey}&start="
+    url = "https://serpapi.com/search.json?engine=google_events&q=#{URI.encode_www_form_component(query)}&hl=en&gl=us&api_key=#{ENV["API_KEY"]}&start="
 
     events_serialized = URI.open(url).read
     data = JSON.parse(events_serialized)

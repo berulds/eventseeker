@@ -13,6 +13,7 @@ class ItinerariesController < ApplicationController
   end
 
   def show
+    @itinerary = Itinerary.find(params[:id])
     authorize @itinerary
   end
 

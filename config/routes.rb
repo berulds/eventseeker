@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get 'itinerary_events/new'
   get 'bookmarks/new'
   get 'pages/dashboard'
+  get 'pages/about_us'
 
   resources :events, only: [:new, :show, :create, :destroy, :edit, :update, :index]
   resources :itineraries, only: [:new, :create, :show, :destroy, :edit, :update]

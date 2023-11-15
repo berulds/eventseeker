@@ -2,13 +2,20 @@
   <div class="row justify-content-center">
     <div class="col-12 col-lg-6">
 
-      <strong> Hi, I'm a dashboard. I need content. </strong>
+      <div>
+        <h1> Hi, I'm a dashboard. I need content. </h1>
+      </div>
 
-      <%= link_to "View events", pages_dashboard_path, class: "dash-link" %>
-      <%= link_to "Create an event", pages_dashboard_path, class: "dash-link" %>
-      <%= link_to "View itineraries", pages_dashboard_path, class: "dash-link" %>
-      <%= link_to "Create an itineraries", pages_dashboard_path, class: "dash-link" %>
+      <div class="mt-5">
+        <p>These are just links so we can access all our current pages</p>
+        <ul>
+          <li><%= link_to "View all my events", events_path, class: "dash-link" %></li>
+          <li><%= link_to "Create an event", new_event_path, class: "dash-link" %></li>
+          <li><%= link_to "View my itineraries", itinerary_path(current_user), class: "dash-link" %></li>
+          <li><%= link_to "Create an itinerary", new_itinerary_path, class: "dash-link" %></li>
+        </ul>
+      </div>
 
-    </>
+    </div>
   </div>
 </div>

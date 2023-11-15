@@ -1,8 +1,16 @@
-<h2><%= @itinerary.name %></h2>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-lg-12">
 
-<p>Starts: <%= @itinerary.start_time %></p>
-<p>Ends: <%= @itinerary.end_time %></p>
+      <h2><%= @itinerary.name %></h2>
 
-<%= link_to "Delete", itinerary_path(@itinerary), class: "btn btn-warning", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
-<%# change to dashboard path later %>
-<%= link_to "Edit", edit_itinerary_path(@itinerary), class: "btn btn-warning" %>
+      <p>Starts: <%= @itinerary.start_time %></p>
+      <p>Ends: <%= @itinerary.end_time %></p>
+
+      <%= link_to "Delete", itinerary_path(@itinerary), class: "btn btn-warning", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+      <%# change to dashboard path later %>
+      <%= link_to "Edit", edit_itinerary_path(@itinerary), class: "btn btn-warning" %>
+
+    </div>
+  </div>
+</div>

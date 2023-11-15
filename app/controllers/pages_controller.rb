@@ -19,6 +19,10 @@ class PagesController < ApplicationController
 
   end
 
+  def about_us
+
+  end
+
   private
 
   def set_user

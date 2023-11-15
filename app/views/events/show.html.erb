@@ -1,10 +1,18 @@
-<h2><%= @event.name %></h2>
-<h3><%= @event.category %></h3>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-lg-6">
 
-<p>Starts: <%= @event.start_time %></p>
-<p>Ends: <%= @event.end_time %></p>
-<p>Description: <%= @event.description %></p>
-<p>Address: <%= @event.address %></p>
+      <h2><%= @event.name %></h2>
+      <h3><%= @event.category %></h3>
 
-<%= link_to "Delete", event_path(@event), class: "btn btn-warning", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
-<%= link_to "Edit", edit_event_path(@event), class: "btn btn-warning" %>
+      <p>Starts: <%= @event.start_time %></p>
+      <p>Ends: <%= @event.end_time %></p>
+      <p>Description: <%= @event.description %></p>
+      <p>Address: <%= @event.address %></p>
+
+      <%= link_to "Delete", event_path(@event), class: "btn btn-warning", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+      <%= link_to "Edit", edit_event_path(@event), class: "btn btn-warning" %>
+
+    </div>
+  </div>
+</div>

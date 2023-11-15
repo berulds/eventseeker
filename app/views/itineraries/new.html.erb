@@ -1,11 +1,17 @@
-<h1>Create a new itinerary!</h1>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-lg-6">
 
-<%= form_with model: @itinerary do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-  <%= f.label :start_time %>
-  <%= f.text_field :start_time %>
-  <%= f.label :end_time %>
-  <%= f.text_field :end_time %>
-  <%= f.submit %>
-<% end %>
+      <h1>Create a new itinerary!</h1>
+
+      <%= simple_form_for [@itinerary] do |f| %>
+        <%= f.label :name %>
+        <%= f.text_field :name %>
+        <%= f.input :start_time, as: :string, input_html: { data: { controller: "datepicker" } } %>
+        <%= f.input :end_time, as: :string, input_html: { data: { controller: "datepicker" } } %>
+        <%= f.submit %>
+      <% end %>
+
+    </div>
+  </div>
+</div>

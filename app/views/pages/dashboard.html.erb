@@ -1,0 +1,21 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-lg-6">
+
+      <div>
+        <h1> Hi, I'm a dashboard. I need content. </h1>
+      </div>
+
+      <div class="mt-5">
+        <p>These are just links so we can access all our current pages</p>
+        <ul>
+          <li><%= link_to "View all my events", events_path, class: "dash-link" %></li>
+          <li><%= link_to "Create an event", new_event_path, class: "dash-link" %></li>
+          <li><%= link_to "View my itineraries", itinerary_path(current_user), class: "dash-link" %></li>
+          <li><%= link_to "Create an itinerary", new_itinerary_path, class: "dash-link" %></li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</div>

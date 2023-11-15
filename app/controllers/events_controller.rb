@@ -14,6 +14,7 @@ class EventsController < ApplicationController
     @event = Event.new(event_params)
     authorize @event
     @event.save
+    redirect_to events_path
   end
 
   def show

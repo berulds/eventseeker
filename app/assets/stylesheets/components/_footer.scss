@@ -1,0 +1,31 @@
+@import "pages/home";
+
+.footer {
+  background: black;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+  padding: 0px 25px;
+  color: rgba(0,0,0,0.3);
+  width: 100%;
+  position: absolute;
+}
+.footer-links a {
+  color: $green;
+  font-family: $body-font;
+  opacity: .5;
+  text-decoration: none;
+  font-size: 24px;
+  padding: 0px 10px;
+}
+.footer-links a:hover {
+  // opacity: 1;
+  color: white;
+}
+
+.footer-copyright {
+  color: white;
+  opacity: 0.45;
+  text-shadow: 7px 3px 5px rgb(255, 254, 254);
+}

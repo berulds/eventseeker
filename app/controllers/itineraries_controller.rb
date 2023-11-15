@@ -3,33 +3,33 @@ class ItinerariesController < ApplicationController
 
   def new
     @itinerary = Itinerary.new
-    authorize @itinerary
+    # authorize @itinerary
   end
 
   def create
     @itinerary = Itinerary.new(itinerary_params)
-    authorize @itinerary
+    # authorize @itinerary
     @itinerary.save
   end
 
   def show
     @itinerary = Itinerary.find(params[:id])
-    authorize @itinerary
+    # authorize @itinerary
   end
 
   def destroy
     @itinerary.destroy
-    authorize @itinerary
+    # authorize @itinerary
     redirect_to root_path, status: :see_other
   end
 
   def edit
-    authorize @itinerary
+    # authorize @itinerary
   end
 
   def update
     @itinerary.update(itinerary_params)
-    authorize @itinerary
+    # authorize @itinerary
     redirect_to root_path
   end
 

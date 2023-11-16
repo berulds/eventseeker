@@ -4,10 +4,16 @@
 
     <ul>
       <% @events.each do |events| %>
-        <li><%= events.name %></li>
+        <li><%= events.name %>
+          <%= link_to "Bookmark me", event_bookmarks_path(events), data: { turbo_method: :post, turbo_confirm: "Are you interested?" }, class: "btn btn-danger" %>
+      </li>
       <% end %>
     </ul>
-
     </div>
   </div>
 </div>
+
+
+<%# this page should show current_user events and MAYBE his bookmarks? %>
+<%# looks like footer is attached to bottom before page is generated, wich mean that if list is long it is not attached anymore%>
+<%# it also hide the alert on bookmark creation %>

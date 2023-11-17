@@ -1,6 +1,11 @@
 class ItinerariesController < ApplicationController
   before_action :set_itinerary, only: [:show, :destroy, :edit, :update]
 
+  def index
+    @itinerary = Itinerary.all
+    @users = User.all
+  end
+
   def new
     @itinerary = Itinerary.new
     # authorize @itinerary
@@ -8,12 +13,15 @@ class ItinerariesController < ApplicationController
 
   def create
     @itinerary = Itinerary.new(itinerary_params)
+    @itinerary.user = current_user
     # authorize @itinerary
     @itinerary.save
+    redirect_to itinerary_path(@itinerary)
   end
 
   def show
     @itinerary = Itinerary.find(params[:id])
+    @itinerary_events = @itinerary.itinerary_events
     # authorize @itinerary
   end
 

@@ -16,7 +16,7 @@ class PagesController < ApplicationController
   end
 
   def dashboard
-
+    @itinerary = Itinerary.all
   end
 
   def about_us

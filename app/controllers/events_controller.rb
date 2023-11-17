@@ -3,8 +3,9 @@ class EventsController < ApplicationController
 
   def index
     @events = Event.all
+    @itinerary = Itinerary.all
+    @users = User.all
     # @events = policy_scope(Event)
-
   end
 
   def new

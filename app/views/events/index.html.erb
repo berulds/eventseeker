@@ -1,12 +1,22 @@
 <div class="container mt-5">
-  <div class="row justify-content-center">
-    <div class="col-12 col-lg-12">
+  <div class="justify-content-center">
+    <div class="d-flex">
 
-    <ul>
-      <% @events.each do |events| %>
-        <li><%= events.name %></li>
-      <% end %>
-    </ul>
+      <div class="container-event m-5 d-flex">
+        <div class="event-results">
+            <% @events.each do |event| %>
+              <div class="event-card">
+                <img src=<%= cl_image_path(event.photo.key, alt: "event image") %> alt="Event Image">
+                <div class="event-card-content">
+                  <div class="event-card-title"><%= event.name %></div>
+                  <div class="event-card-date"><%= event.start_time.strftime('%dth %b') %> - <%= event.end_time.strftime('%dth %b') %></div>
+                  <div class="event-card-description"><%= event.description %></div>
+                  <%= link_to "Add", itinerary_itinerary_events_path(@itinerary, event), class: "btn btn-primary event-show-more", data: { turbo_method: :post, turbo_confirm: "Add to Itinerary?" } %>
+                </div>
+              </div>
+          <% end %>
+        </div>
+      </div>
 
     </div>
   </div>

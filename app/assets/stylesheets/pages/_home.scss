@@ -1,1 +1,81 @@
 // Specific CSS for your home-page
+
+body {
+  background-color: #f0f0f0;
+}
+
+.main-container {
+  max-height: 100vh;
+  width: 100%;
+  margin-top: 75px;
+  margin-bottom: 75px;
+}
+
+.container-search {
+  font-family: 'Arial', sans-serif;
+  padding: 0;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 5px;
+}
+
+.search-results {
+  display: flex;
+  flex-wrap: wrap;
+  flex-grow: 1;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 16px;
+  padding: 16px;
+}
+
+.card {
+  width: 300px;
+  background-color: #c7c8c6;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+
+.card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.card-content {
+  padding: 16px;
+}
+
+.card-title {
+  font-size: 19px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.card-description {
+  margin-bottom: 8px;
+}
+
+.card-date {
+  color: #555;
+  margin-bottom: 8px;
+}
+
+.show-more {
+  display: block;
+  padding: 8px;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  background-color: $green;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.show-more:hover {
+  background-color: #800080;
+}

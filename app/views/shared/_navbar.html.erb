@@ -1,8 +1,8 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
   <div class="container-fluid">
-    <%= link_to root_path, class: "navbar-brand" do %>
-      <%= image_tag "https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png" %>
-    <% end %>
+    <div class="footer-links">
+      <%= link_to "EventSeeker", root_path, class: "nav-link" %>
+    </div>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -16,11 +16,15 @@
           </li>
           <li class="nav-item dropdown">
           <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <%= cl_image_tag(current_user.photo.key, class: "avatar", alt: "dropdown menu") %>
+            <% if current_user.photo.present? %>
+              <%= cl_image_tag(current_user.photo.key, class: "avatar", alt: "dropdown menu") %>
+            <% else %>
+              <img src="https://res.cloudinary.com/di8qjnwgb/image/upload/v1700175725/defaultusericon_sm5u2k.jpg", class="avatar", alt="dropdown menu";>
+            <% end %>
           </a>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
               <%= link_to "My Events", events_path, class: "dropdown-item" %>
-              <%= link_to "My Itineraries", itinerary_path(current_user), class: "dropdown-item" %>
+              <%= link_to "My Itineraries", itineraries_path, class: "dropdown-item" %>
               <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
             </div>
           </li>

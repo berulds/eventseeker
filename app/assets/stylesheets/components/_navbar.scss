@@ -18,3 +18,11 @@
 .nav-link a:hover {
   color: $green;
 }
+
+.navbar {
+  height: 56px;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+}

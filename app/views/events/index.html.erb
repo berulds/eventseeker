@@ -15,6 +15,9 @@
                   <div class="event-card-title"><%= event.name %></div>
                   <div class="event-card-date"><%= event.start_time.strftime('%dth %b') %> - <%= event.end_time.strftime('%dth %b') %></div>
                   <div class="event-card-description"><%= event.description %></div>
+                    <% if @itinerary.present? %>
+                      <%= link_to "Add", itinerary_itinerary_events_path(@itinerary, event_id: event.id), class: "btn btn-primary event-show-more", data: { turbo_method: :post } %>
+                    <% end %>
                 <% unless current_user.bookmarks.exists?(event_id: event.id) %>
                   <%= link_to "Bookmark me", event_bookmarks_path(event), data: { turbo_method: :post, turbo_confirm: "Are you interested?" }, class: "btn btn-primary" %>
                 <% end %>

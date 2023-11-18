@@ -10,7 +10,10 @@ Rails.application.routes.draw do
   get 'pages/about_us'
   get 'events/index/itinerary_id'
 
-  resources :events, only: [:new, :show, :create, :destroy, :edit, :update, :index]
+  resources :events, only: [:new, :show, :create, :destroy, :edit, :update, :index] do
+    resources :bookmarks, only: [:new, :create, :index]
+  end
+  resources :bookmarks, only: [:destroy, :show, :edit, :update]
   resources :itineraries do
     resources :itinerary_events, only: [:new, :create]
   end

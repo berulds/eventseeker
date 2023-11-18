@@ -18,7 +18,3 @@ Rails.application.routes.draw do
   end
   resources :itinerary_events, only: [:destroy]
 end
-
-# send itinery params to index page at addto itinerary
-# then get ID from controller. (if present get itinerary, if not go to events)
-# if id is present create

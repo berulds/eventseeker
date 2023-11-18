@@ -8,7 +8,9 @@ class PagesController < ApplicationController
 
   def search_events
     query = params[:query]
-    @api_events = ApiService.call_google_events_api(query)
+    location = params[:location]
+    date = params[:date]
+    @api_events = ApiService.call_google_events_api(query, location, date)
     render :home
   rescue StandardError => e
     @error_message = "Error occurred: #{e.message}"

@@ -8,7 +8,6 @@ Rails.application.routes.draw do
   get 'bookmarks/new'
   get 'pages/dashboard'
   get 'pages/about_us'
-  get 'events/index/itinerary_id'
 
   resources :events, only: [:new, :show, :create, :destroy, :edit, :update, :index] do
     resources :bookmarks, only: [:new, :create, :index]
@@ -17,6 +16,7 @@ Rails.application.routes.draw do
   resources :itineraries do
     resources :itinerary_events, only: [:new, :create]
   end
+  resources :itinerary_events, only: [:destroy]
 end
 
 # send itinery params to index page at addto itinerary

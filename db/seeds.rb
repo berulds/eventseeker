@@ -580,7 +580,7 @@ user_total.each do |user|
   5.times do
     event = events.sample
     unless Bookmark.exists?(user_id: user.id, event_id: event.id)
-      Bookmark.create!(user_id: user.id, event_id: event.id, attending: true)
+      Bookmark.create!(user_id: user.id, event_id: event.id, status: :interested)
     end
   end
 end

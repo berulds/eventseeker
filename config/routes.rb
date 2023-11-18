@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   get 'pages/about_us'
 
   resources :events, only: [:new, :show, :create, :destroy, :edit, :update, :index] do
-    resources :bookmarks, only: [:new, :create, :index]
+    resources :bookmarks, only: [:new, :create, :index, :update_status]
   end
   resources :bookmarks, only: [:destroy, :show, :edit, :update]
   resources :itineraries do

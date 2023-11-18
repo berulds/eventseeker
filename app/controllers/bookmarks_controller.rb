@@ -1,9 +1,9 @@
 class BookmarksController < ApplicationController
-  before_action :set_event, only: [:create, :destroy]
+  before_action :set_event, only: [:create]
   before_action :set_bookmark, only: [:destroy]
 
   def index
-    @bookmark = current_user.bookmarks.last
+    @bookmarks = current_user.bookmarks
   end
 
   def new
@@ -35,9 +35,8 @@ class BookmarksController < ApplicationController
   end
 
   def destroy
-    raise
     @bookmark.destroy
-    redirect_to bookmarks_path(current_user), status: :see_other, notice: 'Bookmark deleted successfully.'
+    redirect_to event_bookmarks_path(current_user), status: :see_other, notice: 'Bookmark deleted successfully.'
   end
 
   private

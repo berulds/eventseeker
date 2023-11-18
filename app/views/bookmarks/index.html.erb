@@ -1,4 +1,14 @@
-<%= link_to "Delete",
-bookmark_path(@bookmark),
-data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
-%>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-lg-12">
+
+    <ul>
+      <% @bookmarks.each do |bookmark| %>
+        <li><%= bookmark.event.name %>
+          <%= link_to "destroy me", bookmark_path(bookmark), data: { turbo_method: :delete, turbo_confirm: "Are you interested?" }, class: "btn btn-danger" %>
+      </li>
+      <% end %>
+    </ul>
+    </div>
+  </div>
+</div>

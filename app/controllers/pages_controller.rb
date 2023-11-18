@@ -18,7 +18,8 @@ class PagesController < ApplicationController
   end
 
   def dashboard
-
+    @itinerary = Itinerary.all
+    @bookmarks = current_user.bookmarks
   end
 
   def about_us

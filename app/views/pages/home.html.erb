@@ -16,24 +16,28 @@
   </div>
 </div>
 
-      <div class="d-flex justify-content-center">
+      <div class="d-flex justify-content-center mt-5">
+        <p> Results for ...your search (show only when search is submitted) </p>
+      </div>
+
+      <div class="container-search m-5 d-flex">
         <div class="search-results">
           <% if @api_events.present? %>
-            <h1>Events</h1>
-            <ul>
-              <% @api_events.each do |event| %>
-                <li>
-                  <strong><%= event["title"] %></strong><br>
-                  <%= event["address"].join(", ") %><br>
-                  <%= event["date"]["start_date"] if event["date"] %>
-                </li>
-              <% end %>
-            </ul>
+            <% @api_events.each do |event| %>
+              <div class="card">
+                <img src=<%= event["thumbnail"] %> alt="Event Image">
+                <div class="card-content">
+                  <div class="card-title"><%= event["title"] %></div>
+                  <div class="card-date"><%= event["date"]["start_date"] if event["date"] %></div>
+                  <div class="card-description"><%= event["description"] %></div>
+                  <a href="#" class="show-more">Save Event</a>
+                </div>
+              </div>
+            <% end %>
           <% else %>
           <% end %>
         </div>
       </div>
 
-    </div>
   </div>
 </div>

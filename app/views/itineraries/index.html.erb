@@ -1,0 +1,20 @@
+<div class="container mt-5">
+  <div class="row d-flex justify-content-center">
+    <div class="col-12 col-lg-12 d-flex justify-content-center">
+
+        <% @itinerary.each do |itin| %>
+          <% if itin.user_id == current_user.id %>
+            <div class="dashboard-itinerary-card">
+              <h2><%= itin.name %></h2>
+              <p>Starts: <%= itin.start_time %></p>
+              <p>Ends: <%= itin.end_time %></p>
+              <%= link_to "Delete", itinerary_path(itin), class: "btn btn-warning", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+              <%# change to dashboard path later %>
+              <%= link_to "Edit", edit_itinerary_path(itin), class: "btn btn-warning" %>
+            </div>
+          <% end %>
+        <% end %>
+
+    </div>
+  </div>
+</div>

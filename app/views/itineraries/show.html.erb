@@ -2,14 +2,21 @@
   <div class="row justify-content-center">
     <div class="col-12 col-lg-12">
 
-      <h2><%= @itinerary.name %></h2>
+      <div>
+        <h2><%= @itinerary.name %></h2>
+        <p><%= @itinerary.start_time.strftime('%dth %b') %> - <%= @itinerary.end_time.strftime('%dth %b') %></p>
+        <%= link_to "Add an Event", events_path(@itinerary), class: "btn btn-success" %>
+        <%= link_to "Edit", edit_itinerary_path(@itinerary), class: "btn btn-warning" %>
+        <%= link_to "Delete", pages_dashboard_path, class: "btn btn-danger", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+      </div>
 
-      <p>Starts: <%= @itinerary.start_time %></p>
-      <p>Ends: <%= @itinerary.end_time %></p>
-
-      <%= link_to "Delete", itinerary_path(@itinerary), class: "btn btn-warning", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
-      <%# change to dashboard path later %>
-      <%= link_to "Edit", edit_itinerary_path(@itinerary), class: "btn btn-warning" %>
+      <div class="mt-5">
+        <% @itinerary_events.each do |itinerary_event| %>
+          <% if itinerary_event.itinerary_id == @itinerary.id %>
+            <li><%= itinerary_event.event.name %></li>
+          <% end %>
+        <% end %>
+      </div>
 
     </div>
   </div>

@@ -7,3 +7,8 @@ export default class extends Controller {
     flatpickr(this.element)
   }
 }
+
+
+// flatpickr(this.element, {
+//   mode: "range"
+// })

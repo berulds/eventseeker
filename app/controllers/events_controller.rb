@@ -2,38 +2,41 @@ class EventsController < ApplicationController
   before_action :set_event, only: [:show, :destroy, :edit, :update]
 
   def index
-    @events = policy_scope(Event)
+    @events = Event.all
+    @itinerary = Itinerary.all
+    @users = User.all
+    # @events = policy_scope(Event)
   end
 
   def new
     @event = Event.new
-    authorize @event
+    # authorize @event
   end
 
   def create
     @event = Event.new(event_params)
-    authorize @event
+    # authorize @event
     @event.save
     redirect_to events_path
   end
 
   def show
-    authorize @event
+    # authorize @event
   end
 
   def edit
-    authorize @event
+    # authorize @event
   end
 
   def update
     @event.update(event_params)
-    authorize @event
+    # authorize @event
     redirect_to root_path
   end
 
   def destroy
     @event.destroy
-    authorize @event
+    # authorize @event
     redirect_to root_path, status: :see_other
   end
 

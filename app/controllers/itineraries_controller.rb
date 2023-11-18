@@ -1,35 +1,43 @@
 class ItinerariesController < ApplicationController
   before_action :set_itinerary, only: [:show, :destroy, :edit, :update]
 
+  def index
+    @itinerary = Itinerary.all
+    @users = User.all
+  end
+
   def new
     @itinerary = Itinerary.new
-    authorize @itinerary
+    # authorize @itinerary
   end
 
   def create
     @itinerary = Itinerary.new(itinerary_params)
-    authorize @itinerary
+    @itinerary.user = current_user
+    # authorize @itinerary
     @itinerary.save
+    redirect_to itinerary_path(@itinerary)
   end
 
   def show
     @itinerary = Itinerary.find(params[:id])
-    authorize @itinerary
+    @itinerary_events = @itinerary.itinerary_events
+    # authorize @itinerary
   end
 
   def destroy
     @itinerary.destroy
-    authorize @itinerary
+    # authorize @itinerary
     redirect_to root_path, status: :see_other
   end
 
   def edit
-    authorize @itinerary
+    # authorize @itinerary
   end
 
   def update
     @itinerary.update(itinerary_params)
-    authorize @itinerary
+    # authorize @itinerary
     redirect_to root_path
   end
 

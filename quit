@@ -1,0 +1,53 @@
+[1mdiff --git a/app/controllers/pages_controller.rb b/app/controllers/pages_controller.rb[m
+[1mindex 4a3b3d9..59670c3 100644[m
+[1m--- a/app/controllers/pages_controller.rb[m
+[1m+++ b/app/controllers/pages_controller.rb[m
+[36m@@ -8,6 +8,8 @@[m [mclass PagesController < ApplicationController[m
+ [m
+   def search_events[m
+     query = params[:query][m
+[32m+[m[32m    date = params[:date][m
+[32m+[m[32m    location = params[:location][m
+     @api_events = ApiService.call_google_events_api(query)[m
+     render :home[m
+   rescue StandardError => e[m
+[1mdiff --git a/app/services/api_service.rb b/app/services/api_service.rb[m
+[1mindex 6c0ca8c..e45ced6 100644[m
+[1m--- a/app/services/api_service.rb[m
+[1m+++ b/app/services/api_service.rb[m
+[36m@@ -3,7 +3,8 @@[m [mclass ApiService[m
+   require "open-uri"[m
+ [m
+   def self.call_google_events_api(query)[m
+[31m-    url = "https://serpapi.com/search.json?engine=google_events&q=#{URI.encode_www_form_component(query)}&hl=en&gl=us&api_key=#{ENV["API_KEY"]}&start="[m
+[32m+[m[32m    formatted_date = Date.strftime("%Y/%M/%D")[m
+[32m+[m[32m    url = "https://serpapi.com/search.json?engine=google_events&q=#{URI.encode_www_form_component(query)}&location=#{URI.encode_www_form_component(location)}&date=#{URI.encode_www_form_component(location)}&hl=en&gl=us&api_key=#{ENV["API_KEY"]}"[m
+ [m
+     events_serialized = URI.open(url).read[m
+     data = JSON.parse(events_serialized)[m
+[1mdiff --git a/app/views/pages/home.html.erb b/app/views/pages/home.html.erb[m
+[1mindex e762675..1be18b1 100644[m
+[1m--- a/app/views/pages/home.html.erb[m
+[1m+++ b/app/views/pages/home.html.erb[m
+[36m@@ -1,8 +1,10 @@[m
+ <div class="container mt-5">[m
+   <div class="row justify-content-center">[m
+[31m-    <div class="col-12 col-lg-6">[m
+[32m+[m[32m    <div class="col-12 col-lg-10">[m
+ [m
+[31m-      <div class="d-flex justify-content-center">[m
+[32m+[m
+[32m+[m
+[32m+[m[32m   <div class="d-flex justify-content-center">[m
+         <div class="search mt-5">[m
+           <%= form_with(url: { action: "search_events" }, method: "get") do %>[m
+             <%= text_field_tag(:query, nil, placeholder: "") %>[m
+[36m@@ -10,6 +12,8 @@[m
+           <% end %>[m
+         </div>[m
+       </div>[m
+[32m+[m[32m</div>[m
+[32m+[m
+ [m
+       <div class="d-flex justify-content-center">[m
+         <div class="search-results">[m

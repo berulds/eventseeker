@@ -15,10 +15,28 @@ class EventsController < ApplicationController
 
   def create
     @event = Event.new(event_params)
-    # authorize @event
     @event.save
     redirect_to events_path
-  end
+    end
+
+    def create_from_api
+      event_params_api = {
+        name: params["title"],
+        address: params["address"].to_s,
+        start_time: params['date']['start_date'],
+        end_time: params['date']['start_date'],
+        description: params["description"],
+        # add other thing like price etc...
+      }
+      @event = Event.new(event_params_api)
+      @event.download_image_from_url(params["thumbnail"])
+      if @event.save
+        Bookmark.create(user_id: current_user.id, event_id: @event.id )
+        # flash[:notice]= "everything is created" working on that
+      else
+        redirect_to events_path, alert: 'Failed to create event and bookmark.'
+      end
+    end
 
   def show
     # authorize @event
@@ -45,6 +63,11 @@ class EventsController < ApplicationController
   def event_params
     params.require(:event).permit(:name, :address, :start_time, :end_time, :description)
   end
+
+  def event_params_api
+    params.require(:event).permit(:name, :address, :start_time, :end_time, :description)
+  end
+
 
   def set_event
     @event = Event.find(params[:id])

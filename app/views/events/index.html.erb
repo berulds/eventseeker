@@ -21,7 +21,6 @@
                 <% unless current_user.bookmarks.exists?(event_id: event.id) %>
                   <%= link_to "Bookmark me", event_bookmarks_path(event), data: { turbo_method: :post, turbo_confirm: "Are you interested?" }, class: "btn btn-primary" %>
                 <% end %>
-                  <%= link_to "Add", itinerary_itinerary_events_path(@itinerary, event), class: "btn btn-primary event-show-more", data: { turbo_method: :post, turbo_confirm: "Add to Itinerary?" } %>
                 </div>
               </div>
           <% end %>

@@ -5,7 +5,7 @@
       <div>
         <h2><%= @itinerary.name %></h2>
         <p><%= @itinerary.start_time.strftime('%dth %b') %> - <%= @itinerary.end_time.strftime('%dth %b') %></p>
-        <%= link_to "Add an Event", events_path(@itinerary), class: "btn btn-success" %>
+        <%= link_to "Add an Event", events_index_itinerary_id_path, class: "btn btn-success" %>
         <%= link_to "Edit", edit_itinerary_path(@itinerary), class: "btn btn-warning" %>
         <%= link_to "Delete", pages_dashboard_path, class: "btn btn-danger", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
       </div>

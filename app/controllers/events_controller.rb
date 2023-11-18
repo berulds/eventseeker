@@ -3,8 +3,10 @@ class EventsController < ApplicationController
 
   def index
     @events = Event.all
-    @itinerary = Itinerary.all
-    @users = User.all
+    if Itinerary.find(params[:itinerary_id]).present?
+      @itinerary = Itinerary.find(params[:itinerary_id])
+    else
+    end
     # @events = policy_scope(Event)
   end
 

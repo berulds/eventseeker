@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
-  static targets = ['itinerarySelect'];
+  static targets = ['itinerarySelect', 'eventIdId'];
 
   connect() {
   }
@@ -10,11 +10,10 @@ export default class extends Controller {
     const selectedItineraryId = event.target.value;
     console.log("Selected Itinerary Id: ", selectedItineraryId);
 
-    const addButton = document.getElementById('addToItineraryButton');
-    addButton.addEventListener("click", function () {
-      const eventId = document.getElementById('event_id').value;
+      const eventId = this.eventIdIdTarget.value;
+      console.log("Event Id: ", eventId);
 
-      fetch(`/itineraries/${selectedItineraryId}/itinerary_events`, {
+      fetch(`/itineraries/${selectedItineraryId}/itinerary_events?query=${eventId}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -25,9 +24,9 @@ export default class extends Controller {
       .then(response => response.json())
       .then(data => {
         console.log(data);
-        window.location.href = `/itineraries/${selectedItineraryId}`;
+        // window.location.href = `/itineraries/${selectedItineraryId}`;
+        // window.location.replace(`/itineraries/${selectedItineraryId}`);
       });
-    });
     console.log("Complete");
   }
 }

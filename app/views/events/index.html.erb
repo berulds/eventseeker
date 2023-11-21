@@ -15,13 +15,45 @@
                   <div class="event-card-title"><%= event.name %></div>
                   <div class="event-card-date"><%= event.start_time.strftime('%dth %b') %> - <%= event.end_time.strftime('%dth %b') %></div>
                   <div class="event-card-description"><%= event.description %></div>
+                  <div class="event-card-description"><%= event.id %></div>
                     <% if @itinerary.present? %>
-                      <%= link_to "Add", itinerary_itinerary_events_path(@itinerary, event_id: event.id), class: "btn btn-primary event-show-more", data: { turbo_method: :post } %>
+                      <%= link_to "Add to itinerary", itinerary_itinerary_events_path(@itinerary, event_id: event.id), class: "btn btn-primary event-show-more", data: { turbo_method: :post } %>
+                    <% else %>
+
+                        <button type="button" class="btn btn-primary mb-5" data-bs-toggle="modal" data-bs-target="#addToItinerary">
+                          Add to an itinerary
+                        </button>
+
+                        <div class="modal fade" id="addToItinerary" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addToItineraryLabel" aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h2>Select which itinerary</h2>
+                              </div>
+                              <div class="modal-body select-which-itinerary">
+                                <form id="addToItineraryForm">
+                                  <input type="" id="event_id" value="<%= event.id %>">
+                                  <select data-controller="add-to-itinerary" data-add-to-itinerary-target="itinerarySelect" class="form-select" required data-action="change->add-to-itinerary#itineraryChange">
+                                    <option value="" disabled selected>Select an itinerary</option>
+                                    <% current_user.itineraries.each do | itinerary | %>
+                                      <option value="<%= itinerary.id %>"><%= itinerary.name %></option>
+                                    <% end %>
+                                  </select>
+                                  <div class="modal-footer">
+                                    <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="reset" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addToItinerary" id="addToItineraryButton">Add to this itinerary</button>
+                                  </div>
+                                </form>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
                     <% end %>
+                  </div>
                 <% unless current_user.bookmarks.exists?(event_id: event.id) %>
                   <%= link_to "Bookmark me", event_bookmarks_path(event), data: { turbo_method: :post, turbo_confirm: "Are you interested?" }, class: "btn btn-primary" %>
                 <% end %>
-                  <%= link_to "Add", itinerary_itinerary_events_path(@itinerary, event), class: "btn btn-primary event-show-more", data: { turbo_method: :post, turbo_confirm: "Add to Itinerary?" } %>
                 </div>
               </div>
           <% end %>
@@ -31,7 +63,3 @@
     </div>
   </div>
 </div>
-
-
-<%# looks like footer is attached to bottom before page is generated, wich mean that if list is long it is not attached anymore%>
-<%# it also hide the alert on bookmark creation %>

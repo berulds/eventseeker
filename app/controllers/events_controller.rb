@@ -49,13 +49,13 @@ class EventsController < ApplicationController
   def update
     @event.update(event_params)
     # authorize @event
-    redirect_to root_path
+    redirect_to event_path(@event)
   end
 
   def destroy
     @event.destroy
     # authorize @event
-    redirect_to root_path, status: :see_other
+    redirect_to events_path, status: :see_other
   end
 
   private

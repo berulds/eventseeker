@@ -28,7 +28,7 @@ class ItinerariesController < ApplicationController
   def destroy
     @itinerary.destroy
     # authorize @itinerary
-    redirect_to root_path, status: :see_other
+    redirect_to pages_dashboard_path, status: :see_other
   end
 
   def edit
@@ -38,7 +38,7 @@ class ItinerariesController < ApplicationController
   def update
     @itinerary.update(itinerary_params)
     # authorize @itinerary
-    redirect_to root_path
+    redirect_to itinerary_path(@itinerary)
   end
 
   private

@@ -9,8 +9,17 @@ class PagesController < ApplicationController
   def search_events
     query = params[:query]
     location = params[:location]
-    date = params[:date]
-    @api_events = ApiService.call_google_events_api(query, location, date)
+    matched_address = location.match(/^([^,]+).*?([^,]+)\s*$/)
+    clean_location = location.include?(',') ? matched_address[1] + matched_address[2] : location
+    @date = params[:date]
+    @api_events = ApiService.call_google_events_api(query, clean_location, @date)
+    @geocoded_events = geocoded_events
+    @markers = @geocoded_events.map do |event|
+      {
+        lat: event[:latitude],
+        lng: event[:longitude]
+      }
+    end
     render :home
   rescue StandardError => e
     @error_message = "Error occurred: #{e.message}"
@@ -22,8 +31,21 @@ class PagesController < ApplicationController
     @bookmarks = current_user.bookmarks
   end
 
-  def about_us
+  def geocoded_events
+    @api_events.map do |event|
+      address = event["address"]
+      coordinates = ApiService.mapbox_geocode(address)
+        {
+          title: event["title"],
+          description: event["description"],
+          date: event["date"]["start_date"],
+          latitude: coordinates[:latitude],
+          longitude: coordinates[:longitude]
+        }
+    end
+  end
 
+  def about_us
   end
 
   private

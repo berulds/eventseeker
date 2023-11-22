@@ -79,3 +79,18 @@ body {
 .show-more:hover {
   background-color: #800080;
 }
+
+.suggestions-container {
+  position: absolute;
+  z-index: 1;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  max-height: 200px;
+  overflow-y: auto;
+  width: 32%;
+}
+
+.suggestion:hover {
+  background-color: rgb(53, 101, 172);
+  cursor:pointer;
+}

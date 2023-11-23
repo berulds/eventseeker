@@ -6,13 +6,18 @@ class PagesController < ApplicationController
 
   end
 
+  def see_more
+    counter = params[:start] + 10
+  end
+
   def search_events
     query = params[:query]
-    location = params[:location]
-    matched_address = location.match(/^([^,]+).*?([^,]+)\s*$/)
-    clean_location = location.include?(',') ? matched_address[1] + matched_address[2] : location
+    # location = params[:location]
+    # matched_address = location.match(/^([^,]+).*?([^,]+)\s*$/)
+    # clean_location = location.include?(',') ? matched_address[1] + matched_address[2] : location
     @date = params[:date]
-    @api_events = ApiService.call_google_events_api(query, clean_location, @date)
+    counter = params[:start] + 10
+    @api_events = ApiService.call_google_events_api(query, @date, counter)
     @geocoded_events = geocoded_events
     @markers = @geocoded_events.map do |event|
       {
@@ -56,5 +61,13 @@ class PagesController < ApplicationController
 
   def set_event
     @events = Event.all
+  end
+
+  def set_query
+    params[:query]
+  end
+
+  def set_date
+    params[:date]
   end
 end

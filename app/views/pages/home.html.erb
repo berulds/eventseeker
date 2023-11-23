@@ -6,12 +6,12 @@
         <div class="search mt-5">
           <%= form_with(url: { action: "search_events" }, method: "get") do |form| %>
             <%= form.label :query, "What", class: "search-label" %>
-            <%= form.text_field :query, placeholder: "" %>
+            <%= form.text_field :query, placeholder: "Sports in Melbourne..." %>
             <%= form.label :date, "When", class: "search-label" %>
             <%= form.text_field :date, placeholder: "", data: { controller: "datepicker" } %>
-            <%= form.label :location, "Where", class: "search-label" %>
-            <%= form.text_field :location, autocomplete: "off", placeholder: "", data: { location_autocomplete_target: "input" } %>
-            <div class="suggestions-container"></div>
+            <%# <%= form.label :location, "Where", class: "search-label" %>
+            <%# <%= form.text_field :location, autocomplete: "off", placeholder: "", data: { location_autocomplete_target: "input" } %>
+            <%# <div class="suggestions-container"></div> %>
             <%= form.submit "Search" %>
           <% end %>
         </div>

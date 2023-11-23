@@ -1,14 +1,38 @@
-<div class="container mt-5">
-  <div class="row justify-content-center">
-    <div class="col-12 col-lg-12">
+<%= link_to "back to your dashboard", pages_dashboard_path(current_user) %>
 
-    <ul>
-      <% @bookmarks.each do |bookmark| %>
-        <li><%= bookmark.event.name %>
-          <%= link_to "destroy me", bookmark_path(bookmark), data: { turbo_method: :delete, turbo_confirm: "Are you interested?" }, class: "btn btn-danger" %>
-      </li>
-      <% end %>
-    </ul>
+<div class="container mt-5">
+  <div class="justify-content-center">
+    <div class="d-flex">
+      <div class="container-event m-5 d-flex">
+        <div class="event-results">
+          <% @bookmarks.each do |bookmark| %>
+            <div class="event-card">
+              <% if bookmark.event.photo.present? %>
+                <img src=<%= cl_image_path(bookmark.event.photo.key, alt: "event image") %> alt="Event Image">
+              <% else %>
+                <img src="path_to_default_image" alt="Default Event Image">
+              <% end %>
+                <div class="event-card-content">
+                  <div class="event-card-title"><%= bookmark.event.name %></div>
+                  <div class="event-card-date"><%= bookmark.event.start_time.strftime('%dth %b') %> - <%= bookmark.event.end_time.strftime('%dth %b') %></div>
+                  <div class="event-card-description"><%= bookmark.event.description %></div>
+                    <%= "Bookmark ID: #{bookmark.id}, Status: #{bookmark.status}" %>
+                    <% if bookmark.status == "interested" %>
+                      <%= link_to "I'm going!", bookmark_path(bookmark), class: "btn btn-primary", data: { turbo_method: :patch } %>
+                    <% elsif bookmark.status == "attending" %>
+                      <p>You are going to this event!</p>
+                    <% elsif bookmark.status == "attended" %>
+                      <p>You went to this event!</p>
+                    <% end %>
+                    <%= link_to "Delete bookmark", bookmark_path(bookmark), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger" %>
+                </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+
+<%# maybe?%>
+<%# <%= link_to "Add", itinerary_itinerary_events_path(@itinerary, bookmark), class: "btn btn-primary event-show-more", data: { turbo_method: :post, turbo_confirm: "Add to Itinerary?" } %>

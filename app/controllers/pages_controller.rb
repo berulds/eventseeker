@@ -1,23 +1,21 @@
 class PagesController < ApplicationController
-  before_action :set_user, :set_event
+  before_action :set_user, :set_event, :set_query, :set_date
   skip_before_action :authenticate_user!, only: [ :home, :search_events ]
 
   def home
-
-  end
-
-  def see_more
-    counter = params[:start] + 10
   end
 
   def search_events
-    query = params[:query]
     # location = params[:location]
     # matched_address = location.match(/^([^,]+).*?([^,]+)\s*$/)
     # clean_location = location.include?(',') ? matched_address[1] + matched_address[2] : location
-    @date = params[:date]
-    counter = params[:start] + 10
-    @api_events = ApiService.call_google_events_api(query, @date, counter)
+    if params[:start].present?
+      counter = params[:start]
+    else
+      counter = 0
+    end
+    @api_events = ApiService.call_google_events_api(@query, @date, counter)
+
     @geocoded_events = geocoded_events
     @markers = @geocoded_events.map do |event|
       {
@@ -64,10 +62,10 @@ class PagesController < ApplicationController
   end
 
   def set_query
-    params[:query]
+    @query = params[:query]
   end
 
   def set_date
-    params[:date]
+    @date = params[:date]
   end
 end

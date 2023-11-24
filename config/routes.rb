@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   root to: "pages#home"
 
   get '/search_events', to: 'pages#search_events', as: 'search_events'
+  get '/see_more', to: 'pages#see_more', as: 'see_more'
   get 'bookmarks/new'
   get 'pages/dashboard'
   get 'pages/about_us'

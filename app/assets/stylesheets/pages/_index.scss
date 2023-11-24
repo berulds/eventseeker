@@ -45,6 +45,10 @@
 
 .event-card-description {
   margin-bottom: 8px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 }
 
 .event-card-date {

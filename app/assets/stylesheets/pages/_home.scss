@@ -45,7 +45,7 @@ body {
 }
 
 .card-content {
-  padding: 16px;
+  padding: 8px;
 }
 
 .card-title {
@@ -56,41 +56,35 @@ body {
 
 .card-description {
   margin-bottom: 8px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 }
 
 .card-date {
   color: #555;
+  font-weight: bold;
   margin-bottom: 8px;
 }
 
-.show-more {
-  display: block;
-  padding: 8px;
+.card-actions {
+  bottom: 8px;
+  width: 100%;
   text-align: center;
-  text-decoration: none;
-  color: #fff;
-  background-color: $green;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
 }
 
-.show-more:hover {
-  background-color: #800080;
-}
+// .suggestions-container {
+//   position: absolute;
+//   z-index: 1;
+//   background-color: #fff;
+//   border: 1px solid #ccc;
+//   max-height: 200px;
+//   overflow-y: auto;
+//   width: 32%;
+// }
 
-.suggestions-container {
-  position: absolute;
-  z-index: 1;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  max-height: 200px;
-  overflow-y: auto;
-  width: 32%;
-}
-
-.suggestion:hover {
-  background-color: rgb(53, 101, 172);
-  cursor:pointer;
-}
+// .suggestion:hover {
+//   background-color: rgb(53, 101, 172);
+//   cursor:pointer;
+// }

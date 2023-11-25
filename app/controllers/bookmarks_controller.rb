@@ -27,12 +27,12 @@ class BookmarksController < ApplicationController
 
   def update
     @bookmark.update(status: "attending")
-    redirect_to event_bookmarks_path(current_user), status: :see_other, notice: 'Bookmark Updated successfully.'
+    redirect_to pages_dashboard_path(current_user), status: :see_other, notice: 'Bookmark Updated successfully.'
   end
 
   def destroy
     @bookmark.destroy
-    redirect_to event_bookmarks_path(current_user), status: :see_other, notice: 'Bookmark deleted successfully.'
+    redirect_to pages_dashboard_path(current_user), status: :see_other, notice: 'Bookmark deleted successfully.'
   end
 
 

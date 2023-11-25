@@ -27,7 +27,7 @@
       <div class="container-search m-5 d-flex">
         <div class="search-results">
           <% if @api_events.present? %>
-            <% @api_events.each do |event| %>
+            <% @api_events.each_with_index do |event, index| %>
               <div class="card">
                 <img src=<%= event["thumbnail"] %> alt="Event Image">
                 <div class="card-content">
@@ -37,10 +37,12 @@
                   <div class="card-description"><%= event["description"] %></div>
                 </div>
                 <div class="card-actions d-flex justify-content-center" id="event-card-buttons">
+                  
                   <%= button_to "Save Event", create_from_api_path(event), class: "btn btn-dark"  %>
-                  <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#purchase-<%= event["ticket_info"] %>">Purchase</button>
+                  
+                  <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#purchase-<%= index %>">Purchase</button>
 
-                  <div class="modal fade" id="purchase-<%= event["ticket_info"] %>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="purchase" aria-hidden="true">
+                  <div class="modal fade" id="purchase-<%= index %>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="purchase" aria-hidden="true">
                     <div class="modal-dialog">
                       <div class="modal-content">
                         <div class="modal-header">
@@ -65,14 +67,16 @@
                 </div>
               </div>
             <% end %>
-            <div class="see-more">
-              <%= form_with(url: { action: "search_events" }, method: "get") do |form| %>
-                <%= form.hidden_field :query, value: @query %>
-                <%= form.hidden_field :date, value: @date %>
-                <%= form.hidden_field :start, value: params[:start].to_i + 10 %>
-                <%= form.submit "See more results", class: "btn btn-primary" %>
-              <% end %>
-            </div>
+            <% if @api_events.size == 10 %>
+              <div class="see-more">
+                <%= form_with(url: { action: "search_events" }, method: "get") do |form| %>
+                  <%= form.hidden_field :query, value: @query %>
+                  <%= form.hidden_field :date, value: @date %>
+                  <%= form.hidden_field :start, value: params[:start].to_i + 10 %>
+                  <%= form.submit "See more results", class: "btn btn-primary" %>
+                <% end %>
+              </div>
+            <% end %>
           <% end %>
         </div>
       </div>

@@ -26,6 +26,7 @@ class EventsController < ApplicationController
         start_time: params['date']['start_date'],
         end_time: params['date']['start_date'],
         description: params["description"],
+        ticket_purchase: params["ticket_info"],
         # add other thing like price etc...
       }
       @event = Event.new(event_params_api)
@@ -61,11 +62,11 @@ class EventsController < ApplicationController
   private
 
   def event_params
-    params.require(:event).permit(:name, :address, :start_time, :end_time, :description)
+    params.require(:event).permit(:name, :address, :start_time, :end_time, :description, :ticket_purchase)
   end
 
   def event_params_api
-    params.require(:event).permit(:name, :address, :start_time, :end_time, :description)
+    params.require(:event).permit(:name, :address, :start_time, :end_time, :description, :ticket_purchase)
   end
 
 

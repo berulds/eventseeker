@@ -60,7 +60,7 @@
               <% @itinerary.each do |itin| %>
                 <% if itin.user_id == current_user.id %>
                 <div class="dashboard-itinerary-card">
-                  <h2><%= itin.name %></h2>
+                  <h2><%= link_to "#{itin.name}", itinerary_path(itin) %></h2>
                   <p>Starts: <%= itin.start_time %></p>
                   <p>Ends: <%= itin.end_time %></p>
                   <%= link_to "Delete", itinerary_path(itin), class: "btn btn-warning", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>

@@ -1,7 +1,8 @@
 // Specific CSS for your home-page
 
 body {
-  background-color: #f0f0f0;
+  background-color: #ffffff;
+  font-family: 'Work Sans', sans-serif;
 }
 
 body.home-background {
@@ -17,7 +18,7 @@ body.home-background {
 }
 
 .container-search {
-  font-family: 'Arial', sans-serif;
+  // font-family: 'Arial', sans-serif;
   padding: 0;
   display: flex;
   width: 100%;
@@ -36,11 +37,14 @@ body.home-background {
 }
 
 .card {
-  width: 300px;
-  background-color: #c7c8c6;
-  border-radius: 8px;
+  width: 350px;
+  background-color: #ffffff;
+  border-radius: 5px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .card img {
@@ -50,16 +54,23 @@ body.home-background {
 }
 
 .card-content {
-  padding: 8px;
+  padding: 16px;
 }
 
 .card-title {
-  font-size: 19px;
+  font-size: 18px;
   font-weight: bold;
   margin-bottom: 8px;
 }
 
+.card-address {
+  font-size: 14px;
+  color: #646464;
+  margin-bottom: 7px;
+}
+
 .card-description {
+  font-size: 13px;
   margin-bottom: 8px;
   overflow: hidden;
   display: -webkit-box;
@@ -68,15 +79,26 @@ body.home-background {
 }
 
 .card-date {
+  font-size: 14px;
   color: #555;
-  font-weight: bold;
+  font-weight: 510;
   margin-bottom: 8px;
 }
+
+#event-card-buttons {
+  gap: 15px;
+}
+
+// .card-date:before {
+//   content:url('cal_icon.jpeg');
+// }
 
 .card-actions {
   bottom: 8px;
   width: 100%;
   text-align: center;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
 // .suggestions-container {

@@ -3,6 +3,7 @@ class PagesController < ApplicationController
   skip_before_action :authenticate_user!, only: [ :home, :search_events ]
 
   def home
+
   end
 
   def search_events
@@ -30,8 +31,12 @@ class PagesController < ApplicationController
   end
 
   def dashboard
-    @itinerary = Itinerary.all
     @bookmarks = current_user.bookmarks
+    @itinerary = current_user.itineraries
+
+    @bookmarks.each do |bookmark|
+      update_status_with_time(bookmark)
+    end
   end
 
   def geocoded_events
@@ -52,6 +57,11 @@ class PagesController < ApplicationController
   end
 
   private
+
+  def update_status_with_time(bookmark)
+    bookmark.update(status: "attended") if bookmark.event.end_time < Time.now && bookmark.status == "attending"
+    bookmark.update(status: "event is already past") if bookmark.event.end_time < Time.now && bookmark.status == "interested"
+  end
 
   def set_user
     @users = User.all

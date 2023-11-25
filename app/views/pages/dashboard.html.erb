@@ -1,37 +1,90 @@
-<div class="container mt-5">
-  <div class="row justify-content-center">
-    <div class="col-12 col-lg-6">
+<div class="container-fluid mt-5 ">
+  <div class="row">
+    <div class="col-12">
 
       <div>
         <h1> Hi, I'm a dashboard. I need content. </h1>
       </div>
 
-      <div class="mt-5">
+      <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="event-tab" data-bs-toggle="tab" data-bs-target="#event" type="button" role="tab" aria-controls="home" aria-selected="true">My events</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="itinerary-tab" data-bs-toggle="tab" data-bs-target="#itinerary" type="button" role="tab" aria-controls="itinerary" aria-selected="false">My itineraries</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="chatroom-tab" data-bs-toggle="tab" data-bs-target="#chatroom" type="button" role="tab" aria-controls="chatroom" aria-selected="false">chatroom</button>
+        </li>
+      </ul>
+
+      <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="event" role="tabpanel" aria-labelledby="event-tab">
+
+          <%= link_to "Create an event", new_event_path, class: "btn btn-success dash-link" %>
+
+          <div class="container-fluid mt-5 mb-5">
+            <div class="row">
+              <% @bookmarks.each do |bookmark| %>
+                <div class="col-3 mt-3">
+                  <div class="event-card">
+                    <% if bookmark.event.photo.present? %>
+                      <img src=<%= cl_image_path(bookmark.event.photo.key, alt: "event image") %> alt="Event Image">
+                    <% else %>
+                      <img src="path_to_default_image" alt="Default Event Image">
+                    <% end %>
+                    <div class="event-card-content">
+                      <div class="event-card-title"><%= bookmark.event.name %></div>
+                      <div class="event-card-date"><%= bookmark.event.start_time.strftime('%dth %b') %> - <%= bookmark.event.end_time.strftime('%dth %b') %></div>
+                      <div class="event-card-description"><%= bookmark.event.description %></div>
+                      <%= "Bookmark ID: #{bookmark.id}, Status: #{bookmark.status}" %>
+                      <% if bookmark.status == "interested" %>
+                        <%= link_to "I'm going!", bookmark_path(bookmark), class: "btn btn-primary", data: { turbo_method: :patch } %>
+                      <% elsif bookmark.status == "attending" %>
+                        <p>You are going to this event!</p>
+                      <% elsif bookmark.status == "attended" %>
+                        <p>You went to this event!</p>
+                      <% end %>
+                      <%= link_to "Delete bookmark", bookmark_path(bookmark), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger" %>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-pane fade" id="itinerary" role="tabpanel" aria-labelledby="itinerary-tab">
+          <%= link_to "Create an itinerary", new_itinerary_path, class: "btn btn-success dash-link" %>
+            <div class="col-12 col-lg-12 d-flex">
+              <% @itinerary.each do |itin| %>
+                <% if itin.user_id == current_user.id %>
+                <div class="dashboard-itinerary-card">
+                  <h2><%= itin.name %></h2>
+                  <p>Starts: <%= itin.start_time %></p>
+                  <p>Ends: <%= itin.end_time %></p>
+                  <%= link_to "Delete", itinerary_path(itin), class: "btn btn-warning", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+                  <%# change to dashboard path later %>
+                  <%= link_to "Edit", edit_itinerary_path(itin), class: "btn btn-warning" %>
+                </div>
+              <% end %>
+            <% end %>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="tab-pane fade" id="chatroom" role="tabpanel" aria-labelledby="chatroom-tab"> Coming Soon...
+                <div class="mt-5">
         <p>These are just links so we can access all our current pages</p>
         <ul>
           <li><%= link_to "View all events", events_path, class: "dash-link" %></li>
-          <li><%= link_to "Create an event", new_event_path, class: "dash-link" %></li>
           <li><%= link_to "Create an itinerary", new_itinerary_path, class: "dash-link" %></li>
           <li><%= link_to "View Your Bookmarks", event_bookmarks_path(current_user), class: "dash-link" %></li>
         </ul>
       </div>
-
-      <div class="dashboard-itinerary-card">
-        <%= link_to "View All My Itineraries", itineraries_path, class: "btn btn-primary event-show-more" %>
-          <% @itinerary.order(:start_time).each do |itin| %>
-            <% if itin.user_id == current_user.id %>
-              <div class="d-flex justify-content-between">
-                <div>
-                  <%= link_to itin.name, itinerary_path(itin), class: "btn btn-warning" %>
-                </div>
-                <div class="d-flex align-items-center">
-                  <p><%= itin.start_time.strftime('%dth %b') %> - <%= itin.end_time.strftime('%dth %b') %></p>
-                </div>
-              </div>
-            <% end %>
-          <% end %>
+        </div>
       </div>
-
     </div>
   </div>
 </div>

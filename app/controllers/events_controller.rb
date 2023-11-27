@@ -16,6 +16,7 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(event_params)
     @event.save
+    chatroom = Chatroom.create(name: "#{@event.name}", event: @event)
     redirect_to events_path
     end
 
@@ -33,6 +34,7 @@ class EventsController < ApplicationController
       @event.download_image_from_url(params["thumbnail"])
       if @event.save
         Bookmark.create(user_id: current_user.id, event_id: @event.id )
+        chatroom = Chatroom.create(name: "#{@event.name}", event: @event)
         # flash[:notice]= "everything is created" working on that
       else
         redirect_to events_path, alert: 'Failed to create event and bookmark.'

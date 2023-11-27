@@ -74,17 +74,22 @@
         </div>
 
 
-        <div class="tab-pane fade" id="chatroom" role="tabpanel" aria-labelledby="chatroom-tab"> Coming Soon...
-                <div class="mt-5">
-        <p>These are just links so we can access all our current pages</p>
-        <ul>
-          <li><%= link_to "View all events", events_path, class: "dash-link" %></li>
-          <li><%= link_to "Create an itinerary", new_itinerary_path, class: "dash-link" %></li>
-          <li><%= link_to "View Your Bookmarks", event_bookmarks_path(current_user), class: "dash-link" %></li>
-        </ul>
+<div class="tab-pane fade" id="chatroom" role="tabpanel" aria-labelledby="chatroom-tab">
+  <div>
+    <% @bookmarks.each do |bookmark| %>
+      <div>
+        <% if bookmark.event.chatroom.present? %>
+          <%= link_to "Join the #{bookmark.event.name} channel", chatroom_path(bookmark.event.chatroom.id), class: "btn btn-success" %>
+        <% end %>
       </div>
-        </div>
-      </div>
-    </div>
+    <% end %>
+  </div>
+  <div class="mt-5">
+    <p>These are just links so we can access all our current pages</p>
+    <ul>
+      <li><%= link_to "View all events", events_path, class: "dash-link" %></li>
+      <li><%= link_to "Create an itinerary", new_itinerary_path, class: "dash-link" %></li>
+      <li><%= link_to "View Your Bookmarks", event_bookmarks_path(current_user), class: "dash-link" %></li>
+    </ul>
   </div>
 </div>

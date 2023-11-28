@@ -16,23 +16,27 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(event_params)
     @event.save
+    chatroom = Chatroom.create(name: "#{@event.name}", event: @event)
     redirect_to events_path
     end
 
     def create_from_api
+      ticket_purchase_source = params["ticket_info"][0]["source"]
+      ticket_purchase_link = params["ticket_info"][0]["link"]
       event_params_api = {
         name: params["title"],
         address: params["address"].to_s,
         start_time: params['date']['start_date'],
         end_time: params['date']['start_date'],
         description: params["description"],
-        ticket_purchase: params["ticket_info"],
+        ticket_purchase: { source: ticket_purchase_source, link: ticket_purchase_link },
         # add other thing like price etc...
       }
       @event = Event.new(event_params_api)
       @event.download_image_from_url(params["thumbnail"])
       if @event.save
         Bookmark.create(user_id: current_user.id, event_id: @event.id )
+        chatroom = Chatroom.create(name: "#{@event.name}", event: @event)
         # flash[:notice]= "everything is created" working on that
       else
         redirect_to events_path, alert: 'Failed to create event and bookmark.'
@@ -62,7 +66,7 @@ class EventsController < ApplicationController
   private
 
   def event_params
-    params.require(:event).permit(:name, :address, :start_time, :end_time, :description, :ticket_purchase)
+    params.require(:event).permit(:name, :address, :start_time, :end_time, :description, :photo, :ticket_purchase)
   end
 
   def event_params_api

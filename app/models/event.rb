@@ -2,6 +2,7 @@ require 'open-uri'
 
 class Event < ApplicationRecord
   has_one_attached :photo
+  has_one :chatroom, dependent: :destroy
   has_many :itinerary_events
   has_many :bookmarks, dependent: :destroy
   has_many :event_genres, dependent: :destroy

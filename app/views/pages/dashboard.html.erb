@@ -38,10 +38,36 @@
                       <div class="card-date"><%= bookmark.event.start_time.strftime('%dth %b') %> - <%= bookmark.event.end_time.strftime('%dth %b') %></div>
                       <div class="card-description"><%= bookmark.event.description %></div>
                     <div class="card-actions">
+                      <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#addToItinerary-<%= bookmark.event.id %>">Add to an itinerary</button>
+
+                      <div class="modal fade" id="addToItinerary-<%= bookmark.event.id %>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addToItineraryLabel" aria-hidden="true" data-controller="add-to-itinerary">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h2>Select which itinerary</h2>
+                            </div>
+                            <div class="modal-body select-which-itinerary">
+                              <form id="addToItineraryForm">
+                                <input type="hidden" id="event_id" value="<%= bookmark.event.id %>" data-add-to-itinerary-target="eventIdId">
+                                <select data-add-to-itinerary-target="itinerarySelect" class="form-select" required data-action="change->add-to-itinerary#itineraryChange">
+                                  <option value="" disabled selected>Select an itinerary</option>
+                                  <% current_user.itineraries.each do | itinerary | %>
+                                    <option value="<%= itinerary.id %>"><%= itinerary.name %></option>
+                                  <% end %>
+                                </select>
+                                <div class="modal-footer">
+                                  <button type="reset" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
+                                  <button type="reset" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#addToItinerary-<%= bookmark.event.id %>" id="addToItineraryButton-<%= bookmark.event.id %>">Add to this itinerary</button>
+                                </div>
+                              </form>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
                       <% if bookmark.event.ticket_purchase.present? %>
                         <a class="btn btn-primary" href="<%= bookmark.event.ticket_purchase["link"] %>" target="_blank"><%= bookmark.event.ticket_purchase["source"] %>Testing</a>
                       <% end %>
-                        <%= "Bookmark ID: #{bookmark.id}, Status: #{bookmark.status}" %>
                         <% if bookmark.status == "interested" %>
                           <%= link_to "I'm going!", bookmark_path(bookmark), class: "btn btn-primary", data: { turbo_method: :patch } %>
                         <% elsif bookmark.status == "attending" %>

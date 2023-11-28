@@ -19,4 +19,8 @@ Rails.application.routes.draw do
     resources :itinerary_events, only: [:new, :create]
   end
   resources :itinerary_events, only: [:destroy]
+
+  resources :chatrooms, only: :show do
+    resources :messages, only: :create
+  end
 end

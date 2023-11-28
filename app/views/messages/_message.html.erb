@@ -1,0 +1,12 @@
+<div id="message-<%= message.id %>">
+  <small>
+                <% if message.user.photo.present? %>
+              <%= cl_image_tag(message.user.photo.key, class: "avatar", alt: "dropdown menu") %>
+            <% else %>
+              <img src="https://res.cloudinary.com/di8qjnwgb/image/upload/v1700175725/defaultusericon_sm5u2k.jpg", class="avatar", alt="dropdown menu";>
+            <% end %>
+    <strong><%= message.user.username %></strong>
+    <i><%= message.created_at.strftime("%a %b %e at %l:%M %p") %></i>
+  </small>
+  <p><%= message.content %></p>
+</div>

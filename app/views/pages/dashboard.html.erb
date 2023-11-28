@@ -16,8 +16,8 @@
             <p class="card-text"><%= Date.today %></p>
           </div>
           <div class="col-md-2 d-flex flex-column align-items-end">
-            <div class="p-2"><a href="#" class="btn btn-light">Create Event</a></div>
-            <div class="p-2"><a href="#" class="btn btn-light">Create Itinerary</a></div>
+            <div class="p-2"><%= link_to "Create Event", new_event_path, class: "btn btn-success dash-link" %></div>
+            <div class="p-2"><%= link_to "Create Itinerary", new_itinerary_path, class: "btn btn-success dash-link" %></div>
           </div>
         </div>
       </div>

@@ -22,7 +22,27 @@ class ItinerariesController < ApplicationController
   def show
     @itinerary = Itinerary.find(params[:id])
     @itinerary_events = @itinerary.itinerary_events
+    @markers = @itinerary_events.map do |itinerary_event|
+      {
+        lat: itinerary_event.event[:latitude],
+        lng: itinerary_event.event[:longitude]
+      }
+    end
     # authorize @itinerary
+  end
+
+  def geocoded_events
+    @itinerary_events.map do |itinerary_event|
+      address = itinerary_event.event["address"]
+      coordinates = ApiService.mapbox_geocode(address)
+        {
+          title: itinerary_event.event["title"],
+          description: itinerary_event.event["description"],
+          date: itinerary_event.event["date"]["start_date"],
+          latitude: coordinates[:latitude],
+          longitude: coordinates[:longitude]
+        }
+    end
   end
 
   def destroy

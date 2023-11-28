@@ -16,14 +16,6 @@ class PagesController < ApplicationController
       counter = 0
     end
     @api_events = ApiService.call_google_events_api(@query, @date, counter)
-
-    @geocoded_events = geocoded_events
-    @markers = @geocoded_events.map do |event|
-      {
-        lat: event[:latitude],
-        lng: event[:longitude]
-      }
-    end
     render :home
   rescue StandardError => e
     @error_message = "Error occurred: #{e.message}"

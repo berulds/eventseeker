@@ -12,7 +12,7 @@ body.home-background {
 }
 
 .main-container {
-  max-height: 100vh;
+  min-height: 100vh;
   width: 100%;
   margin-top: 75px;
   margin-bottom: 75px;
@@ -39,6 +39,7 @@ body.home-background {
 
 .card {
   width: 350px;
+  height: 500px;
   background-color: #ffffff;
   border-radius: 5px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
@@ -100,6 +101,11 @@ body.home-background {
   text-align: center;
   align-items: center;
   margin-bottom: 20px;
+}
+
+.see-more-card {
+  width: 350px;
+  height: 500px;
 }
 
 // .suggestions-container {

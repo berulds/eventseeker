@@ -1,87 +1,89 @@
 <body class="home-background">
-<div class="container mt-5">
-  <div class="row justify-content-center">
-    <div class="col-12">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12">
 
-      <div class="d-flex justify-content-center">
-        <div class="search mt-5">
-          <%= form_with(url: { action: "search_events" }, method: "get") do |form| %>
-            <%= form.label :query, "What", class: "search-label" %>
-            <%= form.text_field :query, placeholder: "Sports in Melbourne..." %>
-            <%= form.label :date, "When", class: "search-label" %>
-            <%= form.text_field :date, placeholder: "Select a date", data: { controller: "datepicker" } %>
-            <%# <%= form.label :location, "Where", class: "search-label" %>
-            <%# <%= form.text_field :location, autocomplete: "off", placeholder: "", data: { location_autocomplete_target: "input" } %>
-            <%# <div class="suggestions-container"></div> %>
-            <%= form.submit "Search" %>
+        <div class="d-flex justify-content-center">
+          <div class="search">
+            <%= form_with(url: { action: "search_events" }, method: "get") do |form| %>
+              <%= form.label :query, "What", class: "search-label" %>
+              <%= form.text_field :query, placeholder: "Sports in Melbourne..." %>
+              <%= form.label :date, "When", class: "search-label" %>
+              <%= form.text_field :date, placeholder: "Select a date", data: { controller: "datepicker" } %>
+              <%# <%= form.label :location, "Where", class: "search-label" %>
+              <%# <%= form.text_field :location, autocomplete: "off", placeholder: "", data: { location_autocomplete_target: "input" } %>
+              <%# <div class="suggestions-container"></div> %>
+              <%= form.submit "Search" %>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-center">
+          <% if @api_events.present? %>
+            <p>Showing results for <%= @query.capitalize %> around <%= Date.parse(@date).strftime('%d %b') %></p>
           <% end %>
         </div>
-      </div>
 
-      <div class="d-flex mt-5 justify-content-center">
-        <% if @api_events.present? %>
-          <p>Showing results for <%= @query.capitalize %> around <%= Date.parse(@date).strftime('%d %b') %></p>
-        <% end %>
-      </div>
+        <div class="container-search d-flex">
+          <div class="search-results" data-controller="search" data-search-api-events="<%= @api_events.to_json %>">
+            <% if @api_events.present? %>
+              <% @api_events.each_with_index do |event, index| %>
+                <div class="card">
+                  <img src=<%= event["thumbnail"] %> alt="Event Image">
+                  <div class="card-content">
+                    <div class="card-title"><%= event["title"] %></div>
+                    <div class="card-address"><%= event["address"].join(", ") %></div>
+                    <div class="card-date"><%= event["date"]["start_date"] if event["date"] %></div>
+                    <div class="card-description"><%= event["description"] %></div>
+                  </div>
+                  <div class="card-actions d-flex justify-content-center" id="event-card-buttons">
 
-      <div class="container-search m-5 d-flex">
-        <div class="search-results">
-          <% if @api_events.present? %>
-            <% @api_events.each_with_index do |event, index| %>
-              <div class="card">
-                <img src=<%= event["thumbnail"] %> alt="Event Image">
-                <div class="card-content">
-                  <div class="card-title"><%= event["title"] %></div>
-                  <div class="card-address"><%= event["address"].join(", ") %></div>
-                  <div class="card-date"><%= event["date"]["start_date"] if event["date"] %></div>
-                  <div class="card-description"><%= event["description"] %></div>
-                </div>
-                <div class="card-actions d-flex justify-content-center" id="event-card-buttons">
+                    <%= button_to "Save Event", create_from_api_path(event), class: "btn btn-dark"  %>
 
-                  <%= button_to "Save Event", create_from_api_path(event), class: "btn btn-dark"  %>
+                    <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#purchase-<%= index %>">Purchase</button>
 
-                  <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#purchase-<%= index %>">Purchase</button>
-
-                  <div class="modal fade" id="purchase-<%= index %>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="purchase" aria-hidden="true">
-                    <div class="modal-dialog">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h2>Where would you like to purchase?</h2>
-                        </div>
-                          <div class="modal-body purchase">
-                            <div class="d-flex flex-column align-items-center">
-                              <% event["ticket_info"].each do |vendor| %>
-                                <div class="p-2">
-                                  <a class="btn btn-primary" href="<%= vendor["link"] %>" target="_blank"><%= vendor["source"] %></a>
-                                </div>
-                              <% end %>
-                            </div>
+                    <div class="modal fade" id="purchase-<%= index %>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="purchase" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h2>Where would you like to purchase?</h2>
                           </div>
-                        <div class="modal-footer">
-                          <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <div class="modal-body purchase">
+                              <div class="d-flex flex-column align-items-center">
+                                <% event["ticket_info"].each do |vendor| %>
+                                  <div class="p-2">
+                                    <a class="btn btn-primary" href="<%= vendor["link"] %>" target="_blank"><%= vendor["source"] %></a>
+                                  </div>
+                                <% end %>
+                              </div>
+                            </div>
+                          <div class="modal-footer">
+                            <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                          </div>
                         </div>
                       </div>
                     </div>
+
                   </div>
-
                 </div>
-              </div>
+              <% end %>
+              <% if @api_events.size == 10 %>
+                <div class="see-more-card d-flex justify-content-center align-items-center">
+                  <div class="see-more">
+                    <%= form_with(url: { action: "search_events" }, method: "get") do |form| %>
+                      <%= form.hidden_field :query, value: @query %>
+                      <%= form.hidden_field :date, value: @date %>
+                      <%= form.hidden_field :start, value: params[:start].to_i + 10 %>
+                      <%= form.submit "See more results", class: "btn btn-dark" %>
+                    <% end %>
+                  </div>
+                </div>
+              <% end %>
             <% end %>
-            <% if @api_events.size == 10 %>
-              <div class="see-more">
-                <%= form_with(url: { action: "search_events" }, method: "get") do |form| %>
-                  <%= form.hidden_field :query, value: @query %>
-                  <%= form.hidden_field :date, value: @date %>
-                  <%= form.hidden_field :start, value: params[:start].to_i + 10 %>
-                  <%= form.submit "See more results", class: "btn btn-primary" %>
-                <% end %>
-              </div>
-            <% end %>
-          <% end %>
+          </div>
         </div>
-      </div>
 
+      </div>
     </div>
   </div>
-</div>
 </body>

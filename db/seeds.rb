@@ -38,7 +38,7 @@ users_base = [
 { username:"IsabelleL", email:"isabelle@lau.com", password:"qwerty123", photo_url:"https://res.cloudinary.com/di8qjnwgb/image/upload/v1699852074/f9m6z2zma8kupcso7z7s.png" },
 { username:"EtienneF", email:"etienne@frechet.com", password:"qwerty123", photo_url:"https://res.cloudinary.com/di8qjnwgb/image/upload/v1699852074/xcwfxgg3dibrpvpumic3.jpg" },
 { username:"JeanJeanJ", email:"jean@jean.com", password:"qwerty123", photo_url:"https://res.cloudinary.com/di8qjnwgb/image/upload/v1699852073/kjr5egytj7rhdyszkpvs.webp" },
-{ username:"DwaineTherock", email:"dwayne@therock.com", password:"qwerty123", photo_url:"https://res.cloudinary.com/di8qjnwgb/image/upload/v1699852073/xbqgilndltd1nl1re1jl.jpg" }
+{ username:"DwayneTherock", email:"dwayne@therock.com", password:"qwerty123", photo_url:"https://res.cloudinary.com/di8qjnwgb/image/upload/v1699852073/xbqgilndltd1nl1re1jl.jpg" }
 ]
 
 puts "Creating users..."
@@ -102,7 +102,6 @@ music_events = [
     music festival. Join us for a journey into the heart of tradition, where every note tells a story. Secure your tickets now to be part of this extraordinary celebration of Australia's musical legacy!",
     average_price: rand(20.0..100.0).round(2),
     photo_url: "https://res.cloudinary.com/di8qjnwgb/image/upload/v1699857561/Music_australian_indegenous_wdkk7v.webp",
-    ticket_purchase: "https://tickets.example.com/Australian-Traditional-Music-Festival"
   },
 
   {
@@ -116,7 +115,6 @@ music_events = [
     Secure your tickets now for a once-in-a-lifetime opportunity to be part of this momentous event!",
     average_price: rand(20.0..100.0).round(2),
     photo_url: "https://res.cloudinary.com/di8qjnwgb/image/upload/v1699857567/Music_the_strokes_gqypuh.jpg",
-    ticket_purchase: "https://tickets.example.com/The-Strokes-Finally-in-Melbourne!"
   },
 
   {
@@ -129,7 +127,6 @@ music_events = [
     Don't miss this opportunity to witness a musical journey curated by one of the world's most renowned DJs. Secure your spot now for an unforgettable night of electronic music excellence!",
     average_price: rand(20.0..100.0).round(2),
     photo_url: "https://res.cloudinary.com/di8qjnwgb/image/upload/v1699857568/Music_ultra_tiesto_swl0jl.png",
-    ticket_purchase: "https://tickets.example.com/australian-music-festival"
   },
 
   {
@@ -140,7 +137,6 @@ music_events = [
     description: "Get ready for an electrifying night of K-Pop featuring your favorite artists and the hottest hits from the Korean music scene.",
     average_price: rand(20.0..100.0).round(2),
     photo_url: "https://res.cloudinary.com/di8qjnwgb/image/upload/v1699857560/Music_kpop_okl0jy.png",
-    ticket_purchase: "https://tickets.example.com/kpop-extravaganza"
   },
 
   {
@@ -151,7 +147,6 @@ music_events = [
     description: "Immerse yourself in the enchanting world of Studio Ghibli as the Symphony Orchestra brings its magical music to life.",
     average_price: rand(20.0..100.0).round(2),
     photo_url: "https://res.cloudinary.com/di8qjnwgb/image/upload/v1699857569/Music_Ghibli.jpg_nsrney.webp",
-    ticket_purchase: "https://tickets.example.com/ghibli-orchestra-event"
   }
 ]
 
@@ -166,7 +161,6 @@ music_events.each do |event|
     end_time: event[:end_time],
     description: event[:description],
     average_price: event[:average_price],
-    ticket_purchase: event[:ticket_purchase]
   )
 
   url = event[:photo_url]
@@ -189,7 +183,6 @@ sport_events = [
     This epic battle is set to take place at the iconic Melbourne Cricket Ground",
     average_price: rand(50.0..150.0).round(2),
     photo_url: "https://res.cloudinary.com/di8qjnwgb/image/upload/v1699857567/Sport_final_zsyfyz.jpg",
-    ticket_purchase: "https://tickets.example.com/Australian-Football-final-Adelaide-Crows-VS-Brisbane-Lions"
   },
 
   {
@@ -202,7 +195,6 @@ sport_events = [
     the Sleeman Sports Complex. The annual event was last held in Australia when Adelaide hosted in 2009.",
     average_price: rand(50.0..150.0).round(2),
     photo_url: "https://res.cloudinary.com/di8qjnwgb/image/upload/v1699857565/Sport_bmx_ihe2hj.png",
-    ticket_purchase: "https://tickets.example.com/2026-BMX-World-Championships"
   },
 
   {
@@ -214,7 +206,6 @@ sport_events = [
     during the last fortnight of January every year. The first of four Grand Slams in the annual tennis calendar",
     average_price: rand(50.0..150.0).round(2),
     photo_url: "https://res.cloudinary.com/di8qjnwgb/image/upload/v1699857573/Sport_tennis_open_ysazgu.jpg",
-    ticket_purchase: "https://tickets.example.com/Australian-Open-Victoria-©-Tennis-Australia"
   },
 
   {
@@ -227,7 +218,6 @@ sport_events = [
     Feel the pulse of the ocean as seasoned professionals and rising stars compete for glory.",
     average_price: rand(50.0..150.0).round(2),
     photo_url: "https://res.cloudinary.com/di8qjnwgb/image/upload/v1699857559/Sport_Surf_p3w2yr.webp",
-    ticket_purchase: "https://tickets.example.com/surfest"
   },
 
   {
@@ -239,7 +229,6 @@ sport_events = [
     The battlefield for this epic showdown is set at a yet-to-be-disclosed venue that promises an atmosphere of intense competition and sportsmanship",
     average_price: rand(50.0..150.0).round(2),
     photo_url: "https://res.cloudinary.com/di8qjnwgb/image/upload/v1699857558/Sport_trination_jklgkv.jpg",
-    ticket_purchase: "https://tickets.example.com/Australia-New-Zealand-tri-nations"
   }
 ]
 
@@ -252,7 +241,6 @@ sport_events.each do |event|
     end_time: event[:end_time],
     description: event[:description],
     average_price: event[:average_price],
-    ticket_purchase: event[:ticket_purchase],
   )
 
   url = event[:photo_url]
@@ -274,7 +262,6 @@ art_events = [
     description: "Experience the magic of cinema at the Melbourne International Film Festival, showcasing a diverse range of films from around the world.",
     average_price: rand(20.0..100.0).round(2),
     photo_url: "https://res.cloudinary.com/di8qjnwgb/image/upload/v1699857571/Art_film_festival_yrb31g.webp",
-    ticket_purchase: "https://tickets.example.com/Melbourne-International-Film-Festival"
   },
 
   {
@@ -285,7 +272,6 @@ art_events = [
     description: "Immerse yourself in the elegance and grace of ballet as the Sydney Opera House hosts a spectacular gala featuring renowned ballet performances.",
     average_price: rand(20.0..100.0).round(2),
     photo_url: "https://res.cloudinary.com/di8qjnwgb/image/upload/v1699857570/Art_ballet_kblfhr.jpg",
-    ticket_purchase: "https://tickets.example.com/Sydney-Opera-House-Ballet-Gala"
   },
 
   {
@@ -296,7 +282,6 @@ art_events = [
     description: "Witness the city come alive with light and sound at Vivid Sydney, an annual festival celebrating the intersection of art, technology, and music.",
     average_price: rand(20.0..100.0).round(2),
     photo_url: "https://res.cloudinary.com/di8qjnwgb/image/upload/v1699857562/Art_vivid_qm0gs3.jpg",
-    ticket_purchase: "https://tickets.example.com/Vivid-Sydney-Light-and-Music-Festival"
   },
 
   {
@@ -307,7 +292,6 @@ art_events = [
     description: "Join the vibrant atmosphere of the Adelaide Fringe Festival, where artists from all disciplines come together to showcase their talents in a dynamic and inclusive environment.",
     average_price: rand(20.0..100.0).round(2),
     photo_url: "https://res.cloudinary.com/di8qjnwgb/image/upload/v1699857564/image_a8vtrm.webp",
-    ticket_purchase: "https://tickets.example.com/Adelaide-Fringe-Festival"
   },
 
   {
@@ -318,7 +302,6 @@ art_events = [
     description: "Explore the cutting-edge of contemporary art at the Brisbane Contemporary Art Exhibition, featuring innovative works by local and international artists.",
     average_price: rand(20.0..100.0).round(2),
     photo_url: "https://res.cloudinary.com/di8qjnwgb/image/upload/v1699857565/Art_contemporary_texm8f.jpg",
-    ticket_purchase: "https://tickets.example.com/Brisbane-Contemporary-Art-Exhibition"
   }
 ]
 
@@ -331,7 +314,6 @@ art_events.each do |event|
     end_time: event[:end_time],
     description: event[:description],
     average_price: event[:average_price],
-    ticket_purchase: event[:ticket_purchase],
   )
 
   url = event[:photo_url]
@@ -353,7 +335,6 @@ food_events = [
     description: "Indulge in a culinary extravaganza at the Melbourne Food Festival, featuring a diverse array of cuisines and culinary experiences.",
     average_price: rand(2) == 0 ? "FREE" : rand(10.0..50.0).round(2),
     photo_url: "https://res.cloudinary.com/di8qjnwgb/image/upload/v1699857559/Food_food_festival_oifkmn.jpg",
-    ticket_purchase: "https://tickets.example.com/Melbourne-Food-Festival"
   },
 
   {
@@ -364,7 +345,6 @@ food_events = [
     description: "Dive into a sea of flavors at the Sydney Seafood Spectacular, celebrating the best of Australia's seafood at the iconic Sydney Fish Market.",
     average_price: rand(2) == 0 ? "FREE" : rand(10.0..50.0).round(2),
     photo_url: "https://res.cloudinary.com/di8qjnwgb/image/upload/v1699857562/Food_sidney_fish_nxhwgs.jpg",
-    ticket_purchase: "https://tickets.example.com/Sydney-Seafood-Spectacular"
   },
 
   {
@@ -375,7 +355,6 @@ food_events = [
     description: "Savor the eclectic flavors of street food at the Brisbane Street Food Fest, where food trucks and stalls converge for a gastronomic adventure.",
     average_price: rand(2) == 0 ? "FREE" : rand(10.0..50.0).round(2),
     photo_url: "https://res.cloudinary.com/di8qjnwgb/image/upload/v1699857572/Food_street_food_gnaqaa.jpg",
-    ticket_purchase: "https://tickets.example.com/Brisbane-Street-Food-Fest"
   },
 
   {
@@ -386,7 +365,6 @@ food_events = [
     description: "Experience the perfect pairing of wine and culinary delights at the Adelaide Wine and Dine Expo, a showcase of the region's finest offerings.",
     average_price: rand(2) == 0 ? "FREE" : rand(10.0..50.0).round(2),
     photo_url: "https://res.cloudinary.com/di8qjnwgb/image/upload/v1699857569/Food_adelaide_bnqhbz.jpg",
-    ticket_purchase: "https://tickets.example.com/Adelaide-Wine-and-Dine-Expo"
   },
 
   {
@@ -397,7 +375,6 @@ food_events = [
     description: "Tantalize your taste buds at the Perth Gourmet Food Fair, featuring a showcase of gourmet dishes, local produce, and culinary innovations.",
     average_price: rand(2) == 0 ? "FREE" : rand(10.0..50.0).round(2),
     photo_url: "https://res.cloudinary.com/di8qjnwgb/image/upload/v1699857564/Food_perth_xnpfgf.jpg",
-    ticket_purchase: "https://tickets.example.com/Perth-Gourmet-Food-Fair"
   }
 ]
 
@@ -410,7 +387,6 @@ food_events.each do |event|
     end_time: event[:end_time],
     description: event[:description],
     average_price: event[:average_price],
-    ticket_purchase: event[:ticket_purchase],
   )
 
   url = event[:photo_url]
@@ -432,7 +408,6 @@ technology_events = [
     description: "Join the largest coding conference in Australia, CodeCon 2023, for a deep dive into the latest technologies, coding trends, and networking with fellow developers.",
     average_price: rand(2) == 0 ? "FREE" : rand(10.0..50.0).round(2),
     photo_url: "https://res.cloudinary.com/di8qjnwgb/image/upload/v1699857563/Tech_codecon_y9zqmo.jpg",
-    ticket_purchase: "https://tickets.example.com/CodeCon-2023"
   },
 
   {
@@ -443,7 +418,6 @@ technology_events = [
     description: "Be the first to witness the latest innovations from Apple at the Apple Showcase 2023, where cutting-edge products and technologies will be unveiled.",
     average_price: rand(2) == 0 ? "FREE" : rand(10.0..50.0).round(2),
     photo_url: "https://res.cloudinary.com/di8qjnwgb/image/upload/v1699857559/Tech_apple_zojg2g.jpg",
-    ticket_purchase: "https://tickets.example.com/Apple-Showcase-2023"
   },
 
   {
@@ -454,7 +428,6 @@ technology_events = [
     description: "Explore the future of technology at the Tech StartUp Expo, where groundbreaking startups showcase their innovations, and industry experts share insights.",
     average_price: rand(2) == 0 ? "FREE" : rand(10.0..50.0).round(2),
     photo_url: "https://res.cloudinary.com/di8qjnwgb/image/upload/v1699857558/Tech_startup_expo_lm1r2n.png",
-    ticket_purchase: "https://tickets.example.com/Tech-StartUp-Expo"
   },
 
   {
@@ -465,7 +438,6 @@ technology_events = [
     description: "Dive into the world of Artificial Intelligence and Robotics at the Symposium, where experts share groundbreaking research and advancements in AI and robotics.",
     average_price: rand(2) == 0 ? "FREE" : rand(10.0..50.0).round(2),
     photo_url: "https://res.cloudinary.com/di8qjnwgb/image/upload/v1699857560/Tech_ai_tlfmdw.jpg",
-    ticket_purchase: "https://tickets.example.com/AI-and-Robotics-Symposium"
   },
 
   {
@@ -476,7 +448,6 @@ technology_events = [
     description: "Immerse yourself in the future of Virtual Reality at the Virtual Reality Expo, where the latest VR technologies and experiences are showcased.",
     average_price: rand(2) == 0 ? "FREE" : rand(10.0..50.0).round(2),
     photo_url: "https://res.cloudinary.com/di8qjnwgb/image/upload/v1699857571/Tech_VR_ygs9tx.jpg",
-    ticket_purchase: "https://tickets.example.com/Virtual-Reality-Expo"
   }
 ]
 
@@ -489,7 +460,6 @@ technology_events.each do |event|
     end_time: event[:end_time],
     description: event[:description],
     average_price: event[:average_price],
-    ticket_purchase: event[:ticket_purchase],
   )
 
   url = event[:photo_url]
@@ -511,7 +481,6 @@ asmr_events = [
     description: "Immerse yourself in the soothing world of ASMR with the Whispering Waves ASMR Experience. Let the calming whispers and gentle sounds transport you to a state of relaxation.",
     average_price: rand(2) == 0 ? "FREE" : rand(10.0..30.0).round(2),
     photo_url: "https://res.cloudinary.com/di8qjnwgb/image/upload/v1699857570/ASMR_first_iht77v.png",
-    ticket_purchase: "https://tickets.example.com/Whispering-Waves-ASMR-Experience"
   },
 
   {
@@ -522,7 +491,6 @@ asmr_events = [
     description: "Embark on a sensory journey at the ASMR Soundscape Retreat. Delight in the harmonious blend of calming sounds and gentle whispers for a truly tranquil experience.",
     average_price: rand(2) == 0 ? "FREE" : rand(10.0..30.0).round(2),
     photo_url: "https://res.cloudinary.com/di8qjnwgb/image/upload/v1699857571/ASMR_second_piinv2.jpg",
-    ticket_purchase: "https://tickets.example.com/ASMR-Soundscape-Retreat"
   },
 
   {
@@ -533,7 +501,6 @@ asmr_events = [
     description: "Experience tranquility at the Zen Garden ASMR Night. Let the ASMR artists guide you through a night of calming sounds and gentle triggers in a serene garden setting.",
     average_price: rand(2) == 0 ? "FREE" : rand(10.0..30.0).round(2),
     photo_url: "https://res.cloudinary.com/di8qjnwgb/image/upload/v1699857561/ASMR_third_idt391.jpg",
-    ticket_purchase: "https://tickets.example.com/Zen-Garden-ASMR-Night"
   },
 
   {
@@ -545,7 +512,6 @@ asmr_events = [
     Some people says that you never truly experience inner peace before hearing Alexis'magic fingers...",
     average_price: rand(2) == 0 ? "FREE" : rand(10.0..30.0).round(2),
     photo_url: "https://res.cloudinary.com/di8qjnwgb/image/upload/v1699857568/ASMR_Alex_s1ruai.jpg",
-    ticket_purchase: "https://tickets.example.com/Alex-Keyboard-and-background-ASMR"
   }
 ]
 
@@ -558,7 +524,6 @@ asmr_events.each do |event|
     end_time: event[:end_time],
     description: event[:description],
     average_price: event[:average_price],
-    ticket_purchase: event[:ticket_purchase],
   )
 
   url = event[:photo_url]

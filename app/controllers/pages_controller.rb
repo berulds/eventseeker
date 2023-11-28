@@ -16,6 +16,7 @@ class PagesController < ApplicationController
       counter = 0
     end
     @api_events = ApiService.call_google_events_api(@query, @date, counter)
+    render json: api_events
 
     @geocoded_events = geocoded_events
     @markers = @geocoded_events.map do |event|

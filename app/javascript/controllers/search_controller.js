@@ -14,23 +14,28 @@ export default class extends Controller {
     const formData = new FormData(form);
     const query = formData.get('query');
     const date = formData.get('date');
-    const start = formData.get('start');
+    const counter = formData.get('start');
 
-    console.log(query, date, start);
+    console.log(query, date, counter);
 
-    const dateParam = date.gsub('-', '+');
-    const url = `https://serpapi.com/search.json?engine=google_events&q=${query}+${dateParam}&start=${start}&hl=en&api_key=#{ENV["API_KEY"]}`;
+    try {
+      const response = await fetch(`/search_events?query=${query}&date=${date}&start=${counter}`);
 
-    console.log(url);
+      if (response.ok) {
+        const newResults = await response.json();
+        this.appendResults(newResults);
+      } else {
+        console.error(`Error: ${response.status} - ${response.statusText}`);
+      }
+    } catch (error) {
+      console.error("Error fetching search results", error);
+    }
   }
-
 }
 
 
-
-
-// listen for click
-// submit form
-// append results
-// data-controller="search"
-// , data: { action: "click->search#loadMoreResults" }
+// appendResults(results) {
+//   // Implement the logic to append new results to the existing results
+//   const resultsContainer = this.resultsTarget;
+//   // Example: resultsContainer.innerHTML += newResultsHtml;
+// }

@@ -69,12 +69,12 @@
               <% end %>
               <% if @api_events.size == 10 %>
                 <div class="see-more-card d-flex justify-content-center align-items-center">
-                  <div class="see-more">
-                    <%= form_with(url: { action: "search_events" }, method: "get") do |form| %>
+                  <div class="see-more" data-controller="search">
+                    <%= form_with(url: { action: "search_events" }, method: "get", class: "see-more-form") do |form| %>
                       <%= form.hidden_field :query, value: @query %>
                       <%= form.hidden_field :date, value: @date %>
                       <%= form.hidden_field :start, value: params[:start].to_i + 10 %>
-                      <%= form.submit "See more results", class: "btn btn-dark" %>
+                      <%= form.submit "See more results", class: "btn btn-dark", data: { action: "click->search#loadMoreResults" } %>
                     <% end %>
                   </div>
                 </div>

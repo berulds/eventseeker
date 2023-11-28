@@ -25,7 +25,7 @@
 
           <div class="container-fluid mt-5 mb-5">
             <div class="row">
-              <% @bookmarks.each do |bookmark| %>
+              <% @bookmarks.each do |bookmark, index| %>
                 <div class="col-3 mt-3">
                   <div class="card">
                     <% if bookmark.event.photo.present? %>
@@ -38,9 +38,34 @@
                       <div class="card-date"><%= bookmark.event.start_time.strftime('%dth %b') %> - <%= bookmark.event.end_time.strftime('%dth %b') %></div>
                       <div class="card-description"><%= bookmark.event.description %></div>
                     <div class="card-actions">
+
                       <% if bookmark.event.ticket_purchase.present? %>
-                        <a class="btn btn-primary" href="<%= bookmark.event.ticket_purchase["link"] %>" target="_blank"><%= bookmark.event.ticket_purchase["source"] %>Testing</a>
+                        <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#purchase-<%= index %>">Purchase</button>
+
+                        <div class="modal fade" id="purchase-<%= index %>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="purchase" aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h2>Where would you like to purchase?</h2>
+                              </div>
+                                <div class="modal-body purchase">
+                                  <div class="d-flex flex-column align-items-center">
+                                    <% ticket_purchase_json = JSON.parse(bookmark.event.ticket_purchase) %>
+                                    <% ticket_purchase_json.each do |info| %>
+                                      <div class="p-2">
+                                        <a class="btn btn-dark" href="<%= info["link"] %>" target="_blank"><%= info["source"] %></a>
+                                      </div>
+                                    <% end %>
+                                  </div>
+                                </div>
+                              <div class="modal-footer">
+                                <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       <% end %>
+
                         <%= "Bookmark ID: #{bookmark.id}, Status: #{bookmark.status}" %>
                         <% if bookmark.status == "interested" %>
                           <%= link_to "I'm going!", bookmark_path(bookmark), class: "btn btn-primary", data: { turbo_method: :patch } %>

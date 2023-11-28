@@ -4,7 +4,11 @@
       <div class="card-body" style="background-color: #000000; padding: 25px; margin: 15px; margin-bottom: 20px; color: #ffffff;">
         <div class="row">
           <div class="col-md-2">
-            <img src="assets/images/IsabelleL.jpg" alt="Image" style="width: 100px; height: 100px; margin-right: 20px;">
+            <% if current_user.photo.present? %>
+                <%= cl_image_tag(current_user.photo.key, class: "img-fluid", alt: "User Photo") %>
+              <% else %>
+                <img src="https://res.cloudinary.com/di8qjnwgb/image/upload/v1700175725/defaultusericon_sm5u2k.jpg", class="img-fluid", alt="User Photo";>
+              <% end %>
           </div>
           <div class="col-md-8">
             <h5 class="card-title"> <%= @current_user.username %></h5>

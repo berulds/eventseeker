@@ -1,10 +1,25 @@
-<div class="container-fluid mt-5 ">
+<div class="container-fluid mt-5">
   <div class="row">
     <div class="col-12">
-
-      <div>
-        <h1> Hi, I'm a dashboard. I need content. </h1>
+      <div class="card-body" style="background-color: #000000; padding: 25px; margin: 15px; margin-bottom: 20px; color: #ffffff;">
+        <div class="row">
+          <div class="col-md-2">
+            <img src="assets/images/IsabelleL.jpg" alt="Image" style="width: 100px; height: 100px; margin-right: 20px;">
+          </div>
+          <div class="col-md-8">
+            <h5 class="card-title"> <%= @current_user.username %></h5>
+            <p class="card-text">Welcome back <%= @current_user.username %>! Here's what's happening.</p>
+            <p class="card-text"><%= Date.today %></p>
+          </div>
+          <div class="col-md-2 d-flex flex-column align-items-end">
+            <div class="p-2"><a href="#" class="btn btn-light">Create Event</a></div>
+            <div class="p-2"><a href="#" class="btn btn-light">Create Itinerary</a></div>
+          </div>
+        </div>
       </div>
+    </div>
+  </div>
+</div>
 
       <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item" role="presentation">

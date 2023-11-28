@@ -4,19 +4,29 @@
     <div class="col-12">
 
       <div class="d-flex justify-content-center">
-        <div class="search mt-5">
+        <div class="search mt-5 search-form">
           <%= form_with(url: { action: "search_events" }, method: "get") do |form| %>
-            <%= form.label :query, "What", class: "search-label" %>
-            <%= form.text_field :query, placeholder: "Sports in Melbourne..." %>
-            <%= form.label :date, "When", class: "search-label" %>
-            <%= form.text_field :date, placeholder: "Select a date", data: { controller: "datepicker" } %>
+
+              <div class="search-container">
+                <%= form.text_field :query, placeholder: "Sports in Melbourne...", class: "search-input", autocomplete: "off"%>
+                <button type="submit" class="search-button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                <%# <i class="fa-solid fa-magnifying-glass"><%= form.submit "" %>
+              </div>
+
+            <div class="date-filters">
+            <%= form.button "Today" %>
+            <%= form.button "Tomorrow" %>
+            <%= form.button "This Weekend" %>
+            <%= form.text_field :date, placeholder: "Pick a date!", data: { controller: "datepicker" } %>
+            </div>
             <%# <%= form.label :location, "Where", class: "search-label" %>
             <%# <%= form.text_field :location, autocomplete: "off", placeholder: "", data: { location_autocomplete_target: "input" } %>
             <%# <div class="suggestions-container"></div> %>
-            <%= form.submit "Search" %>
+
           <% end %>
         </div>
       </div>
+
 
       <div class="d-flex mt-5 justify-content-center">
         <% if @api_events.present? %>

@@ -1,12 +1,14 @@
 class PagesController < ApplicationController
   before_action :set_user, :set_event, :set_query, :set_date
   skip_before_action :authenticate_user!, only: [ :home, :search_events ]
+  before_action :authenticate_user!, only: [:save_from_api]
 
   def home
 
   end
 
   def search_events
+    store_location_for(:user, request.fullpath) # for login logic if not signed in
     # location = params[:location]
     # matched_address = location.match(/^([^,]+).*?([^,]+)\s*$/)
     # clean_location = location.include?(',') ? matched_address[1] + matched_address[2] : location
@@ -58,6 +60,7 @@ class PagesController < ApplicationController
   end
 
   private
+
 
   def update_status_with_time(bookmark)
     bookmark.update(status: "attended") if bookmark.event.end_time < Time.now && bookmark.status == "attending"

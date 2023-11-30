@@ -23,10 +23,14 @@
       <%= render "shared/navbar" %>
       <%= render "shared/flashes" %>
 
-      <%= yield %>
+      <main>
+        <%= yield %>
+      </main>
+
   </body>
 
-  <footer>
+  <footer class="footer">
     <%= render "shared/footer" %>
   </footer>
+
 </html>

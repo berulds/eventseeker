@@ -49,9 +49,7 @@
                     <div class="card-description"><%= event["description"] %></div>
                   </div>
                   <div class="card-actions d-flex justify-content-center" id="event-card-buttons">
-
                     <%= button_to "Save Event", create_from_api_path(event), class: "btn btn-dark"  %>
-
                     <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#purchase-<%= index %>">Purchase</button>
 
                     <div class="modal fade" id="purchase-<%= index %>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="purchase" aria-hidden="true">

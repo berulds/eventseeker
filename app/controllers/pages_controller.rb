@@ -15,7 +15,8 @@ class PagesController < ApplicationController
     else
       counter = 0
     end
-    @api_events = ApiService.call_google_events_api(@query, @date, counter)
+    @date_filter = params[:htichips].present? ? params[:htichips] : nil
+    @api_events = ApiService.call_google_events_api(query: @query, date: @date, counter: counter, date_filter: @date_filter )
     render :home
   rescue StandardError => e
     @error_message = "Error occurred: #{e.message}"
@@ -31,19 +32,19 @@ class PagesController < ApplicationController
     end
   end
 
-  def geocoded_events
-    @api_events.map do |event|
-      address = event["address"]
-      coordinates = ApiService.mapbox_geocode(address)
-        {
-          title: event["title"],
-          description: event["description"],
-          date: event["date"]["start_date"],
-          latitude: coordinates[:latitude],
-          longitude: coordinates[:longitude]
-        }
-    end
-  end
+  # def geocoded_events
+  #   @api_events.map do |event|
+  #     address = event["address"]
+  #     coordinates = ApiService.mapbox_geocode(address)
+  #       {
+  #         title: event["title"],
+  #         description: event["description"],
+  #         date: event["date"]["start_date"],
+  #         latitude: coordinates[:latitude],
+  #         longitude: coordinates[:longitude]
+  #       }
+  #   end
+  # end
 
   def about_us
   end
@@ -70,4 +71,8 @@ class PagesController < ApplicationController
   def set_date
     @date = params[:date]
   end
+
+  # def set_date_filter
+  #   @date_filter = params[:htichips]
+  # end
 end

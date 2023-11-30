@@ -14,8 +14,8 @@
               </div>
 
             <div class="date-filters">
-            <%= form.button "Today" %>
-            <%= form.button "Tomorrow" %>
+            <%= form.button "Today", type: "button", name: "htichips", value: "date:today" %>
+            <%= form.button "Tomorrow", name: "htichips", value: "date:tomorrow" %>
             <%= form.button "This Weekend" %>
             <%= form.text_field :date, placeholder: "Pick a date!", data: { controller: "datepicker" } %>
             </div>
@@ -30,15 +30,15 @@
 
       <div class="d-flex mt-5 justify-content-center">
         <% if @api_events.present? %>
-          <p>Showing results for <%= @query.capitalize %> around <%= Date.parse(@date).strftime('%d %b') %></p>
+          <% if @date.present? %>
+            <p>Showing results for <%= @query.capitalize %> around <%= Date.parse(@date).strftime('%d %b') %></p>
+          <% elsif @date_filter.present? %>
+            <p>Showing results for <%= @query.capitalize %> <%= @date_filter.split(':').last %></p>
+          <% end %>
         <% end %>
       </div>
 
-        <div class="d-flex justify-content-center">
-          <% if @api_events.present? %>
-            <p>Showing results for <%= @query.capitalize %> around <%= Date.parse(@date).strftime('%d %b') %></p>
-          <% end %>
-        </div>
+
 
         <div class="container-search d-flex">
           <div class="search-results" data-controller="search" data-search-api-events="<%= @api_events.to_json %>">
@@ -55,6 +55,7 @@
                   <div class="card-actions d-flex justify-content-center" id="event-card-buttons">
 
                     <%= button_to "Save Event", create_from_api_path(event), class: "btn btn-dark"  %>
+
 
                     <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#purchase-<%= index %>">Purchase</button>
 

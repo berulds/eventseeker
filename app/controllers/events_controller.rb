@@ -23,7 +23,6 @@ class EventsController < ApplicationController
     def create_from_api
       ticket_purchase_source = params["ticket_info"][0]["source"]
       ticket_purchase_link = params["ticket_info"][0]["link"]
-      raise
       event_params_api = {
         name: params["title"],
         address: params["address"].join(', '),

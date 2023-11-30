@@ -88,6 +88,7 @@
                       <% if bookmark.event.ticket_purchase.present? %>
                         <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#purchase-<%= index %>">Purchase</button>
 
+
                         <div class="modal fade" id="purchase-<%= index %>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="purchase" aria-hidden="true">
                           <div class="modal-dialog">
                             <div class="modal-content">
@@ -111,7 +112,7 @@
                           </div>
                         </div>
                       <% end %>
-                      
+
                         <% if bookmark.status == "interested" %>
                           <%= link_to "I'm going!", bookmark_path(bookmark), class: "btn btn-primary", data: { turbo_method: :patch } %>
                         <% elsif bookmark.status == "attending" %>

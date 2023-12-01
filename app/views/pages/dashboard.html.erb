@@ -34,12 +34,6 @@
             <li class="nav-item" role="presentation">
               <button class="nav-link" id="event-tab" data-bs-toggle="tab" data-bs-target="#event" type="button" role="tab" aria-controls="home" aria-selected="false">My Events</button>
             </li>
-            <li class="nav-item" role="presentation">
-              <button class="nav-link" id="chatroom-tab" data-bs-toggle="tab" data-bs-target="#chatroom" type="button" role="tab" aria-controls="chatroom" aria-selected="false">Chatroom</button>
-            </li>
-            <li class="nav-item" role="presentation">
-              <button class="nav-link" id="all_events-tab" data-bs-toggle="tab" data-bs-target="#all_events" type="button" role="tab" aria-controls="all_events" aria-selected="false">All Events</button>
-            </li>
           </div>
         </ul>
       </div>
@@ -56,14 +50,6 @@
 
         <div class="tab-pane fade" id="event" role="tabpanel" aria-labelledby="event-tab">
           <%= render "shared/my_events" %>
-        </div>
-
-        <div class="tab-pane fade" id="chatroom" role="tabpanel" aria-labelledby="chatroom-tab">
-          <%= render "shared/chatrooms" %>
-        </div>
-
-        <div class="tab-pane fade" id="all_events" role="tabpanel" aria-labelledby="all_events-tab">
-          <%= render "shared/all_events" %>
         </div>
 
       </div>

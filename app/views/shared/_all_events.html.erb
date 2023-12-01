@@ -19,41 +19,49 @@
                 </div>
                 <div class="card-actions d-flex justify-content-center" id="event-card-buttons">
                   <div>
-                    <% unless current_user.bookmarks.exists?(event_id: event.id) %>
-                      <%= link_to "Bookmark me", event_bookmarks_path(event), data: { turbo_method: :post, turbo_confirm: "Are you interested?" }, class: "btn btn-dark" %>
+                    <% if current_user.present? == false %>
+                      <%= link_to "Login/Sign Up to save", new_user_session_path,class: "btn btn-dark" %>
+                    <% end %>
+                  </div>
+                  <div>
+                    <% if current_user.present? %>
+                      <% unless current_user.bookmarks.exists?(event_id: event.id) %>
+                        <%= link_to "Bookmark me", event_bookmarks_path(event), data: { turbo_method: :post, turbo_confirm: "Are you interested?" }, class: "btn btn-dark" %>
+                      <% end %>
                     <% end %>
                   </div>
                   <div>
                     <% if @itinerary.present? %>
                       <%= link_to "Add", itinerary_itinerary_events_path(@itinerary, event_id: event.id), class: "btn btn-dark", data: { turbo_method: :post } %>
                     <% else %>
+                      <% if current_user.present? %>
+                        <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#addToItinerary-<%= event.id %>">Add to an itinerary</button>
 
-                      <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#addToItinerary-<%= event.id %>">Add to an itinerary</button>
-
-                      <div class="modal fade" id="addToItinerary-<%= event.id %>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addToItineraryLabel" aria-hidden="true" data-controller="add-to-itinerary">
-                        <div class="modal-dialog">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <h2>Select which itinerary</h2>
-                            </div>
-                            <div class="modal-body select-which-itinerary">
-                              <form id="addToItineraryForm">
-                                <input type="hidden" id="event_id" value="<%= event.id %>" data-add-to-itinerary-target="eventIdId">
-                                <select data-add-to-itinerary-target="itinerarySelect" class="form-select" required data-action="change->add-to-itinerary#itineraryChange">
-                                  <option value="" disabled selected>Select an itinerary</option>
-                                  <% current_user.itineraries.each do | itinerary | %>
-                                    <option value="<%= itinerary.id %>"><%= itinerary.name %></option>
-                                  <% end %>
-                                </select>
-                                <div class="modal-footer">
-                                  <button type="reset" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
-                                  <button type="reset" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#addToItinerary-<%= event.id %>" id="addToItineraryButton-<%= event.id %>">Add to this itinerary</button>
-                                </div>
-                              </form>
+                        <div class="modal fade" id="addToItinerary-<%= event.id %>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addToItineraryLabel" aria-hidden="true" data-controller="add-to-itinerary">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h2>Select which itinerary</h2>
+                              </div>
+                              <div class="modal-body select-which-itinerary">
+                                <form id="addToItineraryForm">
+                                  <input type="hidden" id="event_id" value="<%= event.id %>" data-add-to-itinerary-target="eventIdId">
+                                  <select data-add-to-itinerary-target="itinerarySelect" class="form-select" required data-action="change->add-to-itinerary#itineraryChange">
+                                    <option value="" disabled selected>Select an itinerary</option>
+                                    <% current_user.itineraries.each do | itinerary | %>
+                                      <option value="<%= itinerary.id %>"><%= itinerary.name %></option>
+                                    <% end %>
+                                  </select>
+                                  <div class="modal-footer">
+                                    <button type="reset" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
+                                    <button type="reset" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#addToItinerary-<%= event.id %>" id="addToItineraryButton-<%= event.id %>">Add to this itinerary</button>
+                                  </div>
+                                </form>
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </div>
+                      <% end %>
                     <% end %>
                   </div>
                 </div>

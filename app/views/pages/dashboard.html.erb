@@ -22,25 +22,27 @@
         </div>
       </div>
 
-      <ul class="nav nav-tabs" id="myTab" role="tablist">
-        <div class="d-flex justify-content-between">
-          <li class="nav-item" role="presentation">
-            <button class="nav-link active" id="overview-tab" data-bs-toggle="tab" data-bs-target="#overview" type="button" role="tab" aria-controls="home" aria-selected="true">Overview</button>
-          </li>
-          <li class="nav-item" role="presentation">
-            <button class="nav-link" id="itinerary-tab" data-bs-toggle="tab" data-bs-target="#itinerary" type="button" role="tab" aria-controls="itinerary" aria-selected="false">My Itineraries</button>
-          </li>
-          <li class="nav-item" role="presentation">
-            <button class="nav-link" id="event-tab" data-bs-toggle="tab" data-bs-target="#event" type="button" role="tab" aria-controls="home" aria-selected="false">My Events</button>
-          </li>
-          <li class="nav-item" role="presentation">
-            <button class="nav-link" id="chatroom-tab" data-bs-toggle="tab" data-bs-target="#chatroom" type="button" role="tab" aria-controls="chatroom" aria-selected="false">Chatroom</button>
-          </li>
-          <li class="nav-item" role="presentation">
-            <button class="nav-link" id="all_events-tab" data-bs-toggle="tab" data-bs-target="#all_events" type="button" role="tab" aria-controls="all_events" aria-selected="false">All Events</button>
-          </li>
-        </div>
-      </ul>
+      <div data-controller="tab">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <div class="d-flex justify-content-between">
+            <li class="nav-item" role="presentation">
+              <button class="nav-link active" id="overview-tab" data-bs-toggle="tab" data-bs-target="#overview" type="button" role="tab" aria-controls="home" aria-selected="true">Overview</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="itinerary-tab" data-bs-toggle="tab" data-bs-target="#itinerary" type="button" role="tab" aria-controls="itinerary" aria-selected="false">My Itineraries</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="event-tab" data-bs-toggle="tab" data-bs-target="#event" type="button" role="tab" aria-controls="home" aria-selected="false">My Events</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="chatroom-tab" data-bs-toggle="tab" data-bs-target="#chatroom" type="button" role="tab" aria-controls="chatroom" aria-selected="false">Chatroom</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="all_events-tab" data-bs-toggle="tab" data-bs-target="#all_events" type="button" role="tab" aria-controls="all_events" aria-selected="false">All Events</button>
+            </li>
+          </div>
+        </ul>
+      </div>
 
       <div class="tab-content" id="myTabContent">
 

@@ -1,11 +1,11 @@
 .chatroom {
   background: white;
-  margin-top: 9px;
-  height: calc(100vh - 75px);
+  height: calc(80vh - 156px);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   flex-grow: 1;
+  max-width: 50%;
+  margin-right: 25px;
 
   h1 {
     border-bottom: 1px solid $gray-200;
@@ -27,4 +27,60 @@
       margin-bottom: 0;
     }
   }
+}
+
+.chatroom-container {
+  margin-top: 56px;
+  border-radius: 10px;
+}
+
+.chatroom-content {
+  margin-top: 56px;
+  margin-left: 25px;
+}
+
+.chatroom-card {
+  position: relative;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin: 10px;
+  overflow: hidden;
+  transition: box-shadow 0.3s ease;
+  background-color: #fff;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 10px;
+  width: 450px;
+}
+
+.chatroom-card img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 15px;
+}
+
+.chatroom-card .btn {
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.chatroom-card:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+  transform: scale(1.1);
+}
+
+.chatroom-card-date {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  font-size: 14px;
+  color: #555;
 }

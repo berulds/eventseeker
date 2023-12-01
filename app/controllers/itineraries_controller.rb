@@ -31,20 +31,6 @@ class ItinerariesController < ApplicationController
     # authorize @itinerary
   end
 
-  def geocoded_events
-    @itinerary_events.map do |itinerary_event|
-      address = itinerary_event.event["address"]
-      coordinates = ApiService.mapbox_geocode(address)
-        {
-          title: itinerary_event.event["title"],
-          description: itinerary_event.event["description"],
-          date: itinerary_event.event["date"]["start_date"],
-          latitude: coordinates[:latitude],
-          longitude: coordinates[:longitude]
-        }
-    end
-  end
-
   def destroy
     @itinerary.destroy
     # authorize @itinerary

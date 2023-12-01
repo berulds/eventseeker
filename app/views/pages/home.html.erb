@@ -13,16 +13,10 @@
                 <%# <i class="fa-solid fa-magnifying-glass"><%= form.submit "" %>
               </div>
 
-            <div class="date-filters">
-            <%= form.button "Today", type: "button", name: "htichips", value: "date:today" %>
-            <%= form.button "Tomorrow", name: "htichips", value: "date:tomorrow" %>
-            <%= form.button "This Weekend" %>
-            <%= form.text_field :date, placeholder: "Pick a date!", data: { controller: "datepicker" } %>
-            </div>
-            <%# <%= form.label :location, "Where", class: "search-label" %>
-            <%# <%= form.text_field :location, autocomplete: "off", placeholder: "", data: { location_autocomplete_target: "input" } %>
-            <%# <div class="suggestions-container"></div> %>
+              <div class="date-filters">
 
+              <%= form.text_field :date, placeholder: "Pick a date!", data: { controller: "datepicker" } %>
+            </div>
           <% end %>
         </div>
       </div>

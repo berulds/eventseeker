@@ -8,6 +8,7 @@ import mapboxgl from 'mapbox-gl'
     }
 
     connect() {
+      console.log("connected to map controller")
       mapboxgl.accessToken = this.apiKeyValue
 
       this.map = new mapboxgl.Map({
@@ -21,10 +22,9 @@ import mapboxgl from 'mapbox-gl'
 
     #addMarkersToMap() {
       this.markersValue.forEach((marker) => {
-        const popup = new mapboxgl.Popup().setHTML(marker.info_window_html)
+        console.log(marker)
         new mapboxgl.Marker()
           .setLngLat([ marker.lng, marker.lat ])
-          .setPopup(popup)
           .addTo(this.map)
       })
     }

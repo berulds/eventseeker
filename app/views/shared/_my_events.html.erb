@@ -1,5 +1,6 @@
 <div>
   <%= link_to "Create an event", new_event_path, class: "btn btn-success dash-link" %>
+  <%= link_to "All Events", events_path, class: "btn btn-success dash-link" %>
   <div class="container-fluid mt-5 mb-5">
     <div class="row">
       <% @bookmarks.each do |bookmark, index| %>
@@ -16,6 +17,9 @@
               <div class="card-description"><%= bookmark.event.description %></div>
             </div>
             <div class="card-actions">
+              <% if bookmark.event.chatroom.present? %>
+                <%= link_to "Join the #{bookmark.event.name} channel", chatroom_path(bookmark.event.chatroom.id), class: "btn btn-success" %>
+              <% end %>
               <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#addToItinerary-<%= bookmark.event.id %>">Add to an itinerary</button>
               <div class="modal fade" id="addToItinerary-<%= bookmark.event.id %>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addToItineraryLabel" aria-hidden="true" data-controller="add-to-itinerary">
                 <div class="modal-dialog">

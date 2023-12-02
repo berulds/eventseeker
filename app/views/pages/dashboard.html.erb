@@ -1,7 +1,6 @@
-<div class="container-fluid mt-5">
+<div class="dashboard-container container-fluid mt-5">
   <div class="row">
     <div class="col-12">
-
       <div class="card-body" style="background-color: #000000; padding: 25px; margin: 15px; margin-bottom: 20px; color: #ffffff;">
         <div class="row">
           <div class="col-md-2">
@@ -23,20 +22,21 @@
         </div>
       </div>
 
-      <ul class="nav nav-tabs" id="myTab" role="tablist">
-        <li class="nav-item" role="presentation">
-          <button class="nav-link active" id="overview-tab" data-bs-toggle="tab" data-bs-target="#overview" type="button" role="tab" aria-controls="home" aria-selected="true">Overview</button>
-        </li>
-        <li class="nav-item" role="presentation">
-          <button class="nav-link" id="itinerary-tab" data-bs-toggle="tab" data-bs-target="#itinerary" type="button" role="tab" aria-controls="itinerary" aria-selected="false">My Itineraries</button>
-        </li>
-        <li class="nav-item" role="presentation">
-          <button class="nav-link" id="event-tab" data-bs-toggle="tab" data-bs-target="#event" type="button" role="tab" aria-controls="home" aria-selected="true">My Events</button>
-        </li>
-        <li class="nav-item" role="presentation">
-          <button class="nav-link" id="chatroom-tab" data-bs-toggle="tab" data-bs-target="#chatroom" type="button" role="tab" aria-controls="chatroom" aria-selected="false">Chatroom</button>
-        </li>
-      </ul>
+      <div data-controller="tab">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <div class="d-flex justify-content-between">
+            <li class="nav-item" role="presentation">
+              <button class="nav-link active" id="overview-tab" data-bs-toggle="tab" data-bs-target="#overview" type="button" role="tab" aria-controls="home" aria-selected="true">Overview</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="itinerary-tab" data-bs-toggle="tab" data-bs-target="#itinerary" type="button" role="tab" aria-controls="itinerary" aria-selected="false">My Itineraries</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="event-tab" data-bs-toggle="tab" data-bs-target="#event" type="button" role="tab" aria-controls="home" aria-selected="false">My Events</button>
+            </li>
+          </div>
+        </ul>
+      </div>
 
       <div class="tab-content" id="myTabContent">
 
@@ -52,12 +52,7 @@
           <%= render "shared/my_events" %>
         </div>
 
-        <div class="tab-pane fade" id="chatroom" role="tabpanel" aria-labelledby="chatroom-tab">
-          <%= render "shared/chatrooms" %>
-        </div>
-
       </div>
-
     </div>
   </div>
 </div>

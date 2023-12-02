@@ -22,6 +22,12 @@ class ItinerariesController < ApplicationController
   def show
     @itinerary = Itinerary.find(params[:id])
     @itinerary_events = @itinerary.itinerary_events
+    @markers = @itinerary_events.map do |itinerary_event|
+      {
+        lat: itinerary_event.event[:latitude],
+        lng: itinerary_event.event[:longitude]
+      }
+    end
     # authorize @itinerary
   end
 

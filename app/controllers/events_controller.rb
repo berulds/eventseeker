@@ -10,7 +10,6 @@ class EventsController < ApplicationController
 
   def new
     @event = Event.new
-    # authorize @event
   end
 
   def create
@@ -33,52 +32,53 @@ class EventsController < ApplicationController
 
       @event = Event.new(event_params_api)
       @event.download_image_from_url(params["thumbnail"])
-      raise
+
       if @event.valid?
         if @event.save
           existing_bookmark = Bookmark.find_by(user_id: current_user.id, event_id: @event.id)
-
           unless existing_bookmark
             Bookmark.create(user_id: current_user.id, event_id: @event.id)
           end
-
           chatroom = Chatroom.create(name: "#{@event.name}", event: @event)
-
-          render json: { status: "success", message: "Event saved successfully" }
-        else
-          render json: { status: "error", errors: @event.errors.full_messages }, status: :unprocessable_entity
         end
-      else
         existing_bookmark = Bookmark.find_by(user_id: current_user.id, event_id: @event.id)
-
         unless existing_bookmark
           Bookmark.create(user_id: current_user.id, event_id: @event.id)
         end
-
-        render json: { status: "success", message: "Event already added" }
       end
     end
-# will refactor that later
-
 
   def show
-    # authorize @event
   end
 
   def edit
-    # authorize @event
   end
 
   def update
     @event.update(event_params)
-    # authorize @event
     redirect_to event_path(@event)
   end
 
   def destroy
     @event.destroy
-    # authorize @event
     redirect_to events_path, status: :see_other
+  end
+
+  def check_event_exists
+    name = params[:name]
+
+    begin
+      existing_event = Event.find_by(name: name)
+
+      if existing_event
+        render json: { exists: true }
+      else
+        render json: { exists: false }
+      end
+    rescue => e
+      Rails.logger.error("Error checking event existence: #{e.message}")
+      render json: { exists: false, error: e.message }, status: :internal_server_error
+    end
   end
 
   private
@@ -91,11 +91,7 @@ class EventsController < ApplicationController
     params.require(:event).permit(:name, :address, :start_time, :end_time, :description, :ticket_purchase)
   end
 
-  def search_path_params
-    params.permit(:query, :date)
-  end
-
   def set_event
-    @event = Event.find(params[:id])
+    @event = Event.find(params[:id]) if params[:id].present?
   end
 end

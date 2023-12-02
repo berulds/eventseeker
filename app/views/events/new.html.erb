@@ -1,23 +1,22 @@
-<div class="container mt-5">
+<div class="container">
   <div class="row justify-content-center">
     <div class="col-12 col-lg-6">
-
-      <h2>Create a New Event</h2>
-
-      <%= simple_form_for [@event] do |f| %>
-        <%= f.label :name %>
-        <%= f.text_field :name %>
-        <%= f.label :address %>
-        <%= f.text_field :address %>
-        <%= f.input :start_time, as: :string, input_html: { data: { controller: "datepicker" } } %>
-        <%= f.input :end_time, as: :string, input_html: { data: { controller: "datepicker" } } %>
-        <%= f.label :description %>
-        <%= f.text_field :description %>
-        <%= f.label :photo %>
-        <%= f.file_field :photo %>
-        <%= f.submit %>
-      <% end %>
-
+      <div class="event-forms">
+        <h2>Create a New Event</h2>
+        <%= simple_form_for [@event] do |f| %>
+          <%= f.label :name %>
+          <%= f.text_field :name %>
+          <%= f.label :address %>
+          <%= f.text_field :address %>
+          <%= f.input :start_time, as: :string, input_html: { data: { controller: "datepicker" } } %>
+          <%= f.input :end_time, as: :string, input_html: { data: { controller: "datepicker" } } %>
+          <%= f.label :description %>
+          <%= f.text_field :description %>
+          <%= f.label :photo %>
+          <%= f.file_field :photo %>
+          <%= f.submit %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

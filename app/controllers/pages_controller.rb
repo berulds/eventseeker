@@ -28,7 +28,8 @@ class PagesController < ApplicationController
   def dashboard
     @bookmarks = current_user.bookmarks.includes(event: :chatroom)
     @itinerary = current_user.itineraries
-    # @chatrooms = ???
+    @first_chatroom =  @bookmarks.find { |bookmark| bookmark.event.chatroom.present? && bookmark.user }&.event&.chatroom.id
+    # raise
     @bookmarks.each do |bookmark|
       update_status_with_time(bookmark)
     end

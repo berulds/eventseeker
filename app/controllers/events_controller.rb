@@ -30,16 +30,36 @@ class EventsController < ApplicationController
         ticket_purchase: params["ticket_info"].to_json,
         # add other thing like price etc...
       }
+
       @event = Event.new(event_params_api)
       @event.download_image_from_url(params["thumbnail"])
-      if @event.save
-        Bookmark.create(user_id: current_user.id, event_id: @event.id )
-        chatroom = Chatroom.create(name: "#{@event.name}", event: @event)
-        # flash[:notice]= "everything is created" working on that
+      raise
+      if @event.valid?
+        if @event.save
+          existing_bookmark = Bookmark.find_by(user_id: current_user.id, event_id: @event.id)
+
+          unless existing_bookmark
+            Bookmark.create(user_id: current_user.id, event_id: @event.id)
+          end
+
+          chatroom = Chatroom.create(name: "#{@event.name}", event: @event)
+
+          render json: { status: "success", message: "Event saved successfully" }
+        else
+          render json: { status: "error", errors: @event.errors.full_messages }, status: :unprocessable_entity
+        end
       else
-        redirect_to events_path, alert: 'Failed to create event and bookmark.'
+        existing_bookmark = Bookmark.find_by(user_id: current_user.id, event_id: @event.id)
+
+        unless existing_bookmark
+          Bookmark.create(user_id: current_user.id, event_id: @event.id)
+        end
+
+        render json: { status: "success", message: "Event already added" }
       end
     end
+# will refactor that later
+
 
   def show
     # authorize @event
@@ -71,6 +91,9 @@ class EventsController < ApplicationController
     params.require(:event).permit(:name, :address, :start_time, :end_time, :description, :ticket_purchase)
   end
 
+  def search_path_params
+    params.permit(:query, :date)
+  end
 
   def set_event
     @event = Event.find(params[:id])

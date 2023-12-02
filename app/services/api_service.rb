@@ -2,7 +2,7 @@ class ApiService
   require "json"
   require "open-uri"
 
-  def self.call_google_events_api(query:, date:, counter:)
+  def self.call_google_events_api(query, date, counter)
     date = date.gsub('-', '+')
     url = "https://serpapi.com/search.json?engine=google_events&q=#{query + '+' + date}&start=#{counter}&hl=en&api_key=#{ENV["API_KEY"]}"
     puts url
@@ -23,4 +23,3 @@ class ApiService
     end
   end
 end
-# "https://serpapi.com/search.json?engine=google_events&q=#{@query}&htichips=date%3Atoday&hl=en&api_key=#{ENV["API_KEY"]}""

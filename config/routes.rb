@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   get 'pages/dashboard'
   get 'pages/about_us'
   post 'create_from_api', to: 'events#create_from_api', as: 'create_from_api'
+  get '/events/check_event_exists', to: 'events#check_event_exists', as: 'check_event_exists'
+
 
   resources :events, only: [:new, :show, :create, :destroy, :edit, :update, :index] do
     resources :bookmarks, only: [:new, :create, :index, :update]

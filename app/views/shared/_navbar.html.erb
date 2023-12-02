@@ -23,11 +23,8 @@
             <% end %>
           </a>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <%= link_to "Overview", "#{pages_dashboard_path}#overview", data: { action: "click->tab#activateTab", tab_target: "overview" }, class: "dropdown-item" %>
-              <%= link_to "My Itineraries", "#{pages_dashboard_path}#itinerary", data: { action: "click->tab#activateTab", tab_target: "itinerary" }, class: "dropdown-item" %>
-              <%= link_to "My Events", "#{pages_dashboard_path}#event", data: { action: "click->tab#activateTab",tab_target: "event" }, class: "dropdown-item" %>
-              <%= link_to "Chatroom", "#{pages_dashboard_path}#chatroom", data: { action: "click->tab#activateTab", tab_target: "chatroom" }, class: "dropdown-item" %>
-              <%= link_to "All Events", "#{pages_dashboard_path}#all_events", data: { action: "click->tab#activateTab", tab_target: "all_events" }, class: "dropdown-item" %>
+              <%= link_to "Dashboard", pages_dashboard_path, class: "dropdown-item" %>
+              <%= link_to "All Events", events_path, class: "dropdown-item" %>
               <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
             </div>
           </li>

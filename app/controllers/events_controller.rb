@@ -17,7 +17,7 @@ class EventsController < ApplicationController
     @event = Event.new(event_params)
     @event.save
     chatroom = Chatroom.create(name: "#{@event.name}", event: @event)
-    redirect_to pages_dashboard_path
+    redirect_to events_path
     end
 
     def create_from_api
@@ -37,7 +37,7 @@ class EventsController < ApplicationController
         chatroom = Chatroom.create(name: "#{@event.name}", event: @event)
         # flash[:notice]= "everything is created" working on that
       else
-        redirect_to pages_dashboard_path, alert: 'Failed to create event and bookmark.'
+        redirect_to root_path, alert: 'Failed to create event and bookmark.'
       end
     end
 

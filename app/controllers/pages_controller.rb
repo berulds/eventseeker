@@ -19,14 +19,6 @@ class PagesController < ApplicationController
     end
     @api_events = ApiService.call_google_events_api(@query, @date, counter)
     render json: api_events
-
-    @geocoded_events = geocoded_events
-    @markers = @geocoded_events.map do |event|
-      {
-        lat: event[:latitude],
-        lng: event[:longitude]
-      }
-    end
     render :home
   rescue StandardError => e
     @error_message = "Error occurred: #{e.message}"
@@ -39,20 +31,6 @@ class PagesController < ApplicationController
     # @chatrooms = ???
     @bookmarks.each do |bookmark|
       update_status_with_time(bookmark)
-    end
-  end
-
-  def geocoded_events
-    @api_events.map do |event|
-      address = event["address"]
-      coordinates = ApiService.mapbox_geocode(address)
-        {
-          title: event["title"],
-          description: event["description"],
-          date: event["date"]["start_date"],
-          latitude: coordinates[:latitude],
-          longitude: coordinates[:longitude]
-        }
     end
   end
 

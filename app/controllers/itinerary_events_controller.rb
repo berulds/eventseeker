@@ -23,4 +23,5 @@ class ItineraryEventsController < ApplicationController
     redirect_to itinerary_path(@itinerary)
   end
 
+
 end

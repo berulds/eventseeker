@@ -23,7 +23,7 @@ class EventsController < ApplicationController
     def create_from_api
       event_params_api = {
         name: params["title"],
-        address: params["address"].to_s,
+        address: params["address"].join(', '),
         start_time: params['date']['start_date'],
         end_time: params['date']['start_date'],
         description: params["description"],

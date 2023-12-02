@@ -1,12 +1,14 @@
 class PagesController < ApplicationController
   before_action :set_user, :set_event, :set_query, :set_date
   skip_before_action :authenticate_user!, only: [ :home, :search_events ]
+  before_action :authenticate_user!, only: [:save_from_api]
 
   def home
 
   end
 
   def search_events
+    store_location_for(:user, request.fullpath) # for login logic if not signed in
     # location = params[:location]
     # matched_address = location.match(/^([^,]+).*?([^,]+)\s*$/)
     # clean_location = location.include?(',') ? matched_address[1] + matched_address[2] : location
@@ -15,7 +17,8 @@ class PagesController < ApplicationController
     else
       counter = 0
     end
-    @api_events = ApiService.call_google_events_api(query: @query, date: @date, counter: counter )
+    @api_events = ApiService.call_google_events_api(@query, @date, counter)
+    render json: api_events
     render :home
   rescue StandardError => e
     @error_message = "Error occurred: #{e.message}"
@@ -35,6 +38,7 @@ class PagesController < ApplicationController
   end
 
   private
+
 
   def update_status_with_time(bookmark)
     bookmark.update(status: "attended") if bookmark.event.end_time < Time.now && bookmark.status == "attending"

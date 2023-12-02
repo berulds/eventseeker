@@ -2,7 +2,12 @@
   <div class="footer-links">
     <a href="#"><img src="<%= asset_path('small_logo_event_seeker.png') %>" alt="EventSeeker Logo" class="nav-logo" style="height: 80px; width: auto;"></a>
   </div>
-  <div class="footer-links">
-    <%= link_to "About Us", pages_about_us_path, class: "nav-link" %>
+  <div class="avatar-about-group">
+    <%= link_to pages_about_us_path do %>
+      <img src="https://res.cloudinary.com/di8qjnwgb/image/upload/v1699852073/l2rtxwm4jwcn0oxgcn3d.jpg" class="avatar-about-mini">
+      <img src="https://res.cloudinary.com/di8qjnwgb/image/upload/v1699852074/xcwfxgg3dibrpvpumic3.jpg" class="avatar-about-mini">
+      <img src="https://res.cloudinary.com/di8qjnwgb/image/upload/v1699852074/f9m6z2zma8kupcso7z7s.png" class="avatar-about-mini">
+      <img src="https://res.cloudinary.com/di8qjnwgb/image/upload/v1699852072/rjz8iigryqclxvtrrqyg.jpg" class="avatar-about-mini">
+    <% end %>
   </div>
 </div>

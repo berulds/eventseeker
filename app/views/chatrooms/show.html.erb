@@ -1,23 +1,49 @@
-<div class="container chatroom"
-  data-controller="chatroom-subscription"
-  data-chatroom-subscription-chatroom-id-value="<%= @chatroom.id %>"
->
-  <h1>#<%= @chatroom.name %></h1>
-
-  <div class="messages" data-chatroom-subscription-target="messages">
-    <% @chatroom.messages.each do |message| %>
-      <%= render "messages/message", message: message %>
-    <% end %>
+<div class="chatroom-container d-flex">
+  <div class="chatroom-content">
+    <div class="mb-5">
+      <h3>Say hey to those going to your events!</h3>
+      <div class="d-flex justify-content-center"><%= link_to "Back to dashboard", pages_dashboard_path, class: "btn btn-dark" %></div>
+    </div>
+    <div>
+      <% @bookmarks.sort_by { |bookmark| bookmark.event.start_time }.each do |bookmark| %>
+        <% if bookmark.event.chatroom.present? && bookmark.user == current_user %>
+          <div class="chatroom-card d-flex align-items-start">
+            <img src=<%= cl_image_path(bookmark.event.photo.key, alt: "event image") %> alt="Event Image">
+            <%= link_to "Join the #{bookmark.event.name} channel", chatroom_path(bookmark.event.chatroom.id), class: "btn btn-success" %>
+            <div class="chatroom-card-date"><%= bookmark.event.start_time.strftime('%d %b') %></div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
   </div>
 
-<%= simple_form_for [@chatroom, @message],
-  html: { data: { action: "turbo:submit-end->chatroom-subscription#resetForm" }, class: "d-flex" } do |f|
-%>
+  <div class="container chatroom"
+    data-controller="chatroom-subscription"
+    data-chatroom-subscription-chatroom-id-value="<%= @chatroom.id %>"
+    data-chatroom-subscription-current-user-id-value="<%= current_user.id %>"
+  >
+    <h1>#<%= @chatroom.name %></h1>
 
-  <%= f.input :content,
-    label: false,
-    placeholder: "Message ##{@chatroom.name}",
-    wrapper_html: {class: "flex-grow-1"}
-  %>
-  <%= f.submit "Send", class: "btn btn-primary mb-3" %>
-<% end %>
+    <div class="messages" data-chatroom-subscription-target="messages">
+      <% @chatroom.messages.each do |message| %>
+        <div class="message-row d-flex <%= message.sender?(current_user) ? 'justify-content-end' : 'justify-content-start' %>">
+          <div class="<%= message.sender?(current_user) ? 'sender-style' : 'receiver-style' %>">
+            <%= render "messages/message", message: message %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <%= simple_form_for [@chatroom, @message],
+      html: { data: { action: "turbo:submit-end->chatroom-subscription#resetForm" }, class: "d-flex" } do |f|
+    %>
+
+      <%= f.input :content,
+        label: false,
+        placeholder: "Message ##{@chatroom.name}",
+        wrapper_html: {class: "flex-grow-1"}
+      %>
+      <%= f.submit "Send", class: "btn btn-primary mb-3" %>
+    <% end %>
+  </div>
+</div>

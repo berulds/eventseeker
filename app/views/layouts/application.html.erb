@@ -19,15 +19,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400&display=swap" rel="stylesheet">
   </head>
 
-
   <body>
-    <div class="main-container">
       <%= render "shared/navbar" %>
       <%= render "shared/flashes" %>
 
-      <%= yield %>
+      <main>
+        <%= yield %>
+      </main>
 
-      <%= render "shared/footer" %>
-    </div>
   </body>
+
+  <footer class="footer">
+    <%= render "shared/footer" %>
+  </footer>
+
 </html>

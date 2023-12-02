@@ -1,0 +1,44 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="card w-75">
+        <h1>Upcoming Events</h1>
+        <div class="card-content">
+          <p>Events you're going to</p>
+          <% @bookmarks.each do |bookmark, index| %>
+            <% if bookmark.status == "attending" %>
+              <div class="card-title"><%= link_to "#{bookmark.event.name}", bookmark_path(bookmark) %></div>
+              <div class="card-date"><%= bookmark.event.start_time.strftime('%dth %b') %> - <%= bookmark.event.end_time.strftime('%dth %b') %></div>
+              <div class="card-description"><%= bookmark.event.description %></div>
+            <% end %>
+          <% end %>
+        </div>
+        <div class="card-content">
+          <p>Events you're interested in</p>
+          <% @bookmarks.each do |bookmark, index| %>
+            <% if bookmark.status == "interested" %>
+              <div class="card-title"><%= link_to "#{bookmark.event.name}", bookmark_path(bookmark) %></div>
+              <div class="card-date"><%= bookmark.event.start_time.strftime('%dth %b') %> - <%= bookmark.event.end_time.strftime('%dth %b') %></div>
+              <div class="card-description"><%= bookmark.event.description %></div>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-6">
+      <div class="card w-75">
+        <div class="card-content">
+          <h1>My Itineraries</h1>
+          <% @itinerary.each do |itin| %>
+            <% if itin.user_id == current_user.id %>
+              <div class="card-title"><%= link_to "#{itin.name}", itinerary_path(itin) %></div>
+              <div class="card-date">Starts: <%= itin.start_time %></div>
+              <div class="card-date">Ends: <%= itin.end_time %></div>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

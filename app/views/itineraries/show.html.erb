@@ -1,6 +1,6 @@
-<div class="container mt-5">
-  <div class="row justify-content-center">
-    <div class="col-12 col-lg-12">
+<div class="container-fluid mt-5">
+  <div class="row">
+    <div class="col-12">
 
       <div>
         <h2><%= @itinerary.name %></h2>
@@ -10,13 +10,58 @@
         <%= link_to "Delete", itinerary_path(@itinerary), class: "btn btn-danger", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
       </div>
 
-      <div class="mt-5">
-        <% @itinerary_events.each do |itinerary_event| %>
-          <% if itinerary_event.itinerary_id == @itinerary.id %>
-            <li><%= itinerary_event.event.name %></li>
-            <%= link_to "Delete", itinerary_event_path(itinerary_event), class: "btn btn-danger", data: { turbo_method: :delete } %>
+      <div class="container-fluid mt-5 mb-5">
+        <div class="row">
+          <% @itinerary_events.each do |itinerary_event, index| %>
+            <% if itinerary_event.itinerary_id == @itinerary.id %>
+              <div class="col-3 mt-3">
+                <div class="card">
+                  <% if itinerary_event.event.photo.present? %>
+                    <img src=<%= cl_image_path(itinerary_event.event.photo.key, alt: "event image") %> alt="Event Image">
+                  <% else %>
+                    <img src="path_to_default_image" alt="Default Event Image">
+                  <% end %>
+                  <div class="card-content">
+                    <div class="card-title"><%= itinerary_event.event.name %></div>
+                    <div class="card-date"><%= itinerary_event.event.start_time.strftime('%dth %b') %> - <%= itinerary_event.event.end_time.strftime('%dth %b') %></div>
+                    <div class="card-description"><%= itinerary_event.event.description %></div>
+                  <div class="card-actions">
+
+                    <% if itinerary_event.event.ticket_purchase.present? %>
+                      <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#purchase-<%= index %>">Purchase</button>
+
+                      <div class="modal fade" id="purchase-<%= index %>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="purchase" aria-hidden="true">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h2>Where would you like to purchase?</h2>
+                            </div>
+                              <div class="modal-body purchase">
+                                <div class="d-flex flex-column align-items-center">
+                                  <% ticket_purchase_json = JSON.parse(itinerary_event.event.ticket_purchase) %>
+                                  <% ticket_purchase_json.each do |info| %>
+                                    <div class="p-2">
+                                      <a class="btn btn-dark" href="<%= info["link"] %>" target="_blank"><%= info["source"] %></a>
+                                    </div>
+                                  <% end %>
+                                </div>
+                              </div>
+                            <div class="modal-footer">
+                              <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    <% end %>
+
+                    <%= link_to "Delete", itinerary_event_path(itinerary_event), class: "btn btn-danger", data: { turbo_method: :delete } %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <% end %>
           <% end %>
-        <% end %>
+        </div>
       </div>
       <div style="width: 50%; height: 600px;"
         data-controller="map"

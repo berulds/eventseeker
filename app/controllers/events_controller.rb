@@ -17,19 +17,17 @@ class EventsController < ApplicationController
     @event = Event.new(event_params)
     @event.save
     chatroom = Chatroom.create(name: "#{@event.name}", event: @event)
-    redirect_to events_path
+    redirect_to pages_dashboard_path
     end
 
     def create_from_api
-      ticket_purchase_source = params["ticket_info"][0]["source"]
-      ticket_purchase_link = params["ticket_info"][0]["link"]
       event_params_api = {
         name: params["title"],
         address: params["address"].join(', '),
         start_time: params['date']['start_date'],
         end_time: params['date']['start_date'],
         description: params["description"],
-        ticket_purchase: { source: ticket_purchase_source, link: ticket_purchase_link },
+        ticket_purchase: params["ticket_info"].to_json,
         # add other thing like price etc...
       }
       @event = Event.new(event_params_api)
@@ -39,7 +37,7 @@ class EventsController < ApplicationController
         chatroom = Chatroom.create(name: "#{@event.name}", event: @event)
         # flash[:notice]= "everything is created" working on that
       else
-        redirect_to events_path, alert: 'Failed to create event and bookmark.'
+        redirect_to pages_dashboard_path, alert: 'Failed to create event and bookmark.'
       end
     end
 
@@ -60,7 +58,7 @@ class EventsController < ApplicationController
   def destroy
     @event.destroy
     # authorize @event
-    redirect_to events_path, status: :see_other
+    redirect_to pages_dashboard_path, status: :see_other
   end
 
   private

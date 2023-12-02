@@ -19,10 +19,11 @@
             <div class="p-2"><%= link_to "Create Event", new_event_path, class: "btn btn-success dash-link" %></div>
             <div class="p-2"><%= link_to "Create Itinerary", new_itinerary_path, class: "btn btn-success dash-link" %></div>
               <% if @first_chatroom %>
-                <%= link_to "My chatrooms", chatroom_path(@first_chatroom), class: "btn btn-success dash-link" %>
+              <div class="p-2"> <%= link_to "My chatrooms", chatroom_path(@first_chatroom), class: "btn btn-success dash-link" %>
               <% else %>
                 <%= "You haven't joined any chatrooms yet!" %>
               <% end %>
+              </div>
           </div>
         </div>
       </div>

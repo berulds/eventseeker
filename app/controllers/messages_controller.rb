@@ -22,9 +22,3 @@ class MessagesController < ApplicationController
     params.require(:message).permit(:content)
   end
 end
-
-
-
-# render_to_string(
-#           partial: "message",
-#           locals: {message: @message})

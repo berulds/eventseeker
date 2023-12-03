@@ -25,7 +25,10 @@
             <%= f.button :submit, "Sign up" %>
           </div>
         <% end %>
-      <%= render "devise/shared/links" %>
+        <div class="user-forms-links mt-3">
+          <%= render "devise/shared/links" %>
+          <%= link_to "Back", :back %>
+        </div>
       </div>
     </div>
   </div>

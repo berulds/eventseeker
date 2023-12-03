@@ -1,17 +1,17 @@
 <div class="container mt-5">
   <div class="row justify-content-center">
     <div class="col-12 col-lg-6">
+      <div class="event-forms">
+        <h1>Create a new itinerary!</h1>
 
-      <h1>Create a new itinerary!</h1>
-
-      <%= simple_form_for [@itinerary] do |f| %>
-        <%= f.label :name %>
-        <%= f.text_field :name %>
-        <%= f.input :start_time, as: :string, input_html: { data: { controller: "datepicker" } } %>
-        <%= f.input :end_time, as: :string, input_html: { data: { controller: "datepicker" } } %>
-        <%= f.submit %>
-      <% end %>
-
+        <%= simple_form_for [@itinerary] do |f| %>
+          <%= f.label :name %>
+          <%= f.text_field :name %>
+          <%= f.input :start_time, as: :string, input_html: { data: { controller: "datepicker" } } %>
+          <%= f.input :end_time, as: :string, input_html: { data: { controller: "datepicker" } } %>
+          <%= f.submit %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

@@ -22,9 +22,11 @@ import mapboxgl from 'mapbox-gl'
 
     #addMarkersToMap() {
       this.markersValue.forEach((marker) => {
-        console.log(marker)
+        const popup = new mapboxgl.Popup().setHTML(marker.info_window_html)
+        // console.log(popup)
         new mapboxgl.Marker()
           .setLngLat([ marker.lng, marker.lat ])
+          .setPopup(popup)
           .addTo(this.map)
       })
     }

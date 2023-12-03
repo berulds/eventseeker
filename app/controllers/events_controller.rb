@@ -10,7 +10,6 @@ class EventsController < ApplicationController
 
   def new
     @event = Event.new
-    # authorize @event
   end
 
   def create
@@ -30,35 +29,56 @@ class EventsController < ApplicationController
         ticket_purchase: params["ticket_info"].to_json,
         # add other thing like price etc...
       }
+
       @event = Event.new(event_params_api)
       @event.download_image_from_url(params["thumbnail"])
-      if @event.save
-        Bookmark.create(user_id: current_user.id, event_id: @event.id )
-        chatroom = Chatroom.create(name: "#{@event.name}", event: @event)
-        # flash[:notice]= "everything is created" working on that
-      else
-        redirect_to root_path, alert: 'Failed to create event and bookmark.'
+
+      if @event.valid?
+        if @event.save
+          existing_bookmark = Bookmark.find_by(user_id: current_user.id, event_id: @event.id)
+          unless existing_bookmark
+            Bookmark.create(user_id: current_user.id, event_id: @event.id)
+          end
+          chatroom = Chatroom.create(name: "#{@event.name}", event: @event)
+        end
+        existing_bookmark = Bookmark.find_by(user_id: current_user.id, event_id: @event.id)
+        unless existing_bookmark
+          Bookmark.create(user_id: current_user.id, event_id: @event.id)
+        end
       end
     end
 
   def show
-    # authorize @event
   end
 
   def edit
-    # authorize @event
   end
 
   def update
     @event.update(event_params)
-    # authorize @event
     redirect_to event_path(@event)
   end
 
   def destroy
     @event.destroy
-    # authorize @event
-    redirect_to pages_dashboard_path, status: :see_other
+    redirect_to events_path, status: :see_other
+  end
+
+  def check_event_exists
+    name = params[:name]
+
+    begin
+      existing_event = Event.find_by(name: name)
+
+      if existing_event
+        render json: { exists: true }
+      else
+        render json: { exists: false }
+      end
+    rescue => e
+      Rails.logger.error("Error checking event existence: #{e.message}")
+      render json: { exists: false, error: e.message }, status: :internal_server_error
+    end
   end
 
   private
@@ -71,8 +91,7 @@ class EventsController < ApplicationController
     params.require(:event).permit(:name, :address, :start_time, :end_time, :description, :ticket_purchase)
   end
 
-
   def set_event
-    @event = Event.find(params[:id])
+    @event = Event.find(params[:id]) if params[:id].present?
   end
 end

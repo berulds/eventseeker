@@ -10,7 +10,8 @@ class Event < ApplicationRecord
   has_many :event_genres, dependent: :destroy
   has_many :genres, through: :event_genres
 
-  validates :name, :address, :start_time, :end_time, :description, presence: true
+  validates :name, :address, :start_time, :end_time, :description, :photo, presence: true
+  validates :name, uniqueness: { case_sensitive: false }
 
   def download_image_from_url(url)
     filename = File.basename(URI.parse(url).path)

@@ -1,24 +1,21 @@
-<div class="container mt-5">
+<div class="container">
   <div class="row justify-content-center">
     <div class="col-12 col-lg-6">
-
-      <h1>Edit an event</h1>
-      <%= simple_form_for [@event] do |f| %>
-        <%= f.label :name %>
-        <%= f.text_field :name %>
-        <%= f.label :address %>
-        <%= f.text_field :address %>
-        <%= f.input :start_time, as: :string, input_html: { data: { controller: "datepicker" } } %>
-        <%= f.input :end_time, as: :string, input_html: { data: { controller: "datepicker" } } %>
-        <%= f.label :description %>
-        <%= f.text_field :description %>
-        <%= f.submit %>
-      <% end %>
-
-
-
-      <%= link_to "Delete", event_path(@event), class: "btn btn-warning", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
-
+      <div class="event-forms">
+        <h1>Edit an event</h1>
+        <%= simple_form_for [@event] do |f| %>
+          <%= f.label :name %>
+          <%= f.text_field :name %>
+          <%= f.label :address %>
+          <%= f.text_field :address %>
+          <%= f.input :start_time, as: :string, input_html: { data: { controller: "datepicker" } } %>
+          <%= f.input :end_time, as: :string, input_html: { data: { controller: "datepicker" } } %>
+          <%= f.label :description %>
+          <%= f.text_field :description %>
+          <%= f.submit %>
+        <% end %>
+        <%= link_to "Delete", event_path(@event), class: "btn btn-danger", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+      </div>
     </div>
   </div>
 </div>

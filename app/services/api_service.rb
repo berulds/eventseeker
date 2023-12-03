@@ -23,4 +23,3 @@ class ApiService
     end
   end
 end
-# "https://serpapi.com/search.json?engine=google_events&q=#{@query}&htichips=date%3Atoday&hl=en&api_key=#{ENV["API_KEY"]}""

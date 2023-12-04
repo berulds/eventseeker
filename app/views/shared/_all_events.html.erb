@@ -40,29 +40,30 @@
                           <% end %>
                         </div>
                         <div class="row">
-                          <div class="col-sm-9">
+                          <div class="col-sm-12">
                             <p><b>Date: </b><%= event.start_time %></p>
                             <p><b>Location: </b><%= event.address %></p>
+                            <p><%= event.description %></p>
                           </div>
-
-                            <div class="col-sm-3" >
-                              <!-- Need to add the if statement to display only if a user is currently signed in here... -->
-                              <%= link_to "Bookmark me", event_bookmarks_path(event), data: { turbo_method: :post, turbo_confirm: "Are you interested?" }, class: "btn btn-dark" %>
-                            </div>
                         </div>
-
-                        <div class="row">
-                            <div class="col-sm-12">
-                              <p><%= event.description %></p>
-                            </div>
+                      </div><div class="modal-footer text-center">
+                        <div class="row align-items-start">
+                          <div class="row">
+                            <p><b><em>Click on one of the links below to purchase your tickets.</em></b></p>
+                          </div>
+                          <div class="row">
+                            <% if event.ticket_purchase.present? %>
+                              <% ticket_purchase_json = JSON.parse(event.ticket_purchase) %>
+                              <% ticket_purchase_json.each do |info| %>
+                                <div class="p-2"><a class="btn btn-dark" href="<%= info["link"] %>" target="_blank"><%= info["source"] %></a></div>
+                              <% end %>
+                            <% end %>
+                          </div>
                         </div>
-                      </div>
-                      <div class="modal-footer">
                       </div>
                   </div>
                 </div>
               </div>
-
 
                   <div class="card-address"><%= event.address %></div>
                   <div class="card-date"><%= event.start_time.strftime('%a %b %e') %> - <%= event.end_time.strftime('%a %b %e') %></div>
@@ -80,6 +81,38 @@
                         <%= link_to "Bookmark me", event_bookmarks_path(event), data: { turbo_method: :post, turbo_confirm: "Are you interested?" }, class: "btn btn-dark" %>
                       <% end %>
                     <% end %>
+                  </div>
+                  <div>
+                    <% if current_user.present? %>
+                      <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#purchase<%= event.id %>">Purchase</button>
+                    <% end %>
+
+                            <!-- Purchase Modal -->
+                              <div class="modal fade" id="purchase<%= event.id %>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="purchase" aria-hidden="true">
+                                <div class="modal-dialog">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h2>Where would you like to purchase?</h2>
+                                    </div>
+                                    <div class="modal-body purchase">
+                                      <div class="d-flex flex-column align-items-center">
+                                        <% if event.ticket_purchase.present? %>
+                                          <% ticket_purchase_json = JSON.parse(event.ticket_purchase) %>
+                                          <% ticket_purchase_json.each do |info| %>
+                                            <div class="p-2"><a class="btn btn-dark" href="<%= info["link"] %>" target="_blank"><%= info["source"] %></a></div>
+                                          <% end %>
+                                        <% else %>
+                                          <p>No ticket purchase information available.</p>
+                                        <% end %>
+                                      </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
                   </div>
                   <div>
                     <% if @itinerary.present? %>

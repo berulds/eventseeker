@@ -209,9 +209,6 @@ body {
   gap: 15px;
 }
 
-// .card-date:before {
-//   content:url('cal_icon.jpeg');
-// }
 
 .card-actions {
   bottom: 8px;
@@ -225,21 +222,6 @@ body {
   width: 350px;
   height: 500px;
 }
-
-// .suggestions-container {
-//   position: absolute;
-//   z-index: 1;
-//   background-color: #fff;
-//   border: 1px solid #ccc;
-//   max-height: 200px;
-//   overflow-y: auto;
-//   width: 32%;
-// }
-
-// .suggestion:hover {
-//   background-color: rgb(53, 101, 172);
-//   cursor:pointer;
-// }
 
 main {
   flex-grow: 1;

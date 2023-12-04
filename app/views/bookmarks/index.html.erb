@@ -14,7 +14,7 @@
               <% end %>
                 <div class="event-card-content">
                   <div class="event-card-title"><%= bookmark.event.name %></div>
-                  <div class="event-card-date"><%= bookmark.event.start_time.strftime('%dth %b') %> - <%= bookmark.event.end_time.strftime('%dth %b') %></div>
+                  <div class="event-card-date"><%= bookmark.event.start_time.strftime('%a %b %e') %> - <%= bookmark.event.end_time.strftime('%a %b %e') %></div>
                   <div class="event-card-description"><%= bookmark.event.description %></div>
                     <%= "Bookmark ID: #{bookmark.id}, Status: #{bookmark.status}" %>
                     <% if bookmark.status == "interested" %>
@@ -33,6 +33,3 @@
     </div>
   </div>
 </div>
-
-<%# maybe?%>
-<%# <%= link_to "Add", itinerary_itinerary_events_path(@itinerary, bookmark), class: "btn btn-primary event-show-more", data: { turbo_method: :post, turbo_confirm: "Add to Itinerary?" } %>

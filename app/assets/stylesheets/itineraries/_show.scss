@@ -70,6 +70,7 @@
 .map {
   height: 100%;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
 }
 
 .card-actions {
@@ -146,7 +147,6 @@
 }
 
 .itinerary-details {
-
   h2 {
   font-weight: bold;
   }

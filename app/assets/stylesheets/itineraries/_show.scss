@@ -5,13 +5,15 @@
 }
 
 .card-container {
-  background: linear-gradient(86deg, rgba(255,228,113,1)  0%, rgba(217,106,3,1) 35%, rgba(224,0,0,1) 100%);
+  background-color: #f1f1f1;
+  // background: linear-gradient(86deg, rgba(255,228,113,1)  0%, rgba(217,106,3,1) 35%, rgba(224,0,0,1) 100%);
   padding: 17px;
   border-radius: 8px;
   overflow-y: scroll;
   height: 100%;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   z-index: 1;
+  width: 544px;
 }
 
 .show-card {
@@ -113,7 +115,7 @@
   border: none;
   color: black;
   font-size: 24px;
-  background-color: rgba(224,0,0,1);
+  background-color: #f1f1f1;
 }
 
 .itinerary-action-dropdown:hover .dropdown-links {
@@ -149,5 +151,21 @@
 
   h2 {
   font-weight: bold;
+  }
+}
+
+@media (max-width: 1199.98px) {
+
+  .show-card {
+    width: 270px;
+    .show-card-title {
+      font-size: 10px;
+      width: 180px;
+    }
+
+    .show-card-content {
+      flex-direction: column;
+    }
+
   }
 }

@@ -1,20 +1,22 @@
 <div class="container mt-5">
   <div class="row justify-content-center">
     <div class="col-12 col-lg-6">
-
-      <h1>Edit your itinerary!</h1>
-      <%= form_with model: @itinerary do |f| %>
-        <%= f.label :name %>
-        <%= f.text_field :name %>
-        <%= f.label :start_time %>
-        <%= f.text_field :start_time %>
-        <%= f.label :end_time %>
-        <%= f.text_field :end_time %>
-        <%= f.submit %>
-      <% end %>
-
-      <%= link_to "Delete", root_path(@itinerary), class: "btn btn-warning", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
-
+      <div class="event-forms">
+        <h1>Edit your itinerary!</h1>
+        <%= form_with model: @itinerary do |f| %>
+          <%= f.label :name %>
+          <%= f.text_field :name %>
+          <%= f.label :start_time %>
+          <%= f.text_field :start_time %>
+          <%= f.label :end_time %>
+          <%= f.text_field :end_time %>
+          <%= f.submit %>
+        <% end %>
+        <div class="d-flex align-items-center justify-content-between">
+          <%= link_to "Delete", root_path(@itinerary), class: "btn btn-danger", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+          <%= link_to "Back", :back %>
+        </div>
+      </div>
     </div>
   </div>
 </div>

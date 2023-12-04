@@ -18,13 +18,22 @@
   }
 
   input[type=submit]{
-    background-color: #04AA6D;
+    background-color: $green;
     border: none;
     border-radius: 10px;
     color: white;
     padding: 16px 32px;
     text-decoration: none;
     margin: 4px 2px;
+    cursor: pointer;
+  }
+
+  input[type="file"]::-webkit-file-upload-button{
+    background-color: $orange;
+    color: white;
+    border-radius: 10px;
+    border: none;
+    padding: 8px 8px;
     cursor: pointer;
   }
 }
@@ -46,7 +55,7 @@
   }
 
   input[type=submit]{
-    background-color: #04AA6D;
+    background-color: $green;
     border: none;
     border-radius: 10px;
     color: white;
@@ -55,4 +64,20 @@
     margin: 4px 2px;
     cursor: pointer;
   }
+
+  input[type="checkbox"] {
+    width: 5px;
+  }
+
+  a {
+    text-decoration: none;
+    color: $gray;
+  }
+}
+
+.user-forms-links .cancel-account-button {
+  background-color: $red;
+  border: none;
+  border-radius: 8px;
+  width: 200px;
 }

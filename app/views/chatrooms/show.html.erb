@@ -2,7 +2,7 @@
   <div class="chatroom-content">
     <div class="mb-5">
       <h3>Say hey to those going to your events!</h3>
-      <div class="d-flex justify-content-center"><%= link_to "Back to dashboard", pages_dashboard_path, class: "btn btn-dark" %></div>
+      <div class="d-flex justify-content-start"><%= link_to "Back to dashboard", pages_dashboard_path, class: "btn btn-dark" %></div>
     </div>
     <div>
       <% @bookmarks.sort_by { |bookmark| bookmark.event.start_time }.each do |bookmark| %>
@@ -22,7 +22,7 @@
     data-chatroom-subscription-chatroom-id-value="<%= @chatroom.id %>"
     data-chatroom-subscription-current-user-id-value="<%= current_user.id %>"
   >
-    <h1>#<%= @chatroom.name %></h1>
+    <h1><%= @chatroom.name.capitalize %></h1>
 
     <div class="messages" data-chatroom-subscription-target="messages">
       <% @chatroom.messages.each do |message| %>
@@ -40,10 +40,10 @@
 
       <%= f.input :content,
         label: false,
-        placeholder: "Message ##{@chatroom.name}",
+        placeholder: "Message group",
         wrapper_html: {class: "flex-grow-1"}
       %>
-      <%= f.submit "Send", class: "btn btn-primary mb-3" %>
+      <%= f.submit "Send", class: "btn btn-dark mb-3" %>
     <% end %>
   </div>
 </div>

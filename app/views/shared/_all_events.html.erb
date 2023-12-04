@@ -14,7 +14,7 @@
                 <div class="card-content">
                   <div class="card-title"><%= event.name %></div>
                   <div class="card-address"><%= event.address %></div>
-                  <div class="card-date"><%= event.start_time.strftime('%dth %b') %> - <%= event.end_time.strftime('%dth %b') %></div>
+                  <div class="card-date"><%= event.start_time.strftime('%d %b') %> - <%= event.end_time.strftime('%d %b') %></div>
                   <div class="card-description"><%= event.description %></div>
                 </div>
                 <div class="card-actions d-flex justify-content-center" id="event-card-buttons">

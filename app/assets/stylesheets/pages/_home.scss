@@ -1,16 +1,29 @@
 // Specific CSS for your home-page
 
 body {
-  background: rgb(224,0,0);
   background: linear-gradient(86deg, rgba(224,0,0,1) 0%, rgba(217,106,3,1) 35%, rgba(255,228,113,1) 100%);
+  background-size: 200% 200%;
+  animation: waveAnimation 5s linear infinite;
   font-family: 'Work Sans', sans-serif;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
 
-.home-background {
+@keyframes waveAnimation {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.background {
   background-image: url('background.png');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   background-size: cover;
 }
 
@@ -54,8 +67,8 @@ body {
     }
 
     .search-button:hover {
-      background-color: #625e69;
-      opacity: 1;
+      // background-color: #625e69;
+      opacity: 0;
       box-shadow: 2px 2px 14px #ffffff;
     }
 
@@ -66,13 +79,30 @@ body {
       border: none;
       border-radius: 35px;
       background-color: black !important;
-      color: #fff;
+      color: none;
       font-size: 20px;
       outline: none;
       margin-right: 10px;
       opacity: .8;
       box-shadow: 2px 2px 14px #ffffff;
       margin: 5px;
+      z-index: 1000;
+    }
+
+    .search-date-image {
+      margin-left: 20px;
+      color: #fff;
+      margin-right: -39px;
+    }
+
+    .search-date-image i {
+      font-size: 20px;
+      opacity: 1000%;
+    }
+
+    .search-date:hover {
+      opacity: 0;
+      box-shadow: 2px 2px 14px #ffffff;
     }
 
     .search-date::placeholder {
@@ -89,7 +119,7 @@ body {
       font-size: 20px;
       outline: none;
       margin-right: 10px;
-      opacity: .8;
+      opacity: .5;
       height: 50px;
       box-shadow: 2px 2px 14px #ffffff;
       margin: 5px;
@@ -97,6 +127,11 @@ body {
 
     .search-input::placeholder {
       color: #fff;
+    }
+
+    .search-input:hover {
+      opacity: 1;
+      box-shadow: 2px 2px 14px #ffffff;
     }
   }
 }

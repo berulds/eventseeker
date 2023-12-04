@@ -66,7 +66,7 @@
               </div>
 
                   <div class="card-address"><%= event.address %></div>
-                  <div class="card-date"><%= event.start_time.strftime('%d %b') %> - <%= event.end_time.strftime('%d %b') %></div>
+                  <div class="card-date"><%= event.start_time.strftime('%a %b %e') %> - <%= event.end_time.strftime('%a %b %e') %></div>
                   <div class="card-description"><%= event.description %></div>
                 </div>
                 <div class="card-actions d-flex justify-content-center" id="event-card-buttons">

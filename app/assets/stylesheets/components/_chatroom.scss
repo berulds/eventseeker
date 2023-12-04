@@ -1,12 +1,79 @@
+.main {
+  width: 100%;
+  height: 866px;
+  margin-top: 25px !important;
+}
+
+.chat-container {
+  padding: 17px;
+  border-radius: 8px;
+}
+
+.chat-card {
+  width: 500px;
+  height: 100px;
+  background-color: #ffffff;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.chat-card img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}
+
+.chat-card-content {
+  padding: 16px;
+}
+
+.chat-card-title {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 8px;
+  text-align: left;
+  width: 275px;
+  overflow: hidden;
+
+  a {
+    text-decoration: none;
+    color: black;
+  }
+}
+
+.chat-card-date {
+  font-size: 11px;
+  color: #555;
+  font-weight: 510;
+  margin-bottom: 8px;
+  justify-content: flex-end;
+}
+
+.chat-card:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+  transform: scale(1.1);
+}
+
+.chatroom-details {
+  h2 {
+  font-weight: bold;
+  }
+}
+
 .chatroom {
   background: white;
-  height: 75vh;
+  height: 80%;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
   max-width: 50%;
   margin-right: 25px;
   margin-bottom: 25px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   border-radius: 10px;
 
   h1 {
@@ -30,61 +97,4 @@
       margin-bottom: 0;
     }
   }
-}
-
-.chatroom-container {
-  margin-top: 56px;
-  border-radius: 10px;
-}
-
-.chatroom-content {
-  margin-top: 56px;
-  margin-left: 25px;
-  margin-bottom: 25px;
-}
-
-.chatroom-card {
-  position: relative;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  margin: 10px;
-  overflow: hidden;
-  transition: box-shadow 0.3s ease;
-  background-color: #fff;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding: 10px;
-  width: 450px;
-}
-
-.chatroom-card img {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-right: 15px;
-}
-
-.chatroom-card .btn {
-  background-color: #28a745;
-  color: #fff;
-  border: none;
-  padding: 8px 15px;
-  border-radius: 5px;
-  font-weight: bold;
-  text-decoration: none;
-}
-
-.chatroom-card:hover {
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
-  transform: scale(1.1);
-}
-
-.chatroom-card-date {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  font-size: 14px;
-  color: #555;
 }

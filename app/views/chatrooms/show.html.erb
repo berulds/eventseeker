@@ -1,49 +1,62 @@
-<div class="chatroom-container d-flex">
-  <div class="chatroom-content">
-    <div class="mb-5">
-      <h3>Say hey to those going to your events!</h3>
-      <div class="d-flex justify-content-start"><%= link_to "Back to dashboard", pages_dashboard_path, class: "btn btn-dark" %></div>
-    </div>
-    <div>
-      <% @bookmarks.sort_by { |bookmark| bookmark.event.start_time }.each do |bookmark| %>
-        <% if bookmark.event.chatroom.present? && bookmark.user == current_user %>
-          <div class="chatroom-card d-flex align-items-start">
-            <img src=<%= cl_image_path(bookmark.event.photo.key, alt: "event image") %> alt="Event Image">
-            <%= link_to "Join the #{bookmark.event.name} channel", chatroom_path(bookmark.event.chatroom.id), class: "btn btn-success" %>
-            <div class="chatroom-card-date"><%= bookmark.event.start_time.strftime('%d %b') %></div>
-          </div>
-        <% end %>
-      <% end %>
-    </div>
-  </div>
+<div class="container-fluid mt-5">
+  <div class="row">
+    <div class="col-12">
+      <div class="main container-fluid margin-auto mt-3 mb-3 d-flex justify-content-evenly">
 
-  <div class="container chatroom"
-    data-controller="chatroom-subscription"
-    data-chatroom-subscription-chatroom-id-value="<%= @chatroom.id %>"
-    data-chatroom-subscription-current-user-id-value="<%= current_user.id %>"
-  >
-    <h1><%= @chatroom.name.capitalize %></h1>
-
-    <div class="messages" data-chatroom-subscription-target="messages">
-      <% @chatroom.messages.each do |message| %>
-        <div class="message-row d-flex <%= message.sender?(current_user) ? 'justify-content-end' : 'justify-content-start' %>">
-          <div class="<%= message.sender?(current_user) ? 'sender-style' : 'receiver-style' %>">
-            <%= render "messages/message", message: message %>
+        <div class="chat-container ms-4 me-4">
+          <div class="mt-2 d-flex justify-content-between">
+            <div class="chatroom-details">
+              <h2>Say hey to those going to your events!</h2>
+              <%= link_to "Back to dashboard", pages_dashboard_path, class: "btn btn-dark" %>
+            </div>
           </div>
+          <% @bookmarks.sort_by { |bookmark| bookmark.event.start_time }.each do |bookmark| %>
+            <% if bookmark.event.chatroom.present? && bookmark.user == current_user %>
+              <div class="chat-card d-flex flex-row mb-3 mt-3">
+                <% if bookmark.event.photo.present? %>
+                  <img src=<%= cl_image_path(bookmark.event.photo.key, alt: "event image") %> alt="Event Image">
+                <% else %>
+                  <img src="path_to_default_image" alt="Default Event Image">
+                <% end %>
+                <div class="chat-card-content d-flex">
+                  <div class="chat-card-title"><%= link_to "Join the #{bookmark.event.name} channel", chatroom_path(bookmark.event.chatroom.id) %></div>
+                  <div class="chat-card-date"><%= bookmark.event.start_time.strftime('%a %b %e') %></div>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
         </div>
-      <% end %>
+
+        <div class="container chatroom"
+          data-controller="chatroom-subscription"
+          data-chatroom-subscription-chatroom-id-value="<%= @chatroom.id %>"
+          data-chatroom-subscription-current-user-id-value="<%= current_user.id %>"
+        >
+          <h1><%= @chatroom.name.capitalize %></h1>
+
+          <div class="messages" data-chatroom-subscription-target="messages">
+            <% @chatroom.messages.each do |message| %>
+              <div class="message-row d-flex <%= message.sender?(current_user) ? 'justify-content-end' : 'justify-content-start' %>">
+                <div class="<%= message.sender?(current_user) ? 'sender-style' : 'receiver-style' %>">
+                  <%= render "messages/message", message: message %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+
+          <%= simple_form_for [@chatroom, @message],
+            html: { data: { action: "turbo:submit-end->chatroom-subscription#resetForm" }, class: "d-flex" } do |f|
+          %>
+
+            <%= f.input :content,
+              label: false,
+              placeholder: "Message group",
+              wrapper_html: {class: "flex-grow-1"}
+            %>
+            <%= f.submit "Send", class: "btn btn-dark mb-3" %>
+          <% end %>
+        </div>
+      </div>
     </div>
-
-    <%= simple_form_for [@chatroom, @message],
-      html: { data: { action: "turbo:submit-end->chatroom-subscription#resetForm" }, class: "d-flex" } do |f|
-    %>
-
-      <%= f.input :content,
-        label: false,
-        placeholder: "Message group",
-        wrapper_html: {class: "flex-grow-1"}
-      %>
-      <%= f.submit "Send", class: "btn btn-dark mb-3" %>
-    <% end %>
   </div>
 </div>

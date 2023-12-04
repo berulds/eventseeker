@@ -8,7 +8,7 @@
           <% @bookmarks.each do |bookmark, index| %>
             <% if bookmark.status == "attending" %>
               <div class="card-title"><%= link_to "#{bookmark.event.name}", bookmark_path(bookmark) %></div>
-              <div class="card-date"><%= bookmark.event.start_time.strftime('%dth %b') %> - <%= bookmark.event.end_time.strftime('%dth %b') %></div>
+              <div class="card-date"><%= bookmark.event.start_time.strftime('%a %b %e') %> - <%= bookmark.event.end_time.strftime('%a %b %e') %></div>
               <div class="card-description"><%= bookmark.event.description %></div>
             <% end %>
           <% end %>
@@ -18,7 +18,7 @@
           <% @bookmarks.each do |bookmark, index| %>
             <% if bookmark.status == "interested" %>
               <div class="card-title"><%= link_to "#{bookmark.event.name}", bookmark_path(bookmark) %></div>
-              <div class="card-date"><%= bookmark.event.start_time.strftime('%dth %b') %> - <%= bookmark.event.end_time.strftime('%dth %b') %></div>
+              <div class="card-date"><%= bookmark.event.start_time.strftime('%a %b %e') %> - <%= bookmark.event.end_time.strftime('%a %b %e') %></div>
               <div class="card-description"><%= bookmark.event.description %></div>
             <% end %>
           <% end %>

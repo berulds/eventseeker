@@ -9,7 +9,7 @@
           <div class="chatroom-card d-flex align-items-start">
             <img src=<%= cl_image_path(bookmark.event.photo.key, alt: "event image") %> alt="Event Image">
             <%= link_to "Join the #{bookmark.event.name} channel", chatroom_path(bookmark.event.chatroom.id), class: "btn btn-success" %>
-            <div class="chatroom-card-date"><%= bookmark.event.start_time.strftime('%d %b') %></div>
+            <div class="chatroom-card-date"><%= bookmark.event.start_time.strftime('%a %b %e') %></div>
           </div>
         <% end %>
       </div>

@@ -4,9 +4,10 @@
       <div class="main container-fluid margin-auto mt-3 mb-3 d-flex justify-content-evenly">
         <div class="card-container ms-4 me-4">
           <div class="mt-2 d-flex justify-content-between">
-            <div class="itinerary-details">
+            <div class="itinerary-details mb-4">
               <h2><%= @itinerary.name %></h2>
               <p><%= @itinerary.start_time.strftime('%a %b %e') %> - <%= @itinerary.end_time.strftime('%a %b %e') %></p>
+              <%= link_to "Back to dashboard", pages_dashboard_path %>
             </div>
             <div class="itinerary-action-dropdown">
               <button class="fa-solid fa-ellipsis-vertical dropbtn"></button>

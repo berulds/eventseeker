@@ -25,8 +25,12 @@ class ItinerariesController < ApplicationController
     @markers = @itinerary_events.map do |itinerary_event|
       {
         lat: itinerary_event.event[:latitude],
-        lng: itinerary_event.event[:longitude]
+        lng: itinerary_event.event[:longitude],
+        # info_window_html: render_to_string(shared: "map_window")
+
+
       }
+
     end
     # authorize @itinerary
   end

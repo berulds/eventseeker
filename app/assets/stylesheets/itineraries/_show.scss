@@ -1,0 +1,153 @@
+.main {
+  width: 100%;
+  height: 866px;
+  margin-top: 25px !important;
+}
+
+.card-container {
+  background: linear-gradient(86deg, rgba(255,228,113,1)  0%, rgba(217,106,3,1) 35%, rgba(224,0,0,1) 100%);
+  padding: 17px;
+  border-radius: 8px;
+  overflow-y: scroll;
+  height: 100%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.show-card {
+  width: 500px;
+  height: 100px;
+  background-color: #ffffff;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.show-card img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}
+
+.show-card-content {
+  padding: 16px;
+}
+
+.show-card-title {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 8px;
+  text-align: left;
+  width: 275px;
+}
+
+.show-card-address {
+  font-size: 14px;
+  color: #646464;
+  margin-bottom: 7px;
+}
+
+.show-card-description {
+  font-size: 13px;
+  margin-bottom: 8px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.show-card-date {
+  font-size: 11px;
+  color: #555;
+  font-weight: 510;
+  margin-bottom: 8px;
+  justify-content: flex-end;
+}
+
+.map {
+  height: 100%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.card-actions {
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.event-delete-icon {
+  text-decoration: none !important;
+  color: black;
+  margin-left: 10px;
+  margin-top: 7px;
+  font-size: 15px;
+  margin-right: 15px;
+}
+
+.event-delete-icon:hover {
+  text-decoration: none !important;
+  color: black;
+  margin-left: 10px;
+  margin-top: 7px;
+  font-size: 20px;
+}
+.see-more-card {
+  width: 350px;
+  height: 500px;
+}
+
+
+.itinerary-action-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropbtn {
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  color: black;
+  font-size: 24px;
+  background-color: rgba(224,0,0,1);
+}
+
+.itinerary-action-dropdown:hover .dropdown-links {
+  display: block;
+  z-index: 1000;
+  position: fixed;
+  border-radius: 12px;
+}
+
+.dropdown-links{
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1000;
+}
+
+.dropdown-links a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  z-index: 1000;
+}
+
+.dropdown-links a:hover {
+  background-color: lightgrey;
+  border-radius: 12px;
+}
+
+.itinerary-details {
+
+  h2 {
+  font-weight: bold;
+  }
+}

@@ -4,7 +4,7 @@
 
       <div class="container-search m-5 d-flex">
         <div class="search-results">
-            <% @events.each do |event| %>
+            <% @events.each_with_index do |event, index| %>
               <div class="card">
                   <% if event.photo.present? %>
                     <img src=<%= cl_image_path(event.photo.key, alt: "event image") %> alt="Event Image">
@@ -12,7 +12,58 @@
                     <img src="path_to_default_image" alt="Default Event Image">
                   <% end %>
                 <div class="card-content">
-                  <div class="card-title"><%= event.name %></div>
+
+                <!-- Event Modal Button -->
+                <div class="card-title">
+                    <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#exampleModal<%= event.id %>"><%= event.name %></button>
+                  </div>
+
+                <!-- Event Modal -->
+
+                <div class="modal fade" id="exampleModal<%= event.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel"><%= event.name %></h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="row">
+                          <% if event.photo.present? %>
+                            <div class="col-sm-12 mb-3">
+                              <img src=<%= cl_image_path(event.photo.key, alt: "event image") %> alt="Event Image">
+                            </div>
+                          <% else %>
+                            <div class="col-sm-12 mb-3">
+                          <img src="path_to_default_image" alt="Default Event Image">
+                            </div>
+                          <% end %>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-9">
+                            <p><b>Date: </b><%= event.start_time %></p>
+                            <p><b>Location: </b><%= event.address %></p>
+                          </div>
+
+                            <div class="col-sm-3" >
+                              <!-- Need to add the if statement to display only if a user is currently signed in here... -->
+                              <%= link_to "Bookmark me", event_bookmarks_path(event), data: { turbo_method: :post, turbo_confirm: "Are you interested?" }, class: "btn btn-dark" %>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                              <p><%= event.description %></p>
+                            </div>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                      </div>
+                  </div>
+                </div>
+              </div>
+
+
                   <div class="card-address"><%= event.address %></div>
                   <div class="card-date"><%= event.start_time.strftime('%dth %b') %> - <%= event.end_time.strftime('%dth %b') %></div>
                   <div class="card-description"><%= event.description %></div>

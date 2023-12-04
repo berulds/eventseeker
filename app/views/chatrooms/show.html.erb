@@ -5,9 +5,9 @@
 
         <div class="chat-container ms-4 me-4">
           <div class="mt-2 d-flex justify-content-between">
-            <div class="chatroom-details">
+            <div class="chatroom-details mb-4">
               <h2>Say hey to those going to your events!</h2>
-              <%= link_to "Back to dashboard", pages_dashboard_path, class: "btn btn-dark" %>
+              <%= link_to "Back to dashboard", pages_dashboard_path %>
             </div>
           </div>
           <% @bookmarks.sort_by { |bookmark| bookmark.event.start_time }.each do |bookmark| %>

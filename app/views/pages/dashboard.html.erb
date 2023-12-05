@@ -11,7 +11,7 @@
             <% end %>
           </div>
           <div class="col-md-8">
-            <h5 class="card-title"> <%= @current_user.username %></h5>
+            <h5 class="card-title"> <%= @current_user.username.capitalize %></h5>
             <p class="card-text">Welcome back <%= @current_user.username %>! Here's what's happening.</p>
             <p class="card-text"><%= Date.today.strftime('%a %b %e') %></p>
           </div>
@@ -19,7 +19,7 @@
             <div class="p-2"><%= link_to "Create Event", new_event_path, class: "btn btn-success dash-link" %></div>
             <div class="p-2"><%= link_to "Create Itinerary", new_itinerary_path, class: "btn btn-success dash-link" %></div>
               <% if @first_chatroom %>
-              <div class="p-2"> <%= link_to "My chatrooms", chatroom_path(@first_chatroom), class: "btn btn-success dash-link" %>
+                <div class="p-2"> <%= link_to "My chatrooms", chatroom_path(@first_chatroom), class: "btn btn-success dash-link" %>
               <% else %>
                 <%= "You haven't joined any chatrooms yet!" %>
               <% end %>

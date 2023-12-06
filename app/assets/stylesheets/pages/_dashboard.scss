@@ -9,16 +9,20 @@
   border: solid 1px black;
   padding: 16px;
   margin: 8px;
-  width: 600px;
+  max-height: 200px;
+  max-width: 600px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   background-color: white;
   text-align: center;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
 
   a {
     text-decoration: none;
-    color: black;
     margin-left: 30px;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
   }
 
   .itinerary-card-top {
@@ -79,7 +83,9 @@
 }
 
 
-.itinerary-card-dropdown:hover .dropbtn {background-color: white;}
+.itinerary-card-dropdown:hover .dropbtn {
+  background-color: white;
+}
 
 
 .col-sm-6 {
@@ -93,4 +99,10 @@
 .dashboard-itinerary-card:hover {
   cursor: pointer;
   border: 3px solid black;
+}
+
+.itinerary-dash-card-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }

@@ -6,6 +6,13 @@ class EventsController < ApplicationController
     if params[:itinerary_id].present?
       @itinerary = Itinerary.find(params[:itinerary_id])
     end
+
+    @bookmarking_users_by_event = {}
+    @events.each do |event|
+      bookmarking_users = event.bookmarks.includes(:user).map(&:user)
+      @bookmarking_users_by_event[event.id] = bookmarking_users
+    end
+
   end
 
   def new

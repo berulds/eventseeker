@@ -11,6 +11,30 @@
               <% else %>
                 <img src="path_to_default_image" alt="Default Event Image">
               <% end %>
+
+              <%# ETIENNE The div that display avatars total user who bookmarked the event %>
+                <div class="avatar-card">
+                  <div id="avatar-container">
+                    <div id="avatar-line">
+                      <% users = @bookmarking_users_by_event[event.id] %>
+                      <% max_avatars = 5 %>
+                      <% users.first(max_avatars).each_with_index do |user, index| %>
+                        <% if user.photo.present? %>
+                          <img src="<%= cl_image_path(user.photo.key, alt: "user image") %>" id="card-mini-avatar">
+                        <% else %>
+                          <img src="path_to_default_user_image" alt="Default User Image" id="card-mini-avatar">
+                        <% end %>
+                      <% end %>
+                      <% if users.length > max_avatars %>
+                        <div id="more-avatars">+<%= users.length - max_avatars %></div>
+                      <% end %>
+                    </div>
+                    <div id="follow-text">
+                      <%= "#{users.length} #{'user'.pluralize(users.length)}" %> following this event
+                    </div>
+                  </div>
+                </div>
+
               <div class="card-content">
 
               <!-- Event Modal Button -->

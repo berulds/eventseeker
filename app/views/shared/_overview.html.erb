@@ -1,44 +1,116 @@
 <div class="container">
   <div class="row">
-    <div class="col-sm-6">
-      <div class="card w-75">
-        <h1>Upcoming Events</h1>
-        <div class="card-content">
-          <p>Events you're going to</p>
+    <div class="col">
+      <h1>Upcoming Events</h1>
+        <% if @bookmarks.present? %>
           <% @bookmarks.each do |bookmark, index| %>
             <% if bookmark.status == "attending" %>
-              <div class="card-title"><%= link_to "#{bookmark.event.name}", bookmark_path(bookmark) %></div>
-              <div class="card-date"><%= bookmark.event.start_time.strftime('%a %b %e') %> - <%= bookmark.event.end_time.strftime('%a %b %e') %></div>
-              <div class="card-description"><%= bookmark.event.description %></div>
+              <div class="show-card d-flex flex-row mb-3 mt-3">
+                <% if bookmark.event.photo.present? %>
+                  <img src=<%= cl_image_path(bookmark.event.photo.key, alt: "event image") %> alt="Event Image">
+                <% else %>
+                  <img src="path_to_default_image" alt="Default Event Image">
+                <% end %>
+                <div class="show-card-content d-flex">
+                  <div class="card-title"><%= link_to "#{bookmark.event.name}", bookmark_path(bookmark) %></div>
+                  <div class="card-date"><%= bookmark.event.start_time.strftime('%a %b %e') %> - <%= bookmark.event.end_time.strftime('%a %b %e') %></div>
+                </div>
+                <div class="event-card-dropdown">
+                <button class="fa-solid fa-ellipsis-vertical dropbtn"></button>
+                <div class="dropdown-links">
+                  <%= link_to "I'm not going!", events_path %>
+                  <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#addToItinerary-<%= bookmark.event.id %>">Add to Itinerary</button>
+                  <div class="modal fade" id="addToItinerary-<%= bookmark.event.id %>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addToItineraryLabel" aria-hidden="true" data-controller="add-to-itinerary">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h2>Select which itinerary</h2>
+                        </div>
+                        <div class="modal-body select-which-itinerary">
+                          <form id="addToItineraryForm">
+                            <input type="hidden" id="event_id" value="<%= bookmark.event.id %>" data-add-to-itinerary-target="eventIdId">
+                            <select data-add-to-itinerary-target="itinerarySelect" class="form-select" required data-action="change->add-to-itinerary#itineraryChange">
+                              <option value="" disabled selected>Select an itinerary</option>
+                              <% current_user.itineraries.each do | itinerary | %>
+                                <option value="<%= itinerary.id %>"><%= itinerary.name %></option>
+                              <% end %>
+                            </select>
+                            <div class="modal-footer">
+                              <button type="reset" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
+                              <button type="reset" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#addToItinerary-<%= bookmark.event.id %>" id="addToItineraryButton-<%= bookmark.event.id %>">Add to this itinerary</button>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <%= link_to "Purchase", events_path %>
+                  <%= link_to "Remove Bookmark", events_path %>
+                </div>
+              </div>
+              </div>
             <% end %>
           <% end %>
-        </div>
-        <div class="card-content">
-          <p>Events you're interested in</p>
-          <% @bookmarks.each do |bookmark, index| %>
-            <% if bookmark.status == "interested" %>
-              <div class="card-title"><%= link_to "#{bookmark.event.name}", bookmark_path(bookmark) %></div>
-              <div class="card-date"><%= bookmark.event.start_time.strftime('%a %b %e') %> - <%= bookmark.event.end_time.strftime('%a %b %e') %></div>
-              <div class="card-description"><%= bookmark.event.description %></div>
-            <% end %>
-          <% end %>
-        </div>
-      </div>
+        <% else %>
+          <p>You have no upcoming events. Browse all events to add some!</p>
+          <%= link_to "Browse Events", events_path %>
+        <% end %>
     </div>
 
-    <div class="col-sm-6">
-      <div class="card w-75">
-        <div class="card-content">
-          <h1>My Itineraries</h1>
-          <% @itinerary.each do |itin| %>
-            <% if itin.user_id == current_user.id %>
-              <div class="card-title"><%= link_to "#{itin.name}", itinerary_path(itin) %></div>
-              <div class="card-date">Starts: <%= itin.start_time %></div>
-              <div class="card-date">Ends: <%= itin.end_time %></div>
-            <% end %>
+    <div class="col">
+      <h1>Bookmarked Events</h1>
+      <% if @bookmarks.present? %>
+        <% @bookmarks.each do |bookmark, index| %>
+          <% if bookmark.status == "interested" %>
+            <div class="show-card d-flex flex-row mb-3 mt-3">
+              <% if bookmark.event.photo.present? %>
+                <img src=<%= cl_image_path(bookmark.event.photo.key, alt: "event image") %> alt="Event Image">
+              <% else %>
+                <img src="path_to_default_image" alt="Default Event Image">
+              <% end %>
+              <div class="show-card-content d-flex">
+                <div class="card-title"><%= link_to "#{bookmark.event.name}", bookmark_path(bookmark) %></div>
+                <div class="card-date"><%= bookmark.event.start_time.strftime('%a %b %e') %> - <%= bookmark.event.end_time.strftime('%a %b %e') %></div>
+              </div>
+              <div class="event-card-dropdown">
+                <button class="fa-solid fa-ellipsis-vertical dropbtn"></button>
+                <div class="dropdown-links">
+                  <%= link_to "Add to Itinerary", events_path %>
+                  <%= link_to "Purchase", events_path %>
+                  <%= link_to "Remove Bookmark", events_path %>
+                </div>
+              </div>
+            </div>
           <% end %>
+        <% end %>
+      <% else %>
+        <p>You aren't interested in any events yet.</p>
+        <%= link_to "Browse Events", events_path %>
+      <% end %>
+    </div>
+    <div class="col">
+          <h1>My Itineraries</h1><div class="col-12 col-lg-12 d-flex">
+          <div class="itinerary-dash-card-container d-flex row mb-5">
+            <% @itinerary.each do |itin| %>
+              <% if itin.user_id == current_user.id %>
+                <div class="dashboard-itinerary-card">
+                <div class="itinerary-card-top">
+                  <h2><%= link_to "#{itin.name}", itinerary_path(itin) %></h2>
+                      <div class="itinerary-card-dropdown">
+                        <button class="fa-solid fa-ellipsis-vertical dropbtn"></button>
+                        <div class="dropdown-links">
+                          <%= link_to "Delete", itinerary_path(itin), class: "btn itinerary-card-btn", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+                          <%= link_to "Edit", edit_itinerary_path(itin), class: "btn itinerary-card-btn" %>
+                        </div>
+                      </div>
+                </div>
+                  <h5><%= itin.start_time.strftime('%dth %b') %> - <%= itin.end_time.strftime('%dth %b') %> </h5>
+                  <p><%= itin.itinerary_events.count %> Events saved</p>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
         </div>
-      </div>
     </div>
   </div>
 </div>

@@ -37,6 +37,11 @@
   }
 }
 
+  .dropbtn {
+    background-color: white;
+  }
+
+
 .dropbtn {
   background-color: #04AA6D;
   color: white;
@@ -94,3 +99,18 @@
   cursor: pointer;
   border: 3px solid black;
 }
+
+
+
+.event-card-dropdown-content a:hover {background-color: #ddd;}
+
+
+.event-card-dropdown:hover .dropdown-links {
+  display: block;
+  z-index: 1000;
+  position: absolute;
+  border-radius: 12px;
+}
+
+
+.event-card-dropdown:hover .dropbtn {background-color: white;}

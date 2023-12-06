@@ -9,6 +9,8 @@
           <%= f.text_field :name %>
           <%= f.input :start_time, as: :string, input_html: { data: { controller: "datepicker" } } %>
           <%= f.input :end_time, as: :string, input_html: { data: { controller: "datepicker" } } %>
+          <%= f.label :photo %>
+          <%= f.file_field :photo %>
           <%= f.submit %>
         <% end %>
         <div class="event-forms-links">

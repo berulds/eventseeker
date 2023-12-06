@@ -29,3 +29,29 @@
   box-shadow: 0 1px 2px rgba(0,0,0,0.2);
   border: white 1px solid;
 }
+
+// added css for styling here
+#avatar-container {
+  display: flex;
+  align-items: center;
+}
+
+#avatar-line {
+  display: flex;
+}
+
+#card-mini-avatar {
+  height:25px;
+  width: 25px;
+  border-radius: 50%;
+  margin-right: -10px;
+}
+
+#follow-text {
+  margin-left: 10px;
+}
+
+#more-avatars {
+  font-weight: bold;
+  margin-left: 5px;
+}

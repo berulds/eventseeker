@@ -15,7 +15,7 @@
 }
 
 .chat-card {
-  width: 700px;
+  width: 600px;
   height: 100px;
   background-color: #ffffff;
   border-radius: 5px;
@@ -67,8 +67,11 @@
   color: #555;
   font-weight: 510;
   margin-bottom: 8px;
-  justify-content: flex-end;
+  // justify-content: flex-end;
   margin-left: 13px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .chatroom-details {

@@ -6,11 +6,13 @@
         <div class="search-results">
           <% @events.each_with_index do |event, index| %>
             <div class="card">
-              <% if event.photo.present? %>
-                <img src=<%= cl_image_path(event.photo.key, alt: "event image") %> alt="Event Image">
-              <% else %>
-                <img src="path_to_default_image" alt="Default Event Image">
-              <% end %>
+              <div class="event-card-header">
+                <% if event.photo.present? %>
+                  <img src=<%= cl_image_path(event.photo.key, alt: "event image") %> alt="Event Image">
+                <% else %>
+                  <img src="path_to_default_image" alt="Default Event Image">
+                <% end %>
+              </div>
               <div class="card-content">
 
               <!-- Event Modal Button -->

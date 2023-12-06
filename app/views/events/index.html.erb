@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container d-flex">
   <div class="justify-content-center">
     <div class="d-flex">
 
@@ -43,7 +43,6 @@
                 </div>
 
                 <!-- Event Modal -->
-
                 <div class="modal fade" id="exampleModal<%= event.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div class="modal-dialog modal-lg">
                     <div class="modal-content">
@@ -81,7 +80,7 @@
                               <% if event.ticket_purchase.present? %>
                                 <% ticket_purchase_json = JSON.parse(event.ticket_purchase) %>
                                 <% ticket_purchase_json.each do |info| %>
-                                  <div class="p-2"><a class="btn btn-dark" href="<%= info["link"] %>" target="_blank"><%= info["source"] %></a></div>
+                                  <div class="p-2"><a class="btn" href="<%= info["link"] %>" target="_blank"><%= info["source"] %></a></div>
                                 <% end %>
                               <% end %>
                             </div>
@@ -92,26 +91,27 @@
                   </div>
                 </div>
 
-                <div class="card-address"><%= event.address %></div>
                 <div class="card-date"><%= event.start_time.strftime('%a %b %e') %> - <%= event.end_time.strftime('%a %b %e') %></div>
                 <div class="card-description"><%= event.description %></div>
               </div>
-              <div class="card-actions d-flex justify-content-center" id="event-card-buttons">
+              <div class="card-actions" id="event-card-buttons">
                 <div>
                   <% if current_user.present? == false %>
-                    <%= link_to "Login/Sign Up to save", new_user_session_path,class: "btn btn-dark" %>
+                    <%= link_to "Login/Sign Up to continue", new_user_session_path,class: "btn" %>
                   <% end %>
                 </div>
                 <div>
                   <% if current_user.present? %>
                     <% unless current_user.bookmarks.exists?(event_id: event.id) %>
-                      <%= link_to "Bookmark me", event_bookmarks_path(event), data: { turbo_method: :post, turbo_confirm: "Are you interested?" }, class: "btn btn-dark" %>
+                      <%= link_to event_bookmarks_path(event), data: { turbo_method: :post, turbo_confirm: "Are you interested?" }, class: "btn" do %>
+                        <i class="fa-solid fa-bookmark" style="color: #000000;"></i>
+                      <% end %>
                     <% end %>
                   <% end %>
                 </div>
                 <div>
                   <% if current_user.present? %>
-                    <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#purchase<%= event.id %>">Purchase</button>
+                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#purchase<%= event.id %>"><i class="fa-solid fa-cart-shopping" style="color: #000000;"></i></button>
                   <% end %>
                           <!-- Purchase Modal -->
                   <div class="modal fade" id="purchase<%= event.id %>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="purchase" aria-hidden="true">
@@ -125,15 +125,15 @@
                             <% if event.ticket_purchase.present? %>
                               <% ticket_purchase_json = JSON.parse(event.ticket_purchase) %>
                               <% ticket_purchase_json.each do |info| %>
-                                <div class="p-2"><a class="btn btn-dark" href="<%= info["link"] %>" target="_blank"><%= info["source"] %></a></div>
+                                <div class="p-2"><a class="btn" href="<%= info["link"] %>" target="_blank"><%= info["source"] %></a></div>
                               <% end %>
                             <% else %>
-                              <p>No ticket purchase information available.</p>
+                              <p><i class="fa-solid fa-cart-shopping" style="color: #000000;"></i> No ticket purchase information available.</p>
                             <% end %>
                           </div>
                         </div>
                         <div class="modal-footer">
-                          <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                          <button type="reset" class="btn-close" data-bs-dismiss="modal"></button>
                         </div>
                       </div>
                     </div>
@@ -141,10 +141,12 @@
                 </div>
                 <div>
                   <% if @itinerary.present? %>
-                    <%= link_to "Add", itinerary_itinerary_events_path(@itinerary, event_id: event.id), class: "btn btn-dark", data: { turbo_method: :post } %>
+                    <%= link_to itinerary_itinerary_events_path(@itinerary, event_id: event.id), class: "btn", data: { turbo_method: :post } do %>
+                      <i class="fa-solid fa-plus" style="color: #000000;"></i>
+                    <% end %>
                   <% else %>
                     <% if current_user.present? %>
-                      <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#addToItinerary-<%= event.id %>">Add to an itinerary</button>
+                      <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addToItinerary-<%= event.id %>"><i class="fa-solid fa-plus" style="color: #000000;"></i></button>
                       <div class="modal fade" id="addToItinerary-<%= event.id %>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addToItineraryLabel" aria-hidden="true" data-controller="add-to-itinerary">
                         <div class="modal-dialog">
                           <div class="modal-content">
@@ -161,8 +163,8 @@
                                   <% end %>
                                 </select>
                                 <div class="modal-footer">
-                                  <button type="reset" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
-                                  <button type="reset" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#addToItinerary-<%= event.id %>" id="addToItineraryButton-<%= event.id %>">Add to this itinerary</button>
+                                  <button type="reset" class="btn" data-bs-toggle="modal" data-bs-target="#addToItinerary-<%= event.id %>" id="addToItineraryButton-<%= event.id %>"><i class="fa-solid fa-plus" style="color: #000000;"></i></button>
+                                  <button type="reset" class="btn-close" data-bs-dismiss="modal"></button>
                                 </div>
                               </form>
                             </div>

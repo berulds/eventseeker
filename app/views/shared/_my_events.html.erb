@@ -81,7 +81,7 @@
                             <% if bookmark.event.ticket_purchase.present? %>
                               <% ticket_purchase_json = JSON.parse(bookmark.event.ticket_purchase) %>
                               <% ticket_purchase_json.each do |info| %>
-                                <div class="p-2"><a class="btn btn-dark" href="<%= info["link"] %>" target="_blank"><%= info["source"] %></a></div>
+                                <div class="p-2"><a class="btn" href="<%= info["link"] %>" target="_blank"><%= info["source"] %></a></div>
                               <% end %>
                             <% end %>
                           </div>
@@ -97,9 +97,11 @@
             </div>
             <div class="card-actions">
               <% if bookmark.event.chatroom.present? %>
-                <%= link_to "Join the #{bookmark.event.name} channel", chatroom_path(bookmark.event.chatroom.id), class: "btn btn-success" %>
+                <%= link_to chatroom_path(bookmark.event.chatroom.id), class: "btn" do %>
+                  <i class="fa-solid fa-comments" style="color: #000000;"></i>
+                <% end %>
               <% end %>
-              <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#addToItinerary-<%= bookmark.event.id %>">Add to an itinerary</button>
+              <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addToItinerary-<%= bookmark.event.id %>"><i class="fa-solid fa-plus" style="color: #000000;"></i></button>
               <div class="modal fade" id="addToItinerary-<%= bookmark.event.id %>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addToItineraryLabel" aria-hidden="true" data-controller="add-to-itinerary">
                 <div class="modal-dialog">
                   <div class="modal-content">
@@ -116,8 +118,8 @@
                           <% end %>
                         </select>
                         <div class="modal-footer">
-                          <button type="reset" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
-                          <button type="reset" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#addToItinerary-<%= bookmark.event.id %>" id="addToItineraryButton-<%= bookmark.event.id %>">Add to this itinerary</button>
+                          <button type="reset" class="btn" data-bs-toggle="modal" data-bs-target="#addToItinerary-<%= bookmark.event.id %>" id="addToItineraryButton-<%= bookmark.event.id %>"><i class="fa-solid fa-plus" style="color: #000000;"></i></button>
+                          <button type="reset" class="btn-close" data-bs-dismiss="modal"></button>
                         </div>
                       </form>
                     </div>
@@ -125,7 +127,7 @@
                 </div>
               </div>
               <% if bookmark.event.ticket_purchase.present? %>
-                <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#purchase-<%= index %>">Purchase</button>
+                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#purchase-<%= index %>"><i class="fa-solid fa-cart-shopping" style="color: #000000;"></i></button>
                 <div class="modal fade" id="purchase-<%= index %>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="purchase" aria-hidden="true">
                   <div class="modal-dialog">
                     <div class="modal-content">
@@ -136,25 +138,31 @@
                         <div class="d-flex flex-column align-items-center">
                           <% ticket_purchase_json = JSON.parse(bookmark.event.ticket_purchase) %>
                           <% ticket_purchase_json.each do |info| %>
-                            <div class="p-2"><a class="btn btn-dark" href="<%= info["link"] %>" target="_blank"><%= info["source"] %></a></div>
+                            <div class="p-2"><a class="btn" href="<%= info["link"] %>" target="_blank"><%= info["source"] %></a></div>
                           <% end %>
                         </div>
                       </div>
                       <div class="modal-footer">
-                        <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="reset" class="btn" data-bs-dismiss="modal">Close</button>
                       </div>
                     </div>
                   </div>
                 </div>
               <% end %>
-              <% if bookmark.status == "interested" %>
+              <%
+=begin%>
+ <% if bookmark.status == "interested" %>
                 <%= link_to "I'm going!", bookmark_path(bookmark), class: "btn btn-primary", data: { turbo_method: :patch } %>
               <% elsif bookmark.status == "attending" %>
                 <p>You are going to this event!</p>
               <% elsif bookmark.status == "attended" %>
                 <p>You went to this event!</p>
               <% end %>
-              <%= link_to "Delete bookmark", bookmark_path(bookmark), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger" %>
+<%
+=end%>
+              <%= link_to bookmark_path(bookmark), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn" do %>
+                <i class="fa-solid fa-x" style="color: #000000;"></i>
+              <% end %>
             </div>
           </div>
         </div>

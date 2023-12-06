@@ -28,7 +28,7 @@ class PagesController < ApplicationController
   def dashboard
     @bookmarks = current_user.bookmarks.includes(event: :chatroom)
     @itinerary = current_user.itineraries
-    @first_chatroom =  @bookmarks.find { |bookmark| bookmark.event.chatroom.present? && bookmark.user }&.event&.chatroom.id
+    @first_chatroom = @bookmarks.find { |bookmark| bookmark.event&.chatroom.present? && bookmark.user }&.event&.chatroom&.id
 
   events = @bookmarks.map(&:event)
   @bookmarking_users_by_event = {}

@@ -21,6 +21,28 @@
                 <div class="chat-card-content d-flex">
                   <div class="chat-card-title"><%= link_to "Join the #{bookmark.event.name} channel", chatroom_path(bookmark.event.chatroom.id) %></div>
                   <div class="chat-card-date"><%= bookmark.event.start_time.strftime('%a %b %e') %></div>
+
+        <!-- Avatar Display for Users related to the current event -->
+        <div>
+          <% bookmark.event.bookmarks.includes(:user).each do |event_bookmark| %>
+            <% user = event_bookmark.user %>
+            <% if user.photo.present? %>
+              <img src="<%= cl_image_path(user.photo.key, alt: "user image") %>" id="card-mini-avatar">
+            <% else %>
+              <img src="path_to_default_user_image" alt="Default User Image" id="card-mini-avatar">
+            <% end %>
+          <% end %>
+
+          <% if bookmark.event.bookmarks.length > 5 %>
+            <div id="more-avatars">+<%= bookmark.event.bookmarks.length - 5 %></div>
+          <% end %>
+        </div>
+
+        <div id="follow-text">
+          <%= "#{bookmark.event.bookmarks.length} #{'user'.pluralize(bookmark.event.bookmarks.length)}" %> following this event
+        </div>
+        <!-- End Avatar Display -->
+
                 </div>
               </div>
             <% end %>

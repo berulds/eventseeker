@@ -12,12 +12,12 @@
   overflow-y: scroll;
   height: 100%;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  z-index: 1;
-  width: 544px;
+  // z-index: 1;
+  max-width: 50%;
 }
 
 .show-card {
-  width: 500px;
+  width: 600px;
   height: 100px;
   background-color: #ffffff;
   border-radius: 5px;
@@ -26,24 +26,44 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-}
 
-.show-card img {
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
+  img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+  }
 }
 
 .show-card-content {
   padding: 16px;
+  width: 100%;
 }
 
 .show-card-title {
   font-size: 16px;
   font-weight: bold;
   margin-bottom: 8px;
-  text-align: left;
-  width: 275px;
+  width: 100%;
+  overflow: hidden;
+  max-height: 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  a {
+    text-decoration: none;
+    color: black;
+  }
+
+  .fa-x:hover::before {
+    content: "Remove from Itinerary";
+    font-size: 16px;
+    color: black;
+    padding: 5px;
+    border-radius: 5px;
+    font-family: $body-font;
+    text-transform: none;
+  }
 }
 
 .show-card-address {
@@ -67,6 +87,7 @@
   font-weight: 510;
   margin-bottom: 8px;
   justify-content: flex-end;
+  margin-left: 13px;
 }
 
 .map {
@@ -104,10 +125,11 @@
   height: 500px;
 }
 
-
 .itinerary-action-dropdown {
   position: relative;
   display: inline-block;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
 }
 
 .dropbtn {
@@ -126,7 +148,7 @@
   border-radius: 12px;
 }
 
-.dropdown-links{
+.dropdown-links {
   display: none;
   position: absolute;
   background-color: #f1f1f1;
@@ -149,6 +171,8 @@
 }
 
 .itinerary-details {
+  width: 100%;
+
   h2 {
   font-weight: bold;
   }
@@ -156,6 +180,19 @@
   a{
     text-decoration: none;
     color: $gray;
+  }
+}
+
+.itinerary-card-banner {
+  width: 100%;
+  padding: 16px;
+  border-radius: 10px;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+
+  a {
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
   }
 }
 

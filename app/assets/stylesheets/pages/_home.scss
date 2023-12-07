@@ -4,10 +4,14 @@ body {
   background: linear-gradient(86deg, rgba(224,0,0,1) 0%, rgba(217,106,3,1) 35%, rgba(255,228,113,1) 100%);
   background-size: 200% 200%;
   animation: waveAnimation 5s linear infinite;
-  font-family: 'Work Sans', sans-serif;
+  font-family: $body-font;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+
+  h1, h2, h3 {
+    font-family: $headers-font;
+  }
 }
 
 @keyframes waveAnimation {
@@ -161,13 +165,11 @@ body {
 }
 
 .container-search {
-  // font-family: 'Arial', sans-serif;
   padding: 0;
   display: flex;
   width: 100%;
   align-items: center;
   justify-content: center;
-  // margin-bottom: 5px;
 }
 
 .search-results {
@@ -191,7 +193,7 @@ body {
   justify-content: space-between;
 }
 
-.card img {
+.event-card-header img {
   width: 100%;
   height: 200px;
   object-fit: cover;
@@ -199,27 +201,34 @@ body {
 
 .card-content {
   padding: 16px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  margin-bottom: 0;
 }
 
 .card-title {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: bold;
   margin-bottom: 8px;
-}
+  display: flex;
+  justify-content: center;
+  height: 70px;
 
-.card-address {
-  font-size: 14px;
-  color: #646464;
-  margin-bottom: 7px;
+  button {
+    width: 300px;
+  }
 }
 
 .card-description {
   font-size: 13px;
   margin-bottom: 8px;
-  overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
+  overflow: hidden;
+  height: 60px;
 }
 
 .card-date {
@@ -229,17 +238,61 @@ body {
   margin-bottom: 8px;
 }
 
-#event-card-buttons {
-  gap: 15px;
-}
-
-
 .card-actions {
-  bottom: 8px;
   width: 100%;
-  text-align: center;
-  align-items: center;
-  margin-bottom: 20px;
+  display: flex;
+  justify-content: end;
+  padding: 16px;
+
+  .fa-bookmark:hover::before {
+    content: "Bookmark Event";
+    font-size: 16px;
+    color: black;
+    padding: 5px;
+    border-radius: 5px;
+    font-family: $body-font;
+    text-transform: none;
+  }
+
+  .fa-cart-shopping:hover::before {
+    content: "Purchase Tickets";
+    font-size: 16px;
+    color: black;
+    padding: 5px;
+    border-radius: 5px;
+    font-family: $body-font;
+    text-transform: none;
+  }
+
+  .fa-x:hover::before {
+    content: "Remove Bookmark";
+    font-size: 16px;
+    color: black;
+    padding: 5px;
+    border-radius: 5px;
+    font-family: $body-font;
+    text-transform: none;
+  }
+
+  .fa-plus:hover::before {
+    content: "Add To Itinerary";
+    font-size: 16px;
+    color: black;
+    padding: 5px;
+    border-radius: 5px;
+    font-family: $body-font;
+    text-transform: none;
+  }
+
+  .fa-comments:hover::before {
+    content: "Join Event Chat";
+    font-size: 16px;
+    color: black;
+    padding: 5px;
+    border-radius: 5px;
+    font-family: $body-font;
+    text-transform: none;
+  }
 }
 
 .see-more-card {
@@ -263,4 +316,15 @@ main {
 
 .footer-about {
   position: relative;
+}
+
+.modal {
+  top: 56px;
+  height: 80%;
+
+  img {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+  }
 }

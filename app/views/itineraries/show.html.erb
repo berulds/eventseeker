@@ -3,14 +3,14 @@
     <div class="col-12">
       <div class="main container-fluid margin-auto mt-3 mb-3 d-flex justify-content-evenly">
         <div class="card-container ms-4 me-4">
-          <div class="mt-2 d-flex justify-content-between">
+          <div class="itinerary-card-banner mt-2 d-flex justify-content-between" style="background-image: url('<%= cl_image_path(@itinerary.photo.key) if @itinerary.photo.attached? %>'); background-size: cover; background-position: center;";>
             <div class="itinerary-details mb-4">
               <h2><%= @itinerary.name %></h2>
               <p><%= @itinerary.start_time.strftime('%a %b %e') %> - <%= @itinerary.end_time.strftime('%a %b %e') %></p>
               <%= link_to "Back to dashboard", pages_dashboard_path %>
             </div>
             <div class="itinerary-action-dropdown">
-              <button class="fa-solid fa-ellipsis-vertical dropbtn"></button>
+              <div><i class="fa-solid fa-ellipsis-vertical"></i></div>
               <div class="dropdown-links">
                 <%= link_to "Add an Event", events_path(itinerary_id: @itinerary.id), class: "" %>
                 <%= link_to "Edit", edit_itinerary_path(@itinerary), class: "" %>
@@ -19,7 +19,7 @@
             </div>
           </div>
           <% @itinerary_events.sort_by { |itinerary_event| itinerary_event.event.start_time }.group_by { |itinerary_event| itinerary_event.event.start_time.to_date }.sort.each do |date, grouped_events| %>
-            <div class="date-header">
+            <div class="date-header mt-3">
               <h3><%= date.strftime(('%a %b %e')) %></h3>
             </div>
             <% grouped_events.each do |event, index| %>
@@ -31,12 +31,65 @@
                   <% else %>
                     <img src="path_to_default_image" alt="Default Event Image">
                   <% end %>
-                  <div class="show-card-content d-flex">
-                    <div class="show-card-title"><%= itinerary_event.event.name %></div>
+                  <div class="show-card-content">
+                    <div class="show-card-title">
+                      <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal<%= itinerary_event.event.id %>"><%= itinerary_event.event.name %></button>
+                      <%= link_to itinerary_event_path(itinerary_event), class: "event-delete-icon", data: { turbo_method: :delete } do %>
+                        <i class="fa-solid fa-x" style="color: #000000;"></i>
+                      <% end %>
+                    </div>
                     <div class="show-card-date"><%= itinerary_event.event.start_time.strftime(('%a %b %e')) %> - <%= itinerary_event.event.end_time.strftime('%a %b %e') %></div>
                   </div>
-                  <%= link_to "", itinerary_event_path(itinerary_event), class: "fa-regular fa-circle-xmark event-delete-icon", data: { turbo_method: :delete } %>
                 </div>
+
+                  <div class="modal fade" id="exampleModal<%= itinerary_event.event.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h1 class="modal-title fs-5" id="exampleModalLabel"><%= itinerary_event.event.name %></h1>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          <div class="row">
+                            <% if itinerary_event.event.photo.present? %>
+                              <div class="col-sm-12 mb-3">
+                                <img src=<%= cl_image_path(itinerary_event.event.photo.key, alt: "event image") %> alt="Event Image">
+                              </div>
+                            <% else %>
+                              <div class="col-sm-12 mb-3">
+                                <img src="path_to_default_image" alt="Default Event Image">
+                              </div>
+                            <% end %>
+                          </div>
+                          <div class="row">
+                            <div class="col-sm-12">
+                              <p><b>Date: </b><%= itinerary_event.event.start_time %></p>
+                              <p><b>Location: </b><%= itinerary_event.event.address %></p>
+                              <p><%= itinerary_event.event.description %></p>
+                            </div>
+                          </div>
+                        </div>
+                        <% if itinerary_event.event.ticket_purchase.present? %>
+                          <div class="modal-footer text-center">
+                            <div class="row align-items-start">
+                              <div class="row">
+                                <p><b><em>Click on one of the links below to purchase your tickets.</em></b></p>
+                              </div>
+                              <div class="row">
+                                <% if itinerary_event.event.ticket_purchase.present? %>
+                                  <% ticket_purchase_json = JSON.parse(itinerary_event.event.ticket_purchase) %>
+                                  <% ticket_purchase_json.each do |info| %>
+                                    <div class="p-2"><a class="btn" href="<%= info["link"] %>" target="_blank"><%= info["source"] %></a></div>
+                                  <% end %>
+                                <% end %>
+                              </div>
+                            </div>
+                          </div>
+                        <% end %>
+                      </div>
+                    </div>
+                  </div>
+
               <% end %>
             <% end %>
           <% end %>

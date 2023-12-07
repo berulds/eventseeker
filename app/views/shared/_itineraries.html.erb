@@ -1,14 +1,14 @@
 <div>
   <%= link_to "Create an itinerary", new_itinerary_path, class: "btn btn-success dash-link mt-5 mb-3" %>
   <div class="col-12 col-lg-12 d-flex">
-    <div class="itinerary-dash-card-container d-flex row mb-5">
+    <div class="itinerary-dash-card-container row mb-5">
       <% @itinerary.each do |itin| %>
         <% if itin.user_id == current_user.id %>
-          <div class="dashboard-itinerary-card">
+          <div class="dashboard-itinerary-card" style="background-image: url('<%= cl_image_path(itin.photo.key) if itin.photo.attached? %>'); background-size: cover; background-position: center;";>
           <div class="itinerary-card-top">
-            <h2><%= link_to "#{itin.name}", itinerary_path(itin) %></h2>
+            <h2><%= link_to "#{itin.name.capitalize}", itinerary_path(itin) %></h2>
                 <div class="itinerary-card-dropdown">
-                  <button class="fa-solid fa-ellipsis-vertical dropbtn"></button>
+                  <div><i class="fa-solid fa-ellipsis-vertical"></i></div>
                   <div class="dropdown-links">
                     <%= link_to "Delete", itinerary_path(itin), class: "btn itinerary-card-btn", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
                     <%= link_to "Edit", edit_itinerary_path(itin), class: "btn itinerary-card-btn" %>

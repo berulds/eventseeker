@@ -61,6 +61,8 @@
     color: black;
     padding: 5px;
     border-radius: 5px;
+    font-family: $body-font;
+    text-transform: none;
   }
 }
 
@@ -126,6 +128,8 @@
 .itinerary-action-dropdown {
   position: relative;
   display: inline-block;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
 }
 
 .dropbtn {

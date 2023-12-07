@@ -85,11 +85,11 @@
                       <% end %>
                     <% end %>
                     <% if users.length > max_avatars %>
-                      <div id="more-avatars">+<%= users.length - max_avatars %></div>
+                      <div id="more-avatars">+</div>
                     <% end %>
                   </div>
                   <div id="follow-text">
-                    <%= "#{users.length} #{'other'.pluralize(users.length)}" %> interested
+                    <%= "#{users.length} #{'seeker'.pluralize(users.length)}" %> following event
                   </div>
                 </div>
 
@@ -98,6 +98,15 @@
                 <div>
                   <% if current_user.present? == false %>
                     <%= link_to "Login/Sign Up to continue", new_user_session_path,class: "btn" %>
+                  <% end %>
+                </div>
+                <div>
+                  <% if current_user.present? && event.chatroom.present? %>
+                    <% if current_user.bookmarks.exists?(event_id: event.id) %>
+                      <%= link_to chatroom_path(event.chatroom.id), class: "btn" do %>
+                        <i class="fa-solid fa-comments" style="color: #000000;"></i>
+                      <% end %>
+                    <% end %>
                   <% end %>
                 </div>
                 <div>

@@ -8,7 +8,7 @@
           <div class="itinerary-card-top">
             <h2><%= link_to "#{itin.name.capitalize}", itinerary_path(itin) %></h2>
                 <div class="itinerary-card-dropdown">
-                  <button"><i class="fa-solid fa-ellipsis-vertical" style="color: #000000;"></i></button>
+                  <div><i class="fa-solid fa-ellipsis-vertical"></i></div>
                   <div class="dropdown-links">
                     <%= link_to "Delete", itinerary_path(itin), class: "btn itinerary-card-btn", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
                     <%= link_to "Edit", edit_itinerary_path(itin), class: "btn itinerary-card-btn" %>

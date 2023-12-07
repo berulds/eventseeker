@@ -4,10 +4,14 @@ body {
   background: linear-gradient(86deg, rgba(224,0,0,1) 0%, rgba(217,106,3,1) 35%, rgba(255,228,113,1) 100%);
   background-size: 200% 200%;
   animation: waveAnimation 5s linear infinite;
-  font-family: 'Work Sans', sans-serif;
+  font-family: $body-font;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+
+  h1, h2, h3 {
+    font-family: $headers-font;
+  }
 }
 
 @keyframes waveAnimation {
@@ -137,13 +141,11 @@ body {
 }
 
 .container-search {
-  // font-family: 'Arial', sans-serif;
   padding: 0;
   display: flex;
   width: 100%;
   align-items: center;
   justify-content: center;
-  // margin-bottom: 5px;
 }
 
 .search-results {
@@ -224,6 +226,8 @@ body {
     color: black;
     padding: 5px;
     border-radius: 5px;
+    font-family: $body-font;
+    text-transform: none;
   }
 
   .fa-cart-shopping:hover::before {
@@ -232,6 +236,8 @@ body {
     color: black;
     padding: 5px;
     border-radius: 5px;
+    font-family: $body-font;
+    text-transform: none;
   }
 
   .fa-x:hover::before {
@@ -240,6 +246,8 @@ body {
     color: black;
     padding: 5px;
     border-radius: 5px;
+    font-family: $body-font;
+    text-transform: none;
   }
 
   .fa-plus:hover::before {
@@ -248,6 +256,8 @@ body {
     color: black;
     padding: 5px;
     border-radius: 5px;
+    font-family: $body-font;
+    text-transform: none;
   }
 
   .fa-comments:hover::before {
@@ -256,6 +266,8 @@ body {
     color: black;
     padding: 5px;
     border-radius: 5px;
+    font-family: $body-font;
+    text-transform: none;
   }
 }
 

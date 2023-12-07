@@ -33,8 +33,8 @@ class PagesController < ApplicationController
   end
 
   def dashboard
-    @bookmarks = current_user.bookmarks.includes(event: :chatroom)
-    @itinerary = current_user.itineraries
+    @bookmarks = current_user.bookmarks.includes(event: :chatroom).order("bookmarks.created_at DESC")
+    @itinerary = current_user.itineraries.order("itineraries.start_time ASC")
     @first_chatroom = @bookmarks.find { |bookmark| bookmark.event&.chatroom.present? && bookmark.user }&.event&.chatroom&.id
 
   events = @bookmarks.map(&:event)

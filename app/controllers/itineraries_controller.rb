@@ -26,9 +26,7 @@ class ItinerariesController < ApplicationController
       {
         lat: itinerary_event.event[:latitude],
         lng: itinerary_event.event[:longitude],
-        # info_window_html: render_to_string(shared: "map_window")
-
-
+        info_window_html: render_to_string(partial: "shared/map_window", locals: { event: itinerary_event.event })
       }
 
     end

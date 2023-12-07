@@ -10,7 +10,7 @@
               <%= link_to "Back to dashboard", pages_dashboard_path %>
             </div>
             <div class="itinerary-action-dropdown">
-              <button><i class="fa-solid fa-ellipsis-vertical" style="color: #000000;"></i></button>
+              <div><i class="fa-solid fa-ellipsis-vertical"></i></div>
               <div class="dropdown-links">
                 <%= link_to "Add an Event", events_path(itinerary_id: @itinerary.id), class: "" %>
                 <%= link_to "Edit", edit_itinerary_path(@itinerary), class: "" %>

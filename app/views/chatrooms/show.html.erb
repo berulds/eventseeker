@@ -44,12 +44,12 @@
                       <% end %>
 
                       <% if bookmark.event.bookmarks.length > 5 %>
-                        <div id="more-avatars">+<%= bookmark.event.bookmarks.length - 5 %></div>
+                        <div id="more-avatars">+</div>
                       <% end %>
                     </div>
 
                     <div id="follow-text">
-                      <%= "#{bookmark.event.bookmarks.length} #{'user'.pluralize(bookmark.event.bookmarks.length)}" %> part of chat
+                      <%= "#{bookmark.event.bookmarks.length} #{'seeker'.pluralize(bookmark.event.bookmarks.length)}" %> in chat
                     </div>
                     <!-- End Avatar Display -->
                   </div>

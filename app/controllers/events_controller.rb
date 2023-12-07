@@ -7,6 +7,8 @@ class EventsController < ApplicationController
       @itinerary = Itinerary.find(params[:itinerary_id])
     end
 
+    @bookmarks = Bookmark.all
+
     @bookmarking_users_by_event = {}
     @events.each do |event|
       bookmarking_users = event.bookmarks.includes(:user).map(&:user)

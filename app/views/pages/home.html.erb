@@ -36,7 +36,9 @@
             <% if @api_events.present? %>
               <% @api_events.each_with_index do |event, index| %>
                 <div class="card" data-controller="button-logic">
-                  <img src=<%= event["thumbnail"] %> alt="Event Image">
+                  <div class="event-card-header">
+                    <img src=<%= event["thumbnail"] %> alt="Event Image">
+                  </div>
                   <div class="card-content">
 
                     <div class="card-title">
@@ -50,7 +52,7 @@
                         <div class="modal-content">
                           <div class="modal-header">
                             <h1 class="modal-title fs-5" id="exampleModalLabel"><%= event["title"] %></h1>
-                            <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close"><i class="fa-solid fa-x" style="color: #000000;"></i></button>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                           </div>
                           <div class="modal-body">
                             <div class="row">

@@ -70,7 +70,7 @@
               <div class="card-date"><%= bookmark.event.start_time.strftime('%a %b %e') %> - <%= bookmark.event.end_time.strftime('%a %b %e') %></div>
               <div class="card-description"><%= bookmark.event.description %></div>
 
- <!--ETIENNE avatar div for users who bookmarked the event -->
+<!--ETIENNE avatar div for users who bookmarked the event -->
                 <div class="avatar-card">
                   <% event_users = @bookmarking_users_by_event[bookmark.event.id] || [] %>
                   <div id="avatar-container">
@@ -83,11 +83,11 @@
                         <% end %>
                       <% end %>
                       <% if event_users.length > 5 %>
-                        <div id="more-avatars">+<%= event_users.length - 5 %></div>
+                        <div id="more-avatars">+</div>
                       <% end %>
                     </div>
                     <div id="follow-text">
-                      <%= "#{event_users.length} #{'user'.pluralize(event_users.length)}" %> following this event
+                      <%= "#{event_users.length} #{'seeker'.pluralize(event_users.length)}" %> following event
                     </div>
                   </div>
                 </div>

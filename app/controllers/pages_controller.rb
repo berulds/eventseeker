@@ -4,7 +4,14 @@ class PagesController < ApplicationController
   before_action :authenticate_user!, only: [:save_from_api]
 
   def home
+    @bookmarks = Bookmark.all
 
+    events = @bookmarks.map(&:event)
+    @bookmarking_users_by_event = {}
+    events.each do |event|
+      bookmarking_users = event.bookmarks.includes(:user).map(&:user)
+      @bookmarking_users_by_event[event.id] = bookmarking_users
+    end
   end
 
   def search_events

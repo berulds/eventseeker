@@ -72,11 +72,43 @@
 
                 <div class="card-date"><%= event.start_time.strftime('%a %b %e') %> - <%= event.end_time.strftime('%a %b %e') %></div>
                 <div class="card-description"><%= event.description %></div>
+
+<!--ETIENNE avatar div for users who bookmarked the event -->
+                <div class="avatar-card">
+                  <% event_users = @bookmarking_users_by_event[event.id] || [] %>
+                  <div id="avatar-container">
+                    <div id="avatar-line">
+                      <% event_users.first(5).each do |user| %>
+                        <% if user.photo.present? %>
+                          <img src="<%= cl_image_path(user.photo.key, alt: "user image") %>" id="card-mini-avatar">
+                        <% else %>
+                          <img src="path_to_default_user_image" alt="Default User Image" id="card-mini-avatar">
+                        <% end %>
+                      <% end %>
+                      <% if event_users.length > 5 %>
+                        <div id="more-avatars">+</div>
+                      <% end %>
+                    </div>
+                    <div id="follow-text">
+                      <%= "#{event_users.length} #{'seeker'.pluralize(event_users.length)}" %> following event
+                    </div>
+                  </div>
+                </div>
+
               </div>
               <div class="card-actions" id="event-card-buttons">
                 <div>
                   <% if current_user.present? == false %>
                     <%= link_to "Login/Sign Up to continue", new_user_session_path,class: "btn" %>
+                  <% end %>
+                </div>
+                <div>
+                  <% if current_user.present? && event.chatroom.present? %>
+                    <% if current_user.bookmarks.exists?(event_id: event.id) %>
+                      <%= link_to chatroom_path(event.chatroom.id), class: "btn" do %>
+                        <i class="fa-solid fa-comments" style="color: #000000;"></i>
+                      <% end %>
+                    <% end %>
                   <% end %>
                 </div>
                 <div>

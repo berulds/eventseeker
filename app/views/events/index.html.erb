@@ -112,7 +112,7 @@
                 <div>
                   <% if current_user.present? %>
                     <% unless current_user.bookmarks.exists?(event_id: event.id) %>
-                      <%= link_to event_bookmarks_path(event), data: { turbo_method: :post, turbo_confirm: "Are you interested?" }, class: "btn" do %>
+                      <%= link_to event_bookmarks_path(event), data: { turbo_method: :post }, class: "btn" do %>
                         <i class="fa-solid fa-bookmark" style="color: #000000;"></i>
                       <% end %>
                     <% end %>

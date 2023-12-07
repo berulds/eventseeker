@@ -1,36 +1,32 @@
 <div class="background">
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-12">
-
-      <div class="call-to-action d-flex justify-content-center mt-5">
-        <h1>Plan Your Next Adventure - Find an Event Now!</h1>
-      </div>
-
-      <div class="d-flex justify-content-center mt-5">
-        <div class="search search-form">
-          <%= form_with(url: { action: "search_events" }, method: "get") do |form| %>
-
-            <div class="search-container">
-              <%= form.text_field :query, placeholder: "Sports in Melbourne...", class: "search-input", autocomplete: "off"%>
-              <div class="search-date-image"><i class="fa-regular fa-calendar"></i></div>
-              <%= form.text_field :date, placeholder: nil, class: "search-date", data: { controller: "datepicker" } %>
-              <div class="search-date-image"><i class="fa-solid fa-magnifying-glass"></i></div>
-              <button type="submit" class="search-button"></button>
+        <div class="call-to-action d-flex justify-content-center mt-5">
+          <strong class="home-title">Plan Your Next Adventure...</strong>
+          <strong>Find an Event Now!</strong>
+          <div class="d-flex justify-content-center flex-column mt-5">
+            <div class="search search-form">
+              <%= form_with(url: { action: "search_events" }, method: "get") do |form| %>
+                <div class="search-container">
+                  <%= form.text_field :query, placeholder: "Sports in Melbourne...", class: "search-input", autocomplete: "off"%>
+                  <div class="search-date-image"><i class="fa-regular fa-calendar"></i></div>
+                  <%= form.text_field :date, placeholder: nil, class: "search-date", data: { controller: "datepicker" } %>
+                  <div class="search-date-image"><i class="fa-solid fa-magnifying-glass"></i></div>
+                  <button type="submit" class="search-button"></button>
+                </div>
+              <% end %>
             </div>
-
-          <% end %>
+            <div class="results-text d-flex justify-content-center">
+              <% if @api_events.present? %>
+                <% if @date.present? %>
+                  <p>Showing results for <%= @query.capitalize %> around <%= Date.parse(@date).strftime('%a %b %e') %></p>
+                <% end %>
+              <% end %>
+            </div>
+            </div>
+          </div>
         </div>
-      </div>
 
-      <div class="d-flex mt-5 justify-content-center">
-        <% if @api_events.present? %>
-          <% if @date.present? %>
-            <p>Showing results for <%= @query.capitalize %> around <%= Date.parse(@date).strftime('%a %b %e') %></p>
-          <% end %>
-        <% end %>
-      </div>
-
+        <div class="container">
+    <div class="row justify-content-center">
         <div class="container-search">
           <div class="search-results row" data-controller="search" data-search-api-events="<%= @api_events.to_json %>">
             <% if @api_events.present? %>

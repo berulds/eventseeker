@@ -10,16 +10,29 @@
               <img src="https://res.cloudinary.com/di8qjnwgb/image/upload/v1700175725/defaultusericon_sm5u2k.jpg", class="img-fluid", alt="User Photo";>
             <% end %>
           </div>
-          <div class="col-md-8">
-            <h5 class="card-title"> <%= @current_user.username.capitalize %></h5>
-            <p class="card-text">Welcome back <%= @current_user.username %>! Here's what's happening.</p>
+
+          <div class="col-md-8 d-flex justify-content-between">
+          <div class="d-flex flex-column border-end header-content-left">
             <p class="card-text"><%= Date.today.strftime('%a %b %e') %></p>
+            <h5 class="card-title">Welcome back <%= @current_user.username %>!</h5>
+            <p class="d-flex flex-column align-self-center">Here's what's happening.</p>
+          </div>
+            <div class="user-activity align-items-center">
+              <div class="user-itineraries d-flex align-items-center flex-column">
+                <h6>Itineraries</h6>
+                <p><%= @current_user.itineraries.count %></p>
+              </div>
+              <div class="user-bookmarks d-flex align-items-center flex-column">
+                <h6>Bookmarks</h6>
+                <p><%= @current_user.bookmarks.count %></p>
+              </div>
+            </div>
           </div>
           <div class="col-md-2 d-flex flex-column align-items-end">
-            <div class="p-2"><%= link_to "Create Event", new_event_path, class: "btn btn-success dash-link" %></div>
-            <div class="p-2"><%= link_to "Create Itinerary", new_itinerary_path, class: "btn btn-success dash-link" %></div>
+            <div class="p-2 align-self-center"><%= link_to "Create Event", new_event_path, class: "btn btn-success dash-link" %></div>
+            <div class="p-2 align-self-center"><%= link_to "Create Itinerary", new_itinerary_path, class: "btn btn-success dash-link" %></div>
               <% if @first_chatroom %>
-                <div class="p-2"> <%= link_to "My chatrooms", chatroom_path(@first_chatroom), class: "btn btn-success dash-link" %>
+              <div class="p-2 align-self-center"> <%= link_to "My chatrooms", chatroom_path(@first_chatroom), class: "btn btn-success dash-link" %>
               <% else %>
                 <%= "You haven't joined any chatrooms yet!" %>
               <% end %>

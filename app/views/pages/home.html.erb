@@ -14,10 +14,11 @@
           </div>
         <% end %>
       </div>
-      <div class="homepage-itinerary mt-1 mb-3">
-        <%= link_to "Or start with an Itinerary", new_itinerary_path %>
+      <div>
+        <button class="p-2 align-self-center button1"><%= link_to "Create Event", new_event_path, class: "dash-link" %></button>
+        <button class="p-2 align-self-center button1"><%= link_to "Create Itinerary", new_itinerary_path, class: " dash-link" %></button>
       </div>
-      <div class="results-text d-flex justify-content-center">
+      <div class="results-text d-flex justify-content-cente mt-5">
         <% if @api_events.present? %>
           <% if @date.present? %>
             <p>Showing events for <%= @query.capitalize %> <%= Date.parse(@date).strftime('%a %b %e') %></p>

@@ -1,4 +1,5 @@
 .event-forms {
+  background-color: #f1f1f1;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -44,6 +45,7 @@
 }
 
 .user-forms {
+  background-color: #f1f1f1;
   align-items: center;
   border-radius: 10px;
   border: 1px solid;
@@ -85,4 +87,16 @@
   border: none;
   border-radius: 8px;
   width: 200px;
+}
+
+.event-forms:hover {
+  cursor: pointer;
+  border: 3px solid rgba(217,106,3,1);
+  box-shadow: 8px 8px 8px rgba(217,106,3,0.5);
+}
+
+.user-forms:hover {
+  cursor: pointer;
+  border: 3px solid rgba(217,106,3,1);
+  box-shadow: 8px 8px 8px rgba(217,106,3,0.5);
 }

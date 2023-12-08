@@ -18,13 +18,13 @@
             <p class="d-flex flex-column align-self-center">Here's what's happening.</p>
           </div>
             <div class="user-activity align-items-center">
-              <div class="user-itineraries d-flex align-items-center flex-column">
-                <h6>Itineraries</h6>
-                <p><%= @current_user.itineraries.count %></p>
-              </div>
               <div class="user-bookmarks d-flex align-items-center flex-column">
                 <h6>Bookmarks</h6>
                 <p><%= @current_user.bookmarks.count %></p>
+              </div>
+              <div class="user-itineraries d-flex align-items-center flex-column">
+                <h6>Itineraries</h6>
+                <p><%= @current_user.itineraries.count %></p>
               </div>
             </div>
           </div>
@@ -47,10 +47,10 @@
               <button class="nav-link active" id="overview-tab" data-bs-toggle="tab" data-bs-target="#overview" type="button" role="tab" aria-controls="home" aria-selected="true">Overview</button>
             </li>
             <li class="nav-item" role="presentation">
-              <button class="nav-link" id="itinerary-tab" data-bs-toggle="tab" data-bs-target="#itinerary" type="button" role="tab" aria-controls="itinerary" aria-selected="false">My Itineraries</button>
+              <button class="nav-link" id="event-tab" data-bs-toggle="tab" data-bs-target="#event" type="button" role="tab" aria-controls="home" aria-selected="false">Bookmarks</button>
             </li>
             <li class="nav-item" role="presentation">
-              <button class="nav-link" id="event-tab" data-bs-toggle="tab" data-bs-target="#event" type="button" role="tab" aria-controls="home" aria-selected="false">My Events</button>
+              <button class="nav-link" id="itinerary-tab" data-bs-toggle="tab" data-bs-target="#itinerary" type="button" role="tab" aria-controls="itinerary" aria-selected="false">Itineraries</button>
             </li>
           </div>
         </ul>

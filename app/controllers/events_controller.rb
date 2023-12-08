@@ -42,19 +42,20 @@ class EventsController < ApplicationController
       @event = Event.new(event_params_api)
       @event.download_image_from_url(params["thumbnail"])
 
-      if @event.valid?
-        if @event.save
-          existing_bookmark = Bookmark.find_by(user_id: current_user.id, event_id: @event.id)
-          unless existing_bookmark
-            Bookmark.create(user_id: current_user.id, event_id: @event.id)
-          end
-          chatroom = Chatroom.create(name: "#{@event.name}", event: @event)
-        end
-        existing_bookmark = Bookmark.find_by(user_id: current_user.id, event_id: @event.id)
-        unless existing_bookmark
-          Bookmark.create(user_id: current_user.id, event_id: @event.id)
-        end
+      if @event.save
+        @event
+      else
+        @event = Event.find_by(name: params["title"])
       end
+        existing_bookmark = Bookmark.find_by(user_id: current_user.id, event_id: @event.id)
+          unless existing_bookmark
+            bookmark = Bookmark.create(user_id: current_user.id, event_id: @event.id)
+          end
+          existing_chatroom = Chatroom.find_by(name: "#{@event.name}")
+          unless existing_chatroom
+            chatroom = Chatroom.create(name: "#{@event.name}", event: @event)
+          end
+
     end
 
   def show

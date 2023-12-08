@@ -18,7 +18,7 @@ class BookmarksController < ApplicationController
       @bookmark = Bookmark.new(user_id: current_user.id, event_id: @event.id)
 
       if @bookmark.save
-        redirect_to "#", notice: 'Bookmark created successfully.'
+        redirect_to events_path
       else
         redirect_to "#", alert: 'Failed to create bookmark.'
       end

@@ -26,7 +26,6 @@ body {
   flex-direction: column;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.7);
-  // opacity: .7;
   box-shadow: 28px 8px 12px #080808;
   height: 900px;
 
@@ -69,7 +68,7 @@ body {
     position: relative;
     display: flex;
     align-items: center;
-    margin-bottom: 20px;
+    // margin-bottom: 20px;
 
     input:focus {
       opacity: 1;
@@ -116,6 +115,8 @@ body {
       margin-left: 20px;
       color: #fff;
       margin-right: -39px;
+      margin-bottom: 25px;
+      z-index: 2000;
     }
 
     .search-date-image i {
@@ -293,8 +294,12 @@ body {
 }
 
 .see-more-card {
-  width: 350px;
-  height: 500px;
+  width: 100vw !important;
+  height: 250px !important;
+  padding: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 main {
@@ -323,5 +328,34 @@ main {
     width: 100%;
     max-height: 400px;
     object-fit: cover;
+  }
+}
+
+.homepage-itinerary {
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  a {
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: none;
+  }
+
+  a:hover {
+    width: 350;
+    padding: 20px;
+    border: none;
+    border-radius: 35px;
+    background-color: black !important;
+    outline: none;
+    height: 50px;
+    box-shadow: 2px 2px 14px #ffffff;
+    margin: 5px;
   }
 }

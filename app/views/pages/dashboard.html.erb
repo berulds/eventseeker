@@ -18,25 +18,26 @@
             <p class="d-flex flex-column align-self-center">Here's what's happening.</p>
           </div>
             <div class="user-activity align-items-center">
+              <div class="user-bookmarks d-flex align-items-center flex-column">
+                <h6>Bookmarks</h6>
+                <p><%= @current_user.bookmarks.count %></p>
+              </div>
               <div class="user-itineraries d-flex align-items-center flex-column">
                 <h6>Itineraries</h6>
                 <p><%= @current_user.itineraries.count %></p>
               </div>
-              <div class="user-bookmarks d-flex align-items-center flex-column">
-                <h6>Bookmarked Events</h6>
-                <p><%= @current_user.bookmarks.count %></p>
-              </div>
             </div>
           </div>
-          <div class="col-md-2 d-flex flex-column align-items-end">
-            <div class="p-2 align-self-center"><%= link_to "Create Event", new_event_path, class: "btn btn-success dash-link" %></div>
-            <div class="p-2 align-self-center"><%= link_to "Create Itinerary", new_itinerary_path, class: "btn btn-success dash-link" %></div>
+          <div class="col-md-2 d-flex flex-column justify-content-evenly align-items-end">
+            <button class="p-2 align-self-center button1"><%= link_to "Create Event", new_event_path, class: "dash-link" %></button>
+            <button class="p-2 align-self-center button1"><%= link_to "Create Itinerary", new_itinerary_path, class: " dash-link" %></button>
               <% if @first_chatroom %>
-              <div class="p-2 align-self-center"> <%= link_to "My chatrooms", chatroom_path(@first_chatroom), class: "btn btn-success dash-link" %>
+              <button class="button1 p-2 align-self-center"><%= link_to "My chatrooms", chatroom_path(@first_chatroom), class: "dash-link" %></button>
               <% else %>
-                <%= "You haven't joined any chatrooms yet!" %>
+                <div class="p-2 align-self-center">
+                  <%= "You haven't joined any chatrooms yet!" %>
+                </div>
               <% end %>
-              </div>
           </div>
         </div>
       </div>
@@ -48,10 +49,10 @@
               <button class="nav-link active" id="overview-tab" data-bs-toggle="tab" data-bs-target="#overview" type="button" role="tab" aria-controls="home" aria-selected="true">Overview</button>
             </li>
             <li class="nav-item" role="presentation">
-              <button class="nav-link" id="event-tab" data-bs-toggle="tab" data-bs-target="#event" type="button" role="tab" aria-controls="home" aria-selected="false">Bookmarked Events</button>
+              <button class="nav-link" id="event-tab" data-bs-toggle="tab" data-bs-target="#event" type="button" role="tab" aria-controls="home" aria-selected="false">Bookmarks</button>
             </li>
             <li class="nav-item" role="presentation">
-              <button class="nav-link" id="itinerary-tab" data-bs-toggle="tab" data-bs-target="#itinerary" type="button" role="tab" aria-controls="itinerary" aria-selected="false">My Itineraries</button>
+              <button class="nav-link" id="itinerary-tab" data-bs-toggle="tab" data-bs-target="#itinerary" type="button" role="tab" aria-controls="itinerary" aria-selected="false">Itineraries</button>
             </li>
           </div>
         </ul>

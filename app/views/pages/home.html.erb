@@ -1,8 +1,10 @@
 <div class="background">
-  <div class="call-to-action d-flex justify-content-center mt-5">
-    <div><strong class="home-title">Your Gateway to Events in Any City</strong></div>
+  <div class="call-to-action d-flex justify-content-center mt-5 align-items-center">
+    <div>
+      <strong class="home-title">Your Gateway to Events in Any City</strong>
+    </div>
     <h2 class="home-subtitle">Planning a trip? You've landed in the right place!</h2>
-    <div class="d-flex justify-content-center flex-column mt-5">
+    <div class="d-flex justify-content-center flex-column mt-5 align-items-center">
       <div class="search search-form">
         <%= form_with(url: { action: "search_events" }, method: "get") do |form| %>
           <div class="search-container">
@@ -13,10 +15,13 @@
           </div>
         <% end %>
       </div>
-      <div class="results-text d-flex justify-content-center mt-3">
+      <div class="homepage-itinerary mt-1 mb-3">
+        <%= link_to "Or start with an Itinerary", new_itinerary_path %>
+      </div>
+      <div class="results-text d-flex justify-content-center">
         <% if @api_events.present? %>
           <% if @date.present? %>
-            <p>Showing events in <%= @query.capitalize %> for <%= Date.parse(@date).strftime('%a %b %e') %></p>
+            <p>Showing events for <%= @query.capitalize %> <%= Date.parse(@date).strftime('%a %b %e') %></p>
           <% end %>
         <% end %>
       </div>
@@ -25,6 +30,7 @@
   </div>
 
   <div class="container-fluid mt-5 mb-5">
+  <div>
     <div class="row" data-controller="search" data-search-api-events="<%= @api_events.to_json %>">
       <% if @api_events.present? %>
         <% @api_events.each_with_index do |event, index| %>
@@ -165,14 +171,15 @@
             </div>
           </div>
         <% end %>
+      </div>
         <% if @api_events.size == 10 %>
-          <div class="see-more-card d-flex justify-content-center align-items-center">
+          <div class="see-more-card">
             <div class="see-more">
               <%= form_with(url: { action: "search_events" }, method: "get") do |form| %>
                 <%= form.hidden_field :query, value: @query %>
                 <%= form.hidden_field :date, value: @date %>
                 <%= form.hidden_field :start, value: params[:start].to_i + 10 %>
-                <%= form.submit "See more results", class: "btn btn-dark" %>
+                <%= form.submit "See more results", class: "p-2 align-self-center button1 dash-link" %>
               <% end %>
             </div>
           </div>

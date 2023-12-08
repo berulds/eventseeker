@@ -20,6 +20,9 @@ class ItinerariesController < ApplicationController
   end
 
   def show
+    @bookmarks = current_user.bookmarks.includes(event: :chatroom).order("bookmarks.created_at DESC")
+    @first_chatroom = @bookmarks.find { |bookmark| bookmark.event&.chatroom.present? && bookmark.user }&.event&.chatroom&.id
+
     @itinerary = Itinerary.find(params[:id])
     @itinerary_events = @itinerary.itinerary_events
     @markers = @itinerary_events.map do |itinerary_event|

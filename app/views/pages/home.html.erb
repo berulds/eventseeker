@@ -1,22 +1,26 @@
 <div class="background">
-  <div class="call-to-action d-flex justify-content-center mt-3">
-    <strong class="home-title">Plan Your Next Adventure...</strong>
-    <strong>Find an Event Now!</strong>
-    <div class="d-flex justify-content-center flex-column mt-5">
+  <div class="call-to-action d-flex justify-content-center align-items-center">
+    <div>
+      <strong class="home-title">Plan Your Next Adventure</strong>
+    </div>
+    <div class="d-flex justify-content-center align-items-center flex-column">
       <div class="search search-form">
         <%= form_with(url: { action: "search_events" }, method: "get") do |form| %>
           <div class="search-container">
-            <%= form.text_field :query, placeholder: "Sports in Melbourne...", class: "search-input", autocomplete: "off"%>
+            <%= form.text_field :query, placeholder: "Search for an event...", class: "search-input", autocomplete: "off"%>
             <div class="search-date-image"><i class="fa-regular fa-calendar"></i></div>
             <%= form.text_field :date, placeholder: nil, class: "search-date", data: { controller: "datepicker" } %>
             <button type="submit" class="search-button"><i class="fa-solid fa-magnifying-glass"></i></button>
           </div>
         <% end %>
       </div>
-      <div class="results-text d-flex justify-content-center mt-3">
+      <div class="homepage-itinerary mt-1 mb-3">
+        <%= link_to "Or start with an Itinerary", new_itinerary_path %>
+      </div>
+      <div class="results-text d-flex justify-content-center">
         <% if @api_events.present? %>
           <% if @date.present? %>
-            <p>Showing events in <%= @query.capitalize %> for <%= Date.parse(@date).strftime('%a %b %e') %></p>
+            <p>Showing events for <%= @query.capitalize %> <%= Date.parse(@date).strftime('%a %b %e') %></p>
           <% end %>
         <% end %>
       </div>
@@ -25,6 +29,7 @@
   </div>
 
   <div class="container-fluid mt-5 mb-5">
+  <div>
     <div class="row" data-controller="search" data-search-api-events="<%= @api_events.to_json %>">
       <% if @api_events.present? %>
         <% @api_events.each_with_index do |event, index| %>
@@ -165,14 +170,15 @@
             </div>
           </div>
         <% end %>
+      </div>
         <% if @api_events.size == 10 %>
-          <div class="see-more-card d-flex justify-content-center align-items-center">
+          <div class="see-more-card">
             <div class="see-more">
               <%= form_with(url: { action: "search_events" }, method: "get") do |form| %>
                 <%= form.hidden_field :query, value: @query %>
                 <%= form.hidden_field :date, value: @date %>
                 <%= form.hidden_field :start, value: params[:start].to_i + 10 %>
-                <%= form.submit "See more results", class: "btn btn-dark" %>
+                <%= form.submit "See more results", class: "btn btn-lg btn-success dash-link" %>
               <% end %>
             </div>
           </div>

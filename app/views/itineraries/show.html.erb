@@ -2,12 +2,16 @@
   <div class="row">
     <div class="col-12">
       <div class="main container-fluid margin-auto mt-3 mb-3 d-flex justify-content-evenly">
+
         <div class="card-container ms-4 me-4">
           <div class="itinerary-card-banner mt-2 d-flex justify-content-between" style="background-image: url('<%= cl_image_path(@itinerary.photo.key) if @itinerary.photo.attached? %>'); background-size: cover; background-position: center;";>
             <div class="itinerary-details mb-4">
               <h2><%= @itinerary.name %></h2>
               <p><%= @itinerary.start_time.strftime('%a %b %e') %> - <%= @itinerary.end_time.strftime('%a %b %e') %></p>
-              <%= link_to "Back to dashboard", pages_dashboard_path %>
+              <div class="d-flex justify-content-between align-items-center">
+                <%= link_to "Back to dashboard", pages_dashboard_path %>
+                <%= link_to "Event chatrooms", chatroom_path(@first_chatroom) %>
+              </div>
             </div>
             <div class="itinerary-action-dropdown">
               <div><i class="fa-solid fa-ellipsis-vertical"></i></div>
@@ -34,9 +38,9 @@
                   <div class="show-card-content">
                     <div class="show-card-title">
                       <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal<%= itinerary_event.event.id %>"><%= itinerary_event.event.name %></button>
-                      <%= link_to itinerary_event_path(itinerary_event), class: "event-delete-icon", data: { turbo_method: :delete } do %>
-                        <i class="fa-solid fa-x" style="color: #000000;"></i>
-                      <% end %>
+                        <%= link_to itinerary_event_path(itinerary_event), class: "event-delete-icon", data: { turbo_method: :delete } do %>
+                          <i class="fa-solid fa-x" style="color: #000000;"></i>
+                        <% end %>
                     </div>
                     <div class="show-card-date"><%= itinerary_event.event.start_time.strftime(('%a %b %e')) %> - <%= itinerary_event.event.end_time.strftime('%a %b %e') %></div>
                   </div>

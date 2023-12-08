@@ -34,7 +34,9 @@
               <% if @first_chatroom %>
               <button class="button1 p-2 align-self-center"><%= link_to "My chatrooms", chatroom_path(@first_chatroom), class: "dash-link" %></button>
               <% else %>
-                <%= "You haven't joined any chatrooms yet!" %>
+                <div class="p-2 align-self-center">
+                  <%= "You haven't joined any chatrooms yet!" %>
+                </div>
               <% end %>
           </div>
         </div>

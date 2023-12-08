@@ -1,11 +1,11 @@
-<div class="container">
-  <div class="row mb-5">
-    <div class="col">
-      <h1>Upcoming Events</h1>
+<div class="overview-container row d-flex justify-content-around mt-5 mb-5">
+  <div class="col overview d-flex justify-content-center">
+    <div class="overview-events">
+      <h1 id="overview-text">Upcoming events</h1>
       <% if @bookmarks.present? %>
         <% @bookmarks.sort_by { |bookmark| bookmark.event.start_time }.take(5).group_by { |bookmark| bookmark.event.start_time.to_date }.sort.each do |date, grouped_bookmarks| %>
           <div class="date-header mt-3">
-            <h3><%= date.strftime(('%a %b %e')) %></h3>
+            <h3 id="overview-text"><%= date.strftime(('%a %b %e')) %></h3>
           </div>
           <% grouped_bookmarks.each do |bookmark, index| %>
             <div class="chat-card d-flex flex-row mb-3 mt-3">
@@ -151,29 +151,32 @@
         <% end %>
       <% end %>
     </div>
-    <div class="col">
-          <h1>My Itineraries</h1><div class="col-12 col-lg-12 d-flex">
-            <div class="itinerary-dash-card-container d-flex row mb-5 mt-5">
-              <% @itinerary.take(4).each do |itin| %>
-                <% if itin.user_id == current_user.id %>
-                  <div class="dashboard-itinerary-card" style="background-image: url('<%= cl_image_path(itin.photo.key) if itin.photo.attached? %>'); background-size: cover; background-position: center;";>
-                  <div class="itinerary-card-top">
-                    <h2><%= link_to "#{itin.name.capitalize}", itinerary_path(itin) %></h2>
-                        <div class="itinerary-card-dropdown">
-                          <div><i class="fa-solid fa-ellipsis-vertical"></i></div>
-                          <div class="dropdown-links">
-                            <%= link_to "Delete", itinerary_path(itin), class: "btn itinerary-card-btn", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
-                            <%= link_to "Edit", edit_itinerary_path(itin), class: "btn itinerary-card-btn" %>
-                          </div>
-                        </div>
+  </div>
+  <div class="col overview d-flex justify-content-center">
+    <div class="overview-itineraries">
+      <h1 id="overview-text">My Itineraries</h1>
+      <div class="col-12 col-lg-12 d-flex">
+        <div class="itinerary-dash-card-container row mb-5 mt-5">
+          <% @itinerary.take(4).each do |itin| %>
+            <% if itin.user_id == current_user.id %>
+              <div class="dashboard-itinerary-card" style="background-image: url('<%= cl_image_path(itin.photo.key) if itin.photo.attached? %>'); background-size: cover; background-position: center;";>
+                <div class="itinerary-card-top">
+                  <h2><%= link_to "#{itin.name.capitalize}", itinerary_path(itin) %></h2>
+                  <div class="itinerary-card-dropdown">
+                    <div><i class="fa-solid fa-ellipsis-vertical"></i></div>
+                    <div class="dropdown-links">
+                      <%= link_to "Delete", itinerary_path(itin), class: "btn itinerary-card-btn", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+                      <%= link_to "Edit", edit_itinerary_path(itin), class: "btn itinerary-card-btn" %>
+                    </div>
                   </div>
-                    <h5><%= itin.start_time.strftime('%dth %b') %> - <%= itin.end_time.strftime('%dth %b') %> </h5>
-                    <p><%= itin.itinerary_events.count %> Events saved</p>
-                  </div>
-                <% end %>
-              <% end %>
-            </div>
+                </div>
+                <h5><%= itin.start_time.strftime('%dth %b') %> - <%= itin.end_time.strftime('%dth %b') %> </h5>
+                <p><%= itin.itinerary_events.count %> Events saved</p>
+              </div>
+            <% end %>
+          <% end %>
         </div>
+      </div>
     </div>
   </div>
 </div>

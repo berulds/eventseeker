@@ -7,13 +7,13 @@
           <div class="dashboard-itinerary-card" style="background-image: url('<%= cl_image_path(itin.photo.key) if itin.photo.attached? %>'); background-size: cover; background-position: center;";>
           <div class="itinerary-card-top">
             <h2><%= link_to "#{itin.name.capitalize}", itinerary_path(itin) %></h2>
-                <div class="itinerary-card-dropdown">
-                  <div><i class="fa-solid fa-ellipsis-vertical"></i></div>
-                  <div class="dropdown-links">
-                    <%= link_to "Delete", itinerary_path(itin), class: "btn itinerary-card-btn", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
-                    <%= link_to "Edit", edit_itinerary_path(itin), class: "btn itinerary-card-btn" %>
-                  </div>
-                </div>
+            <div class="itinerary-card-dropdown">
+              <div><i class="fa-solid fa-ellipsis-vertical"></i></div>
+              <div class="dropdown-links">
+                <%= link_to "Delete", itinerary_path(itin), class: "btn itinerary-card-btn", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+                <%= link_to "Edit", edit_itinerary_path(itin), class: "btn itinerary-card-btn" %>
+              </div>
+            </div>
           </div>
             <h5><%= itin.start_time.strftime('%dth %b') %> - <%= itin.end_time.strftime('%dth %b') %> </h5>
             <p><%= itin.itinerary_events.count %> Events saved</p>

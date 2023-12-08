@@ -1,190 +1,184 @@
 <div class="background">
-        <div class="call-to-action d-flex justify-content-center mt-5">
-          <strong class="home-title">Plan Your Next Adventure...</strong>
-          <strong>Find an Event Now!</strong>
-          <div class="d-flex justify-content-center flex-column mt-5">
-            <div class="search search-form">
-              <%= form_with(url: { action: "search_events" }, method: "get") do |form| %>
-                <div class="search-container">
-                  <%= form.text_field :query, placeholder: "Sports in Melbourne...", class: "search-input", autocomplete: "off"%>
-                  <div class="search-date-image"><i class="fa-regular fa-calendar"></i></div>
-                  <%= form.text_field :date, placeholder: nil, class: "search-date", data: { controller: "datepicker" } %>
-                  <div class="search-date-image"><i class="fa-solid fa-magnifying-glass"></i></div>
-                  <button type="submit" class="search-button"></button>
-                </div>
-              <% end %>
-            </div>
-            <div class="results-text d-flex justify-content-center">
-              <% if @api_events.present? %>
-                <% if @date.present? %>
-                  <p>Showing results for <%= @query.capitalize %> around <%= Date.parse(@date).strftime('%a %b %e') %></p>
-                <% end %>
-              <% end %>
-            </div>
-            </div>
+  <div class="call-to-action d-flex justify-content-center mt-3">
+    <strong class="home-title">Plan Your Next Adventure...</strong>
+    <strong>Find an Event Now!</strong>
+    <div class="d-flex justify-content-center flex-column mt-5">
+      <div class="search search-form">
+        <%= form_with(url: { action: "search_events" }, method: "get") do |form| %>
+          <div class="search-container">
+            <%= form.text_field :query, placeholder: "Sports in Melbourne...", class: "search-input", autocomplete: "off"%>
+            <div class="search-date-image"><i class="fa-regular fa-calendar"></i></div>
+            <%= form.text_field :date, placeholder: nil, class: "search-date", data: { controller: "datepicker" } %>
+            <button type="submit" class="search-button"><i class="fa-solid fa-magnifying-glass"></i></button>
           </div>
-        </div>
+        <% end %>
+      </div>
+      <div class="results-text d-flex justify-content-center mt-3">
+        <% if @api_events.present? %>
+          <% if @date.present? %>
+            <p>Showing events in <%= @query.capitalize %> for <%= Date.parse(@date).strftime('%a %b %e') %></p>
+          <% end %>
+        <% end %>
+      </div>
+      </div>
+    </div>
+  </div>
 
-        <div class="container">
-    <div class="row justify-content-center">
-        <div class="container-search">
-          <div class="search-results row" data-controller="search" data-search-api-events="<%= @api_events.to_json %>">
-            <% if @api_events.present? %>
-              <% @api_events.each_with_index do |event, index| %>
-                <div class="card" data-controller="button-logic">
-                  <div class="event-card-header">
-                    <img src=<%= event["thumbnail"] %> alt="Event Image">
-                  </div>
-                  <div class="card-content">
+  <div class="container-fluid mt-5 mb-5">
+    <div class="row" data-controller="search" data-search-api-events="<%= @api_events.to_json %>">
+      <% if @api_events.present? %>
+        <% @api_events.each_with_index do |event, index| %>
+          <div class="col-3 mt-3 d-flex justify-content-center">
+            <div class="card" data-controller="button-logic">
+              <div class="event-card-header">
+                <img src=<%= event["thumbnail"] %> alt="Event Image">
+              </div>
+              <div class="card-content">
 
-                    <div class="card-title">
-                      <button type="button" class="btn btn-light" data-button-logic-target="eventName" data-bs-toggle="modal" data-bs-target="#exampleModal-<%= index %>"><%= event["title"] %></button>
-                    </div>
+                <div class="card-title">
+                  <button type="button" class="btn btn-light" data-button-logic-target="eventName" data-bs-toggle="modal" data-bs-target="#exampleModal-<%= index %>"><%= event["title"] %></button>
+                </div>
 
-                    <!-- Event Modal -->
+                <!-- Event Modal -->
 
-                    <div class="modal fade" id="exampleModal-<%= index %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                      <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel"><%= event["title"] %></h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal fade" id="exampleModal-<%= index %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel"><%= event["title"] %></h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="row">
+                          <% if event["thumbnail"].present? %>
+                            <div class="col-sm-12 mb-3">
+                              <img src=<%= event["thumbnail"] %> alt="Event Image">
+                            </div>
+                          <% else %>
+                            <div class="col-sm-12 mb-3">
+                              <img src="path_to_default_image" alt="Default Event Image">
+                            </div>
+                          <% end %>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-12">
+                            <p><b>Date: </b><%= event["date"]["start_date"] if event["date"] %></p>
+                            <p><b>Location: </b><%= event["address"].join(", ") %></p>
+                            <p><%= event["description"] %></p>
                           </div>
-                          <div class="modal-body">
+                        </div>
+                      </div>
+                      <% if event["ticket_info"].present? %>
+                        <div class="modal-footer text-center">
+                          <div class="row align-items-start">
                             <div class="row">
-                              <% if event["thumbnail"].present? %>
-                                <div class="col-sm-12 mb-3">
-                                  <img src=<%= event["thumbnail"] %> alt="Event Image">
-                                </div>
-                              <% else %>
-                                <div class="col-sm-12 mb-3">
-                                  <img src="path_to_default_image" alt="Default Event Image">
-                                </div>
+                              <p><b><em>Click on one of the links below to purchase your tickets.</em></b></p>
+                            </div>
+                            <div class="row">
+                              <% if event["ticket_info"].present? %>
+                                <% event["ticket_info"].each do |vendor| %>
+                                  <div class="p-2">
+                                    <a class="btn justify-content-center" href="<%= vendor["link"] %>" target="_blank"><%= vendor["source"] %></a>
+                                  </div>
+                                <% end %>
                               <% end %>
                             </div>
-                            <div class="row">
-                              <div class="col-sm-12">
-                                <p><b>Date: </b><%= event["date"]["start_date"] if event["date"] %></p>
-                                <p><b>Location: </b><%= event["address"].join(", ") %></p>
-                                <p><%= event["description"] %></p>
-                              </div>
-                            </div>
                           </div>
-                          <% if event["ticket_info"].present? %>
-                            <div class="modal-footer text-center">
-                              <div class="row align-items-start">
-                                <div class="row">
-                                  <p><b><em>Click on one of the links below to purchase your tickets.</em></b></p>
-                                </div>
-                                <div class="row">
-                                  <% if event["ticket_info"].present? %>
-                                    <% event["ticket_info"].each do |vendor| %>
-                                      <div class="p-2">
-                                        <a class="btn justify-content-center" href="<%= vendor["link"] %>" target="_blank"><%= vendor["source"] %></a>
-                                      </div>
-                                    <% end %>
-                                  <% end %>
-                                </div>
-                              </div>
+                        </div>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="card-date"><%= event["date"]["start_date"] if event["date"] %></div>
+                <div class="card-description"><%= event["description"] %></div>
+              </div>
+              <div class="card-actions" id="event-card-buttons">
+                <div  data-button-logic-target="saveButtonForm">
+                  <%= button_to create_from_api_path(event), class: "btn", turbo_method: :post, "data-action": "click->button-logic#handleSaveClick" do %>
+                    <i class="fa-solid fa-bookmark" style="color: #000000;"></i>
+                  <% end %>
+                </div>
+
+                <!-- Success Modal -->
+                <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="successModalLabel">Success</h5>
+                      </div>
+                      <div class="modal-body">
+                        Event saved successfully!
+                      </div>
+                      <div class="modal-footer">
+                        <%= link_to "Go to dashboard", pages_dashboard_path, class: "btn btn-secondary" %>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Back to search</button>
+<!--                             <button type="button" class="btn-close" data-bs-dismiss="modal"></button> -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Error Modal -->
+                <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="errorModalLabel">Wait</h5>
+                      </div>
+                      <div class="modal-body">
+                        Event bookmarked successfully!
+                      </div>
+                      <div class="modal-footer">
+                        <%= link_to "Go to dashbaord", pages_dashboard_path, class: "btn btn-secondary" %>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Back to search</button>
+<!--                             <button type="button" class="btn-close" data-bs-dismiss="modal"></button> -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#purchase-<%= index %>"><i class="fa-solid fa-cart-shopping" style="color: #000000;"></i></button>
+                <div class="modal fade" id="purchase-<%= index %>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="purchase" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h2>Where would you like to purchase?</h2>
+                      </div>
+                      <div class="modal-body purchase">
+                        <div class="d-flex flex-column align-items-center">
+                          <% event["ticket_info"].each do |vendor| %>
+                            <div class="p-2">
+                              <a class="btn" href="<%= vendor["link"] %>" target="_blank"><%= vendor["source"] %></a>
                             </div>
                           <% end %>
                         </div>
                       </div>
-                    </div>
-
-                    <div class="card-date"><%= event["date"]["start_date"] if event["date"] %></div>
-                    <div class="card-description"><%= event["description"] %></div>
-                  </div>
-                  <div class="card-actions" id="event-card-buttons">
-                    <div  data-button-logic-target="saveButtonForm">
-                      <%= button_to create_from_api_path(event), class: "btn", turbo_method: :post, "data-action": "click->button-logic#handleSaveClick" do %>
-                        <i class="fa-solid fa-bookmark" style="color: #000000;"></i>
-                      <% end %>
-                    </div>
-
-                    <!-- Success Modal -->
-                    <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
-                      <div class="modal-dialog">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="successModalLabel">Success</h5>
-                          </div>
-                          <div class="modal-body">
-                            Event saved successfully!
-                          </div>
-                          <div class="modal-footer">
-                            <%= link_to "See my event", pages_dashboard_path, class: "btn btn-secondary" %>
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Back to the search</button>
-<!--                             <button type="button" class="btn-close" data-bs-dismiss="modal"></button> -->
-                          </div>
-                        </div>
+                      <div class="modal-footer">
+                        <button type="reset" class="btn-close" data-bs-dismiss="modal"></button>
                       </div>
                     </div>
-
-                    <!-- Error Modal -->
-                    <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
-                      <div class="modal-dialog">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="errorModalLabel">Wait</h5>
-                          </div>
-                          <div class="modal-body">
-                            Event bookmarked successfully!
-                          </div>
-                          <div class="modal-footer">
-                            <%= link_to "See my event", pages_dashboard_path, class: "btn btn-secondary" %>
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Back to the search</button>
-<!--                             <button type="button" class="btn-close" data-bs-dismiss="modal"></button> -->
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#purchase-<%= index %>"><i class="fa-solid fa-cart-shopping" style="color: #000000;"></i></button>
-                    <div class="modal fade" id="purchase-<%= index %>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="purchase" aria-hidden="true">
-                      <div class="modal-dialog">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h2>Where would you like to purchase?</h2>
-                          </div>
-                          <div class="modal-body purchase">
-                            <div class="d-flex flex-column align-items-center">
-                              <% event["ticket_info"].each do |vendor| %>
-                                <div class="p-2">
-                                  <a class="btn" href="<%= vendor["link"] %>" target="_blank"><%= vendor["source"] %></a>
-                                </div>
-                              <% end %>
-                            </div>
-                          </div>
-                          <div class="modal-footer">
-                            <button type="reset" class="btn-close" data-bs-dismiss="modal"></button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
                   </div>
                 </div>
-              <% end %>
-              <% if @api_events.size == 10 %>
-                <div class="see-more-card d-flex justify-content-center align-items-center">
-                  <div class="see-more">
-                    <%= form_with(url: { action: "search_events" }, method: "get") do |form| %>
-                      <%= form.hidden_field :query, value: @query %>
-                      <%= form.hidden_field :date, value: @date %>
-                      <%= form.hidden_field :start, value: params[:start].to_i + 10 %>
-                      <%= form.submit "See more results", class: "btn btn-dark" %>
-                    <% end %>
-                  </div>
-                </div>
-              <% end %>
-            <% else %>
-              <%= render "shared/all_events" %>
-            <% end %>
+
+              </div>
+            </div>
           </div>
-        </div>
-
-      </div>
+        <% end %>
+        <% if @api_events.size == 10 %>
+          <div class="see-more-card d-flex justify-content-center align-items-center">
+            <div class="see-more">
+              <%= form_with(url: { action: "search_events" }, method: "get") do |form| %>
+                <%= form.hidden_field :query, value: @query %>
+                <%= form.hidden_field :date, value: @date %>
+                <%= form.hidden_field :start, value: params[:start].to_i + 10 %>
+                <%= form.submit "See more results", class: "btn btn-dark" %>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      <% else %>
+        <%= render "shared/all_events" %>
+      <% end %>
     </div>
   </div>
-</div>

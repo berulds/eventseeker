@@ -17,6 +17,7 @@
 }
 
 .about-card {
+  background-color: #f1f1f1;
   width: 350px;
   height: 500px;
   border-radius: 10px;
@@ -26,6 +27,12 @@
   flex-direction: column;
   justify-content: space-between;
   padding: 16px;
+}
+
+.about-card:hover {
+  cursor: pointer;
+  border: 3px solid rgba(217,106,3,1);
+  box-shadow: 8px 8px 8px rgba(217,106,3,0.8);
 }
 
 .about-info {

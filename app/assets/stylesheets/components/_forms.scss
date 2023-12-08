@@ -88,3 +88,15 @@
   border-radius: 8px;
   width: 200px;
 }
+
+.event-forms:hover {
+  cursor: pointer;
+  border: 3px solid rgba(217,106,3,1);
+  box-shadow: 8px 8px 8px rgba(217,106,3,0.5);
+}
+
+.user-forms:hover {
+  cursor: pointer;
+  border: 3px solid rgba(217,106,3,1);
+  box-shadow: 8px 8px 8px rgba(217,106,3,0.5);
+}

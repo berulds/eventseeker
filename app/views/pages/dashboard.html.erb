@@ -28,15 +28,14 @@
               </div>
             </div>
           </div>
-          <div class="col-md-2 d-flex flex-column align-items-end">
-            <div class="p-2 align-self-center"><%= link_to "Create Event", new_event_path, class: "btn btn-success dash-link" %></div>
-            <div class="p-2 align-self-center"><%= link_to "Create Itinerary", new_itinerary_path, class: "btn btn-success dash-link" %></div>
+          <div class="col-md-2 d-flex flex-column justify-content-evenly align-items-end">
+            <button class="p-2 align-self-center button1"><%= link_to "Create Event", new_event_path, class: "dash-link" %></button>
+            <button class="p-2 align-self-center button1"><%= link_to "Create Itinerary", new_itinerary_path, class: " dash-link" %></button>
               <% if @first_chatroom %>
-              <div class="p-2 align-self-center"> <%= link_to "My Chatrooms", chatroom_path(@first_chatroom), class: "btn btn-success dash-link" %>
+              <button class="button1 p-2 align-self-center"><%= link_to "My chatrooms", chatroom_path(@first_chatroom), class: "dash-link" %></button>
               <% else %>
                 <%= "You haven't joined any chatrooms yet!" %>
               <% end %>
-              </div>
           </div>
         </div>
       </div>

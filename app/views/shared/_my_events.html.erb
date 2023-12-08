@@ -4,7 +4,7 @@
   <div class="container-fluid mt-5 mb-5">
     <div class="row">
       <% @bookmarks.each_with_index do |bookmark, index| %>
-        <div class="col-3 mt-3">
+        <div class="col-3 mt-3 d-flex justify-content-center">
           <div class="card">
             <div class="event-card-header">
               <% if bookmark.event.photo.present? %>

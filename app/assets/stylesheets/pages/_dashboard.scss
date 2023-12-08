@@ -26,15 +26,13 @@
   }
 }
 
-
-
 .dashboard-itinerary-card {
   border-radius: 5px;
   border: solid 1px black;
   padding: 16px;
   margin: 8px;
   max-height: 200px;
-  max-width: 600px;
+  width: 600px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   background-color: white;
@@ -75,7 +73,6 @@
     background-color: white;
   }
 
-
 .dropbtn {
   background-color: #04AA6D;
   color: white;
@@ -89,7 +86,6 @@
   display: inline-block;
 }
 
-
 .dropdown-links {
   position: absolute;
   background-color: #f1f1f1;
@@ -98,7 +94,6 @@
   z-index: 1;
 }
 
-
 .dropdown-links a {
   color: black;
   padding: 12px 16px;
@@ -106,9 +101,9 @@
   display: block;
 }
 
-
-.itinerary-card-dropdown-content a:hover {background-color: #ddd;}
-
+.itinerary-card-dropdown-content a:hover {
+  background-color: #ddd;
+}
 
 .itinerary-card-dropdown:hover .dropdown-links {
   display: block;
@@ -117,11 +112,9 @@
   border-radius: 12px;
 }
 
-
 .itinerary-card-dropdown:hover .dropbtn {
   background-color: white;
 }
-
 
 .col-sm-6 {
   padding: 10px;
@@ -133,7 +126,8 @@
 
 .dashboard-itinerary-card:hover {
   cursor: pointer;
-  border: 3px solid black;
+  border: 3px solid rgba(217,106,3,1);
+  box-shadow: 8px 8px 8px rgba(217,106,3,0.8);
 }
 
 .event-card-dropdown-content a:hover {
@@ -151,9 +145,32 @@
   background-color: white;
 }
 
+.card:hover {
+  cursor: pointer;
+  border: 3px solid rgba(217,106,3,1);
+  box-shadow: 8px 8px 8px rgba(217,106,3,0.8);
+}
+
 .itinerary-dash-card-container {
   width: 100%;
   display: flex;
   justify-content: center;
 }
 
+.overview-events {
+  width: 700px;
+}
+
+.overview-itineraries {
+  width: 600px;
+}
+
+.overview-container {
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+#overview-text {
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}

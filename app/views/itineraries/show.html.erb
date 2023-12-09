@@ -24,6 +24,12 @@
               </div>
             </div>
           </div>
+          <% if @itinerary_events.present? == false %>
+              <div class="cta-itinerary mt-5 d-flex flex-column justify-content-center align-items-center">
+              <h2>Start by adding an event!</h2>
+              <%= link_to "Find an Event", root_path, class: "button1" %>
+            </div>
+          <% end %>
           <% @itinerary_events.sort_by { |itinerary_event| itinerary_event.event.start_time }.group_by { |itinerary_event| itinerary_event.event.start_time.to_date }.sort.each do |date, grouped_events| %>
             <div class="date-header mt-3">
               <h3><%= date.strftime(('%a %b %e')) %></h3>

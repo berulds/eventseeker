@@ -25,7 +25,7 @@ class EventsController < ApplicationController
     @event = Event.new(event_params)
     @event.save
     chatroom = Chatroom.create(name: "#{@event.name}", event: @event)
-    redirect_to events_path
+    redirect_to dashboard_path
     end
 
     def create_from_api

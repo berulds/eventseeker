@@ -75,30 +75,32 @@
 
 .dropbtn {
   background-color: #04AA6D;
-  color: white;
+  color: black;
   padding: 16px;
-  font-size: 16px;
+  font-size: 24px;
   border: none;
 }
 
 .itinerary-action-dropdown {
   position: relative;
   display: inline-block;
+  color: white;
 }
 
 .dropdown-links {
   position: absolute;
-  background-color: #f1f1f1;
+  background-color: #555555;
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
 }
 
 .dropdown-links a {
-  color: black;
+  color: white !important;
   padding: 12px 16px;
   text-decoration: none;
   display: block;
+  font-weight: 600;
 }
 
 .itinerary-card-dropdown-content a:hover {
